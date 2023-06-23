@@ -1,0 +1,12 @@
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Service.deps.json
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Service.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Service.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.csproj.AssemblyReference.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.AssemblyInfoInputs.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.AssemblyInfo.cs
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.csproj.CoreCompileInputs.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\refint\TaskManagement.Service.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\ref\TaskManagement.Service.dll
