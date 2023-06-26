@@ -1,4 +1,9 @@
 
+using TaskManagement.Database;
+using TaskManagement.Database.Infrastructure;
+using TaskManagement.Database.Repository.UserRepository;
+using TaskManagement.Service.UserService;
+
 namespace TaskManagement.API
 {
     public class Program
@@ -13,6 +18,10 @@ namespace TaskManagement.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddDbContext<MasterDbContext>();
+            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 

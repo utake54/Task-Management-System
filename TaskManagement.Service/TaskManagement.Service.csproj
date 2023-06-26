@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UserService\" />
+    <ProjectReference Include="..\TaskManagement.Database\TaskManagement.Database.csproj" />
   </ItemGroup>
 
 </Project>

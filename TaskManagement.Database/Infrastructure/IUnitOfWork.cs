@@ -8,6 +8,6 @@ namespace TaskManagement.Database.Infrastructure
 {
     public interface IUnitOfWork
     {
-
+        
     }
 }

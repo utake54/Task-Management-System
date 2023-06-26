@@ -28,9 +28,9 @@ namespace TaskManagement.Model.Model.ResponseModel
         {
             Message = "Failed";
         }
-        public void Failed(string message)
+        public void Failed(string error)
         {
-            Message = message;
+            Error = error;
         }
     }
 }

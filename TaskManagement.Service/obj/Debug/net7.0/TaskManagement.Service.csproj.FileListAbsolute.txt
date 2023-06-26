@@ -10,3 +10,10 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\refint\TaskManagement.Service.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.pdb
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\ref\TaskManagement.Service.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Database.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Database.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Model.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.csproj.CopyComplete
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Utility.pdb

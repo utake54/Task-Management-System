@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "TaskManagement.Utility/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/TaskManagement.Utility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TaskManagement.Utility.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "TaskManagement.Utility/1.0.0": {
+      "type": "project",
+      "path": "../TaskManagement.Utility/TaskManagement.Utility.csproj",
+      "msbuildProject": "../TaskManagement.Utility/TaskManagement.Utility.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "TaskManagement.Utility >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\utake\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

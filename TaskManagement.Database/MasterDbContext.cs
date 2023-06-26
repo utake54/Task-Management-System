@@ -14,6 +14,14 @@ namespace TaskManagement.Database
         {
 
         }
-        public DbSet<UserMaster> UserMasters { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Data Source=LAPTOP-JF9VJ1L7\\SQLEXPRESS;Initial Catalog=TaskManagement;Integrated Security=True;TrustServerCertificate=True;Encrypt=False");
+            }
+        }
+        public DbSet<UserMaster> UserMaster { get; set; }
     }
 }
