@@ -13,7 +13,7 @@ namespace TaskManagement.Model.Model.ResponseModel
         public int StatusCode { get; set; }
         public string? Message { get; set; }
         public object? Data { get; set; }
-        public string? Error { get; set; }
+        public List<Error> Errors { get; set; }
 
         public void Ok()
         {
@@ -24,13 +24,14 @@ namespace TaskManagement.Model.Model.ResponseModel
             Data = result;
             Message = "Success";
         }
-        public void Failure()
+        public void Failure(string message)
         {
-            Message = "Failed";
+            Message = message;
         }
-        public void Failed(string error)
-        {
-            Error = error;
-        }
+    }
+
+    public class Errors
+    {
+        public string Erros { get; set; }
     }
 }

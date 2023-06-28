@@ -13,7 +13,8 @@
           "Microsoft.ApplicationInsights.AspNetCore": "2.15.0",
           "Microsoft.AspNetCore.OpenApi": "7.0.1",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "TaskManagement.Service": "1.0.0"
+          "TaskManagement.Service": "1.0.0",
+          "TaskManagement.Utility": "1.0.0"
         },
         "runtime": {
           "TaskManagement.API.dll": {}
@@ -1630,6 +1631,7 @@
       },
       "TaskManagement.Service/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "TaskManagement.Database": "1.0.0"
         },
         "runtime": {

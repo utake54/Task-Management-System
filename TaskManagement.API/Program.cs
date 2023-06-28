@@ -1,4 +1,8 @@
 
+using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using TaskManagement.API.Infrastructure.AutoMapper;
+using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
@@ -14,9 +18,14 @@ namespace TaskManagement.API
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(config =>
+            {
+                config.Filters.Add<ModelStateFilter>();
+                config.Filters.Add<ResultFilter>();
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IUserService, UserService>();

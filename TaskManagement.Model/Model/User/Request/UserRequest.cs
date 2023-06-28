@@ -37,8 +37,6 @@ namespace TaskManagement.Model.Model.User.Request
         public string Country { get; set; }
         [RegularExpression(RegexHelper.REGEX_COUNTRY_CODE, ErrorMessage = "Please enter valid country code")]
         public string CountryCode { get; set; }
-
-        [MinLength(6), MaxLength(6)]
         public int ZipCode { get; set; }
     }
 }

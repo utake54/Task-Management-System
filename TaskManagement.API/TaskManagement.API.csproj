@@ -15,12 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\AutoMapper\" />
-    <Folder Include="Infrastructure\Filters\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TaskManagement.Service\TaskManagement.Service.csproj" />
+    <ProjectReference Include="..\TaskManagement.Utility\TaskManagement.Utility.csproj" />
   </ItemGroup>
 
 </Project>

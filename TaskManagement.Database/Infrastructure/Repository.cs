@@ -47,5 +47,9 @@ namespace TaskManagement.Database.Infrastructure
             var data = await Context.Set<T>().FindAsync(id);
             return data;
         }
+        public async Task<int> SaveChanges()
+        {
+            return await Context.SaveChangesAsync();
+        }
     }
 }

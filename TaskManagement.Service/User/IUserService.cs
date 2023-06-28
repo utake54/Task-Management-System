@@ -10,7 +10,7 @@ namespace TaskManagement.Service.UserService
 {
     public interface IUserService
     {
-        Task<ResponseModel> AddUser(UserRequest request);
+        Task<ResponseModel> AddUser(UserRequest request, int userId, int companyId);
         Task<ResponseModel> GetAllUsers();
         Task<ResponseModel> GetUser(int userId);
         Task<ResponseModel> UpdateUser(UserRequest request);

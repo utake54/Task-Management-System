@@ -15,5 +15,6 @@ namespace TaskManagement.Database.Infrastructure
         void Delete(T entity);
         T Update(T entity);
         Task<T> GetById(int id);
+        Task<int> SaveChanges();
     }
 }

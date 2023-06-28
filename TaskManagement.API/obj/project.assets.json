@@ -3064,6 +3064,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "TaskManagement.Database": "1.0.0"
         },
         "compile": {
@@ -9209,7 +9210,8 @@
       "Microsoft.ApplicationInsights.AspNetCore >= 2.15.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.1",
       "Swashbuckle.AspNetCore >= 6.4.0",
-      "TaskManagement.Service >= 1.0.0"
+      "TaskManagement.Service >= 1.0.0",
+      "TaskManagement.Utility >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -9241,6 +9243,9 @@
           "projectReferences": {
             "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\TaskManagement.Service.csproj": {
               "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\TaskManagement.Service.csproj"
+            },
+            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
             }
           }
         }

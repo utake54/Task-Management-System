@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "aNn5qRgynQnmfs7wh4jkYON5OMEPH/+1wmysfIwysSuC8CzTom24B0TiUVwPYroLNi7Q7v3I07TT/obpLTEx9A==",
+  "dgSpecHash": "mCJ6YBXJWuPyaoDwU+/2z12WrszUyt9eQTM4MDUdDHch1TXaVBi95WBK2x/pEcm7QXlICtV0McDyRf/mpu8QXA==",
   "success": true,
   "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\TaskManagement.Service.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\utake\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "C:\\Users\\utake\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.8\\microsoft.entityframeworkcore.7.0.8.nupkg.sha512",
