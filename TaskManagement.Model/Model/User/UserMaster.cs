@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManagement.Model.Model.CommonModel;
+﻿using TaskManagement.Model.Model.CommonModel;
 
 namespace TaskManagement.Model.Model.User
 {
@@ -22,5 +17,7 @@ namespace TaskManagement.Model.Model.User
         public string CountryCode { get; set; }
         public int ZipCode { get; set; }
         public int CompanyId { get; set; }
+        public int RoleId { get; set; }
+        public string DateOfBirth { get; set; }
     }
 }

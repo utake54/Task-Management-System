@@ -15,6 +15,8 @@ namespace TaskManagement.Database.Infrastructure
         void Delete(T entity);
         T Update(T entity);
         Task<T> GetById(int id);
+        Task<T> GetDefault(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> Get(Expression<Func<T, bool>> expression);
         Task<int> SaveChanges();
     }
 }

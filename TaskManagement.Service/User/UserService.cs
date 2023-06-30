@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
+using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Utility;
 
 namespace TaskManagement.Service.UserService
 {
@@ -30,6 +32,7 @@ namespace TaskManagement.Service.UserService
             user.CreatedBy = userId;
             user.CompanyId = companyId;
             user.CreatedDate = DateTime.Now;
+            user.Password = SHA.Encrypt(request.Password);
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
             response.Ok();
@@ -58,6 +61,10 @@ namespace TaskManagement.Service.UserService
                 response.Message = "No users found";
                 return response;
             }
+            foreach (var user in allUsers)
+            {
+                user.Password = SHA.Decrypt(user.Password);
+            }
             response.Ok(allUsers);
             return response;
         }
@@ -75,6 +82,7 @@ namespace TaskManagement.Service.UserService
             return response;
         }
 
+
         public async Task<ResponseModel> UpdateUser(UserRequest request)
         {
             var response = new ResponseModel();
@@ -86,7 +94,47 @@ namespace TaskManagement.Service.UserService
             }
             response.Ok(user);
             return response;
+        }
+        public async Task<UserMaster> Login(LoginRequest request)
+        {
+            request.Password = SHA.Encrypt(request.Password);
+            var user = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.UserId && x.Password == request.Password);
+            return user;
+        }
 
+        public async Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request)
+        {
+            var response = new ResponseModel();
+            var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == request.DateOfBirth);
+            if (isUserExists != null)
+            {
+                response.Ok(isUserExists.Id);
+                return response;
+            }
+            response.Failure("Invalid user details.");
+            return response;
+        }
+
+        public async Task<ResponseModel> ResetPassword(PasswordResetRequest request)
+        {
+            var response = new ResponseModel();
+            var user = await _unitOfWork.UserRepository.GetById(request.UserId);
+            if (user == null)
+            {
+                response.Failure("No User Found");
+                return response;
+            }
+            if (request.Password == request.ConfirmPassword)
+            {
+                user.Password = SHA.Encrypt(request.Password);
+                _unitOfWork.UserRepository.Update(user);
+                await _unitOfWork.UserRepository.SaveChanges();
+
+                response.Ok("Password changed successfully.");
+                return response;
+            }
+            response.Failure("Please enter same password.");
+            return response;    
         }
     }
 }

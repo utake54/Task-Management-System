@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.UserService;
 
@@ -8,6 +7,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

@@ -1,6 +1,10 @@
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Database;
@@ -23,10 +27,49 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
             });
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = null,
+                    ValidAudience = null,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("UnBreakableJwTk3y"))
+                };
+            });
             builder.Services.AddAutoMapper(typeof(MapperProfile));
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskManagement.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+
+                    Description = "Please insert TOken",
+                    Name = "Authorize",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+             {
+                 new OpenApiSecurityScheme
+                 {
+                     Reference=new OpenApiReference
+                     {
+                         Type=ReferenceType.SecurityScheme,
+                         Id="Bearer"
+                     }
+                 },
+                 new string[]{}
+             }
+            });
+            });
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddDbContext<MasterDbContext>();

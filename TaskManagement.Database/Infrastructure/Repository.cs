@@ -47,6 +47,15 @@ namespace TaskManagement.Database.Infrastructure
             var data = await Context.Set<T>().FindAsync(id);
             return data;
         }
+
+        public virtual async Task<T> GetDefault(Expression<Func<T, bool>> expression)
+        {
+            return await Context.Set<T>().Where(expression).FirstOrDefaultAsync();
+        }
+        public virtual async Task<IEnumerable<T>> Get(Expression<Func<T, bool>> expression)
+        {
+            return await Context.Set<T>().Where(expression).ToListAsync();
+        }
         public async Task<int> SaveChanges()
         {
             return await Context.SaveChangesAsync();

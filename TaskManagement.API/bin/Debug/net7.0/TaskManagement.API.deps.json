@@ -11,6 +11,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.ApplicationInsights.AspNetCore": "2.15.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.8",
           "Microsoft.AspNetCore.OpenApi": "7.0.1",
           "Swashbuckle.AspNetCore": "6.4.0",
           "TaskManagement.Service": "1.0.0",
@@ -182,6 +183,17 @@
           "lib/netstandard2.0/Microsoft.AI.ServerTelemetryChannel.dll": {
             "assemblyVersion": "2.15.0.44797",
             "fileVersion": "2.15.0.44797"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.8": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.21.0"
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "7.0.8.0",
+            "fileVersion": "7.0.823.31807"
           }
         }
       },
@@ -1727,6 +1739,13 @@
       "sha512": "sha512-sZ/DDqTq/JUEsdZS6RlhHhnoce/YeAaROMF9MmQ14biv4eHpicLsUmqoxwMxeeJHgnwnz2WD8FSJtHvvl8GSpQ==",
       "path": "microsoft.applicationinsights.windowsserver.telemetrychannel/2.15.0",
       "hashPath": "microsoft.applicationinsights.windowsserver.telemetrychannel.2.15.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UWGvF86d2q90e1ync37Yg+yg2GRSeSh9y/Q5YRFw42YfzTDQd0X6somujDFVc9HWn6zVB7osSZnxHMW8BwoRSA==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/7.0.8",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.7.0.8.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Hosting/2.1.1": {
       "type": "package",

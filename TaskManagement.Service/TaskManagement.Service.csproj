@@ -14,4 +14,8 @@
     <ProjectReference Include="..\TaskManagement.Database\TaskManagement.Database.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JWTService\" />
+  </ItemGroup>
+
 </Project>
