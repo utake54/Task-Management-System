@@ -24,6 +24,11 @@ namespace TaskManagement.Model.Model.ResponseModel
             Data = result;
             Message = "Success";
         }
+        public void Ok(object result, string message)
+        {
+            Data = result;
+            Message = message;
+        }
         public void Failure(string message)
         {
             Message = message;

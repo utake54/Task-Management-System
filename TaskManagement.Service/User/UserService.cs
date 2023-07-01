@@ -12,6 +12,7 @@ using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Utility;
+using TaskManagement.Utility.Email;
 
 namespace TaskManagement.Service.UserService
 {
@@ -19,10 +20,12 @@ namespace TaskManagement.Service.UserService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly ISendMail _sendMail;
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, ISendMail sendMail)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _sendMail = sendMail;
         }
 
         public async Task<ResponseModel> AddUser(UserRequest request, int userId, int companyId)
@@ -131,7 +134,10 @@ namespace TaskManagement.Service.UserService
             var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == Convert.ToDateTime(request.DateOfBirth));
             if (isUserExists != null)
             {
-                response.Ok(isUserExists.Id);
+                var userEmail = isUserExists.EmailId;
+                var otp = OTPGenerator.GetOTP();
+                await _sendMail.SendEmailAsync(userEmail, "notes.dac@gmail.com", "OTP for validation", otp.ToString());
+                response.Ok(isUserExists.Id, "Otp send on email to reset password");
                 return response;
             }
             response.Failure("Invalid user details.");

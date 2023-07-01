@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "E7tjxyt7o8QXQgVH7rwzv4gWOIQQqoC6SqcUunW3w4OXUHNwdbIovol7bWypeQlextqD30SncfWqD9DM6Ot8XQ==",
+  "dgSpecHash": "R4AbLSKsdhFn2UKfSaeWKERqoqYgdZb1x7/u+hMTXeYlKmM9+t0FjeaXOqWSawk5atKFgB0d5zGD2dim51gLiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\utake\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

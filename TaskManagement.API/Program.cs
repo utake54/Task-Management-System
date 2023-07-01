@@ -11,6 +11,8 @@ using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Service.UserService;
+using TaskManagement.Utility;
+using TaskManagement.Utility.Email;
 
 namespace TaskManagement.API
 {
@@ -74,6 +76,8 @@ namespace TaskManagement.API
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddDbContext<MasterDbContext>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<ISendMail, SendEmail>();
+            builder.Services.AddTransient<IAppSettings, AppSettings>();
 
             var app = builder.Build();
 

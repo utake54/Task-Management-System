@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.UserService;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using TaskManagement.Utility.Email;
 
 namespace TaskManagement.API.Controllers
 {
@@ -12,9 +12,11 @@ namespace TaskManagement.API.Controllers
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly ISendMail _sendMail;
+        public UserController(IUserService userService, ISendMail sendMail)
         {
             _userService = userService;
+            _sendMail = sendMail;
         }
 
         [HttpPost("GetAllUsers")]
@@ -33,7 +35,6 @@ namespace TaskManagement.API.Controllers
             if (addUser.Message == "Success")
                 return APIResponse("Success", addUser.Data);
             return FailureResponse("Failed", addUser.Message);
-
         }
 
         [HttpPost("GetUser/{userId}")]

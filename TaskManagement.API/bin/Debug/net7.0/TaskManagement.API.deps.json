@@ -1651,6 +1651,9 @@
         }
       },
       "TaskManagement.Utility/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
+        },
         "runtime": {
           "TaskManagement.Utility.dll": {}
         }
