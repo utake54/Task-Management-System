@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TaskManagement.Model.Model.User;
+using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
 
 namespace TaskManagement.API.Infrastructure.AutoMapper
@@ -9,6 +10,8 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
         public MapperProfile()
         {
             CreateMap<UserRequest, UserMaster>();
+            CreateMap<UserMaster, UserDTO>();
+
         }
     }
 }

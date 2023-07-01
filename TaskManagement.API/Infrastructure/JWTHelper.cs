@@ -17,6 +17,7 @@ namespace TaskManagement.API.Infrastructure
                     new Claim(ClaimTypes.Name, user.FirstName),
                     new Claim("UserId", Convert.ToString(user.Id), ClaimValueTypes.Integer),
                     new Claim("RoleId", Convert.ToString(user.RoleId), ClaimValueTypes.Integer),
+                    new Claim("CompanyId", Convert.ToString(user.CompanyId), ClaimValueTypes.Integer),
                     //new Claim("Role", role.Name, ClaimValueTypes.String),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };

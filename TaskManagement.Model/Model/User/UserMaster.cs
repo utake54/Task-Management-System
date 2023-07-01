@@ -9,6 +9,7 @@ namespace TaskManagement.Model.Model.User
         public string LastName { get; set; }
         public string EmailId { get; set; }
         public string MobileNo { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string Password { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -18,6 +19,5 @@ namespace TaskManagement.Model.Model.User
         public int ZipCode { get; set; }
         public int CompanyId { get; set; }
         public int RoleId { get; set; }
-        public string DateOfBirth { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using TaskManagement.Service.UserService;
 namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class AccountController : BaseController
     {
         private readonly IUserService _userService;
@@ -37,11 +37,10 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> ForgetPassword(ForgetPassswordRequest request)
         {
             var userData = await _userService.ForgetPassword(request);
-            if (userData != null)
+            if (userData.Data != null)
             {
                 return APIResponse("Please enter new password", userData.Data);
             }
-
             return FailureResponse("Invalid details", null);
         }
 

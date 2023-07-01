@@ -9,6 +9,7 @@ using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
+using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Utility;
 
@@ -33,6 +34,7 @@ namespace TaskManagement.Service.UserService
             user.CompanyId = companyId;
             user.CreatedDate = DateTime.Now;
             user.Password = SHA.Encrypt(request.Password);
+            user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
             response.Ok();
@@ -48,24 +50,29 @@ namespace TaskManagement.Service.UserService
                 response.Message = "No user found";
                 return response;
             }
-            response.Ok(user);
+            _unitOfWork.UserRepository.Delete(user);
+            await _unitOfWork.UserRepository.SaveChanges();
+            response.Ok();
             return response;
         }
 
-        public async Task<ResponseModel> GetAllUsers()
+        public async Task<ResponseModel> GetAllUsers(int companyId)
         {
             var response = new ResponseModel();
-            var allUsers = await _unitOfWork.UserRepository.GetAllAsync();
+            var allUsers = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
             if (allUsers.Count() <= 0)
             {
                 response.Message = "No users found";
                 return response;
             }
+            var users = new List<UserDTO>();
             foreach (var user in allUsers)
             {
-                user.Password = SHA.Decrypt(user.Password);
+                var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
+                userDTO.DateOfBirth = user.DateOfBirth.ToString("d");
+                users.Add(userDTO);
             }
-            response.Ok(allUsers);
+            response.Ok(users);
             return response;
         }
 
@@ -73,17 +80,18 @@ namespace TaskManagement.Service.UserService
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(userId);
+            var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
             if (user == null)
             {
                 response.Message = "No user found";
                 return response;
             }
-            response.Ok(user);
+            response.Ok(userDTO);
             return response;
         }
 
 
-        public async Task<ResponseModel> UpdateUser(UserRequest request)
+        public async Task<ResponseModel> UpdateUser(int userId, UserRequest request)
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(request.Id);
@@ -92,6 +100,21 @@ namespace TaskManagement.Service.UserService
                 response.Message = "No user found";
                 return response;
             }
+
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.Address = request.Address;
+            user.City = request.City;
+            user.State = request.State;
+            user.ZipCode = request.ZipCode;
+            user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
+            user.MobileNo = request.MobileNo;
+            user.ModifiedBy = userId;
+            user.ModifiedDate = DateTime.Now;
+
+            _unitOfWork.UserRepository.Update(user);
+            await _unitOfWork.UserRepository.SaveChanges();
+
             response.Ok(user);
             return response;
         }
@@ -105,7 +128,7 @@ namespace TaskManagement.Service.UserService
         public async Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request)
         {
             var response = new ResponseModel();
-            var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == request.DateOfBirth);
+            var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == Convert.ToDateTime(request.DateOfBirth));
             if (isUserExists != null)
             {
                 response.Ok(isUserExists.Id);
@@ -134,7 +157,7 @@ namespace TaskManagement.Service.UserService
                 return response;
             }
             response.Failure("Please enter same password.");
-            return response;    
+            return response;
         }
     }
 }
