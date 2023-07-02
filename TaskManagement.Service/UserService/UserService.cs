@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Model.Model.Login.Request;
+using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.OTPService;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
 
@@ -21,11 +23,13 @@ namespace TaskManagement.Service.UserService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly ISendMail _sendMail;
-        public UserService(IUnitOfWork unitOfWork, IMapper mapper, ISendMail sendMail)
+        private readonly IOTPService _otpService;
+        public UserService(IUnitOfWork unitOfWork, IMapper mapper, ISendMail sendMail, IOTPService oTPService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _sendMail = sendMail;
+            _otpService = oTPService;
         }
 
         public async Task<ResponseModel> AddUser(UserRequest request, int userId, int companyId)
@@ -136,8 +140,10 @@ namespace TaskManagement.Service.UserService
             {
                 var userEmail = isUserExists.EmailId;
                 var otp = OTPGenerator.GetOTP();
-                await _sendMail.SendEmailAsync(userEmail, "notes.dac@gmail.com", "OTP for validation", otp.ToString());
-                response.Ok(isUserExists.Id, "Otp send on email to reset password");
+                await _sendMail.SendEmailAsync("utake.omkar54@gmail.com", "notes.dac@gmail.com", "OTP for password reset", otp.ToString());
+                var saveOTP = _otpService.AddOTP(isUserExists.Id, otp);
+                response.Ok(isUserExists.Id,"OTP sent successfully on email");
+                
                 return response;
             }
             response.Failure("Invalid user details.");
@@ -164,6 +170,13 @@ namespace TaskManagement.Service.UserService
             }
             response.Failure("Please enter same password.");
             return response;
+        }
+
+        public Task<ResponseModel> ValidateOtp(OTPValidateRequest request)
+        {
+            var response = new ResponseModel();
+
+            return null;
         }
     }
 }

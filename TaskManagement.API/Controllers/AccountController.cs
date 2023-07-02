@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure;
 using TaskManagement.Model.Model.Login.Request;
+using TaskManagement.Model.Model.OTP;
+using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
 
 namespace TaskManagement.API.Controllers
@@ -10,9 +12,11 @@ namespace TaskManagement.API.Controllers
     public class AccountController : BaseController
     {
         private readonly IUserService _userService;
-        public AccountController(IUserService userService)
+        private readonly IOTPService _otpService;
+        public AccountController(IUserService userService, IOTPService oTPService)
         {
             _userService = userService;
+            _otpService = oTPService;
         }
 
         [HttpPost("Login")]
@@ -39,9 +43,20 @@ namespace TaskManagement.API.Controllers
             var userData = await _userService.ForgetPassword(request);
             if (userData.Data != null)
             {
-                return APIResponse("Please enter new password", userData.Data);
+                return APIResponse("OTP sent successfully on email", userData.Data);
             }
             return FailureResponse("Invalid details", null);
+        }
+
+        [HttpPost("ValidateOTP")]
+        public async Task<Dictionary<string, object>> ValidateOtp(OTPValidateRequest request)
+        {
+            var validateOtp = await _otpService.ValidateOTP(request);
+            if (validateOtp.Message == "Success")
+            {
+                return APIResponse("OTP validate successfully", null);
+            }
+            return FailureResponse(validateOtp.Message, validateOtp.Data);
         }
 
         [HttpPost("ResetPassword")]

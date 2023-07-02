@@ -9,7 +9,9 @@ using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
+using TaskManagement.Database.Repository.OTP;
 using TaskManagement.Database.Repository.UserRepository;
+using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
@@ -73,6 +75,8 @@ namespace TaskManagement.API
             });
             });
             builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IOTPRepository, OTPRepository>();
+            builder.Services.AddTransient<IOTPService, OTPService>();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddDbContext<MasterDbContext>();
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
