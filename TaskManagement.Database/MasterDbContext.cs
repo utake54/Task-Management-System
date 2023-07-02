@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Model.Model.OTP;
+using TaskManagement.Model.Model.Task;
 using TaskManagement.Model.Model.User;
 
 namespace TaskManagement.Database
@@ -24,6 +25,8 @@ namespace TaskManagement.Database
             }
         }
         public DbSet<UserMaster> UserMaster { get; set; }
+        public DbSet<TaskMaster> TaskMaster { get; set; }
+        public DbSet<TeamMaster> TeamMaster { get; set; }
         public DbSet<OTPMaster> OTPMaster { get; set; }
     }
 }

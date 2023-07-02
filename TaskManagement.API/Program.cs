@@ -10,6 +10,7 @@ using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.OTP;
+using TaskManagement.Database.Repository.Task;
 using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
@@ -82,6 +83,7 @@ namespace TaskManagement.API
             builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
             builder.Services.AddTransient<ISendMail, SendEmail>();
             builder.Services.AddTransient<IAppSettings, AppSettings>();
+            builder.Services.AddTransient<ITaskRepository, TaskRepository>();
 
             var app = builder.Build();
 
