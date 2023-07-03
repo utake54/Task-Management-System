@@ -8,7 +8,7 @@ using TaskManagement.Service.UserService;
 namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
-    //[ApiController]
+    [ApiController]
     public class AccountController : BaseController
     {
         private readonly IUserService _userService;

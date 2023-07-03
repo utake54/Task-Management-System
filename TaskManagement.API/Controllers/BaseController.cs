@@ -13,8 +13,8 @@ namespace TaskManagement.API.Controllers
 
 
         protected int UserId = 1;
-        protected int RoleId => 1;
-        protected int CompanyId => 1;
+        protected int RoleId = 1;
+        protected int CompanyId = 1;
 
 
         [ApiExplorerSettings(IgnoreApi = true)]

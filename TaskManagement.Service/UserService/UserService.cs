@@ -36,11 +36,12 @@ namespace TaskManagement.Service.UserService
         {
             var response = new ResponseModel();
             var user = _mapper.Map<UserRequest, UserMaster>(request);
+            var systemPassword = request.LastName.ToString() + request.MobileNo.ToString();
             user.IsActive = true;
             user.CreatedBy = userId;
             user.CompanyId = companyId;
             user.CreatedDate = DateTime.Now;
-            user.Password = SHA.Encrypt(request.Password);
+            user.Password = SHA.Encrypt(systemPassword);
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
@@ -142,8 +143,8 @@ namespace TaskManagement.Service.UserService
                 var otp = OTPGenerator.GetOTP();
                 await _sendMail.SendEmailAsync("utake.omkar54@gmail.com", "notes.dac@gmail.com", "OTP for password reset", otp.ToString());
                 var saveOTP = _otpService.AddOTP(isUserExists.Id, otp);
-                response.Ok(isUserExists.Id,"OTP sent successfully on email");
-                
+                response.Ok(isUserExists.Id, "OTP sent successfully on email");
+
                 return response;
             }
             response.Failure("Invalid user details.");

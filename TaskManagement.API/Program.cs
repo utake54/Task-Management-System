@@ -13,6 +13,7 @@ using TaskManagement.Database.Repository.OTP;
 using TaskManagement.Database.Repository.Task;
 using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Service.OTPService;
+using TaskManagement.Service.TaskService;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
@@ -84,6 +85,7 @@ namespace TaskManagement.API
             builder.Services.AddTransient<ISendMail, SendEmail>();
             builder.Services.AddTransient<IAppSettings, AppSettings>();
             builder.Services.AddTransient<ITaskRepository, TaskRepository>();
+            builder.Services.AddTransient<ITaskService, TaskService>();
 
             var app = builder.Build();
 

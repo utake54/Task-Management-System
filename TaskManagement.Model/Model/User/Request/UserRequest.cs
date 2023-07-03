@@ -24,9 +24,9 @@ namespace TaskManagement.Model.Model.User.Request
         [RegularExpression(RegexHelper.REGEX_MOBILE_NUMBER, ErrorMessage = "Please enter mobile number")]
         public string MobileNo { get; set; }
 
-        [MinLength(8, ErrorMessage = "Password must be minimun 8 digits.")]
-        [RegularExpression(RegexHelper.REGEX_PASSWORD, ErrorMessage = "Password must contain special character,number and letter.")]
-        public string Password { get; set; }
+        //[MinLength(8, ErrorMessage = "Password must be minimun 8 digits.")]
+        //[RegularExpression(RegexHelper.REGEX_PASSWORD, ErrorMessage = "Password must contain special character,number and letter.")]
+        //public string Password { get; set; }
 
         [Required(ErrorMessage = "Date of birth required.")]
         public string DateOfBirth { get; set; }
