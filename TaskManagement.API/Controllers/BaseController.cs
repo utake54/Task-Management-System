@@ -31,7 +31,7 @@ namespace TaskManagement.API.Controllers
         public Dictionary<string, object> FailureResponse(string msgCode, object result)
         {
             var response = new Dictionary<string, object>();
-            response.Add("Message", msgCode);
+            response.Add("Failure", msgCode);
             response.Add("Data", result);
 
             return response;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Utility;
+using System.Net;
 
 namespace TaskManagement.API.Infrastructure.Filters
 {
@@ -34,8 +35,16 @@ namespace TaskManagement.API.Infrastructure.Filters
                     break;
                 case ObjectResult objectResult:
                     Dictionary<string, object>? data = (Dictionary<string, object>)objectResult.Value;
-                    responseObj.Message = data.ContainsKey(Constants.RESPONSE_MESSAGE_FIELD) ? Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]) : null;
-                    responseObj.Data = data.ContainsKey(Constants.RESPONSE_DATA_FIELD) ? data[Constants.RESPONSE_DATA_FIELD] : null;
+                    switch (data.Keys.Select(x => x).FirstOrDefault())
+                    {
+                        case "Failure":
+                            responseObj.StatusCode = (int)HttpStatusCode.NoContent;
+                            //responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+                            responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            break;
+                    }
+                    //responseObj.Message = data.ContainsKey(Constants.RESPONSE_MESSAGE_FIELD) ? Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]) : null;
+                    //responseObj.Data = data.ContainsKey(Constants.RESPONSE_DATA_FIELD) ? data[Constants.RESPONSE_DATA_FIELD] : null;
                     break;
                 case JsonResult json:
                     responseObj.Data = json.Value;
@@ -53,3 +62,27 @@ namespace TaskManagement.API.Infrastructure.Filters
         }
     }
 }
+
+
+//switch (data.Keys.Select(x => x).LastOrDefault())
+//{
+//    case "Data":
+//        responseObj.StatusCode = (int)HttpStatusCode.OK;
+//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+//        responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+//        break;
+
+//    case "Failure":
+//        responseObj.StatusCode = (int)HttpStatusCode.PreconditionFailed;
+//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+//        error = new Errors { Erros = (string)data[Constants.RESPNSE_ERROR_FIELD] };
+//        //responseObj.Errors = error;
+//        break;
+
+//    case "Unauthorized":
+//        responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
+//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+//        error = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
+//        //responseObj.Errors = error;
+//        break;
+//}

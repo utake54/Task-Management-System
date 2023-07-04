@@ -2,11 +2,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
+using TaskManagement.API.Infrastructure.Services;
 using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.OTP;
@@ -33,76 +35,26 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
             });
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = null,
-                    ValidAudience = null,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("UnBreakableJwTk3y"))
-                };
-            });
-            builder.Services.AddAutoMapper(typeof(MapperProfile));
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskManagement.API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
+            builder.Services.AddEndpointsApiExplorer()
+                            .AddDbContext<MasterDbContext>()
+                            .AddJWTAuthentication()
+                            .SwaggerConfig()
+                            .RepositoryAndService()
+                            .AddAutoMapper(typeof(MapperProfile));
 
-                    Description = "Please insert TOken",
-                    Name = "Authorize",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "bearer"
 
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-             {
-                 new OpenApiSecurityScheme
-                 {
-                     Reference=new OpenApiReference
-                     {
-                         Type=ReferenceType.SecurityScheme,
-                         Id="Bearer"
-                     }
-                 },
-                 new string[]{}
-             }
-            });
-            });
-            builder.Services.AddTransient<IUserRepository, UserRepository>();
-            builder.Services.AddTransient<IOTPRepository, OTPRepository>();
-            builder.Services.AddTransient<IOTPService, OTPService>();
-            builder.Services.AddTransient<IUserService, UserService>();
-            builder.Services.AddDbContext<MasterDbContext>();
-            builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddTransient<ISendMail, SendEmail>();
-            builder.Services.AddTransient<IAppSettings, AppSettings>();
-            builder.Services.AddTransient<ITaskRepository, TaskRepository>();
-            builder.Services.AddTransient<ITaskService, TaskService>();
-
-            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+
+            var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }

@@ -30,7 +30,7 @@ namespace TaskManagement.Utility.Email
                     From = new MailAddress(_appSetting.MailSetting.FromEmail, _appSetting.MailSetting.DisplayName)
                 };
                 to.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(t => mail.To.Add(new MailAddress(t)));
-                cc.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(c => mail.CC.Add(new MailAddress(c)));
+                //cc.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(c => mail.CC.Add(new MailAddress(c)));
                 mail.Subject = subject;
                 mail.Body = message;
                 mail.IsBodyHtml = true;
