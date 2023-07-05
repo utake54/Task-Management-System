@@ -31,8 +31,18 @@ namespace TaskManagement.API.Controllers
         public Dictionary<string, object> FailureResponse(string msgCode, object result)
         {
             var response = new Dictionary<string, object>();
-            response.Add("Failure", msgCode);
-            response.Add("Data", result);
+            response.Add("Data", msgCode);
+            response.Add("Failed", result);
+
+            return response;
+        }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public Dictionary<string, object> UnauthorizeResponse(string msgCode, object result)
+        {
+            var response = new Dictionary<string, object>();
+            response.Add("Message", "Invalid Credential");
+            response.Add("Unauthorized", msgCode);
 
             return response;
         }

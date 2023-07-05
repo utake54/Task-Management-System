@@ -23,7 +23,8 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<ISendMail, SendEmail>()
                 .AddTransient<IAppSettings, AppSettings>()
                 .AddTransient<ITaskRepository, TaskRepository>()
-                .AddTransient<ITaskService, TaskService>();
+                .AddTransient<ITaskService, TaskService>()
+                .AddTransient<IAssignTaskRepository, AssignTaskRepository>();
 
             return services;
 

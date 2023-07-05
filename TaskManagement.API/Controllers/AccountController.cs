@@ -20,15 +20,15 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<Dictionary<string, object>> Login(LoginRequest request)
         {
             var user = await _userService.Login(request);
-            if (user != null)
+            if (user.Data != null)
             {
-                var _token = JWTHelper.Login(user);
-                return Ok(_token);
+                var _token = JWTHelper.Login((Model.Model.User.UserMaster)user.Data);
+                return APIResponse("Success", _token);
             }
-            return Unauthorized(); ;
+            return UnauthorizeResponse("Unauthorized", user.Message);
         }
 
         [HttpPost("Logout")]
@@ -45,7 +45,7 @@ namespace TaskManagement.API.Controllers
             {
                 return APIResponse("OTP sent successfully on email", userData.Data);
             }
-            return FailureResponse("Invalid details", null);
+            return FailureResponse("Invalid details", userData.Message);
         }
 
         [HttpPost("ValidateOTP")]
@@ -56,7 +56,7 @@ namespace TaskManagement.API.Controllers
             {
                 return APIResponse("OTP validate successfully", null);
             }
-            return FailureResponse(validateOtp.Message, validateOtp.Data);
+            return FailureResponse("Invalid OTP", validateOtp.Message);
         }
 
         [HttpPost("ResetPassword")]
@@ -67,7 +67,7 @@ namespace TaskManagement.API.Controllers
             {
                 return APIResponse("Password changed successfully", null);
             }
-            return FailureResponse(changedPassword.Message, changedPassword.Data);
+            return FailureResponse("Failed to update password", changedPassword.Message);
         }
     }
 }

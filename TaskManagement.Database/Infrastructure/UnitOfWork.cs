@@ -9,13 +9,15 @@ namespace TaskManagement.Database.Infrastructure
         public IUserRepository UserRepository { get; }
         public IOTPRepository OTPRepository { get; }
         public ITaskRepository TaskRepository { get; }
+        public IAssignTaskRepository AssignTaskRepository { get; }
 
         public UnitOfWork(IUserRepository userRepository, IOTPRepository oTPRepository,
-                          ITaskRepository taskRepository)
+                          ITaskRepository taskRepository, IAssignTaskRepository assignTaskRepository)
         {
             UserRepository = userRepository;
             OTPRepository = oTPRepository;
             TaskRepository = taskRepository;
+            AssignTaskRepository = assignTaskRepository;
         }
     }
 }

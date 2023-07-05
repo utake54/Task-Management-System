@@ -33,6 +33,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
+
         public async Task<ResponseModel> DeleteTask(int taskId)
         {
             var response = new ResponseModel();
@@ -93,6 +94,30 @@ namespace TaskManagement.Service.TaskService
                 return response;
             }
             response.Failure("No task found");
+            return response;
+        }
+        public async Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId)
+        {
+            var response = new ResponseModel();
+
+            var taskList = new List<AssignTask>();
+            foreach (var user in request.UserId)
+            {
+                var task = new AssignTask()
+                {
+                    TaskId = request.TaskId,
+                    UserId = user,
+                    AssignedDate = DateTime.Now,
+                    AssignedBy = userId,
+                    EndDate = request.EndDate,
+                    Status = 1
+                };
+                taskList.Add(task);
+            }
+            
+            await _unitOfWork.AssignTaskRepository.AddRangeAsync(taskList);
+            await _unitOfWork.AssignTaskRepository.SaveChanges();
+            response.Ok(null, "Task assigned successfully");
             return response;
         }
     }

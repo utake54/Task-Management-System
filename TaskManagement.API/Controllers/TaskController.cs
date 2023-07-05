@@ -8,7 +8,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
@@ -22,17 +22,17 @@ namespace TaskManagement.API.Controllers
         {
             var addTask = await _taskService.AddTask(UserId, request);
             if (addTask.Message == "Success")
-                return APIResponse("TM200", addTask.Data);
-            return FailureResponse(addTask.Message, addTask.Errors);
+                return APIResponse("Success", addTask.Data);
+            return FailureResponse("Failed", addTask.Message);
         }
 
-        [HttpPost("AddTask/{taskId}")]
+        [HttpPost("GetTask/{taskId}")]
         public async Task<Dictionary<string, object>> GetTask(int taskId)
         {
             var task = await _taskService.GetTask(taskId);
             if (task.Message == "Success")
-                return APIResponse("TM200", task.Data);
-            return FailureResponse(task.Message, task.Errors);
+                return APIResponse("Success", task.Data);
+            return FailureResponse("Failed", task.Message);
         }
 
         [HttpPost("UpdateTask")]
@@ -40,8 +40,8 @@ namespace TaskManagement.API.Controllers
         {
             var updateTask = await _taskService.UpdateTask(request, UserId);
             if (updateTask.Message == "Success")
-                return APIResponse("TM200", updateTask.Data);
-            return FailureResponse(updateTask.Message, updateTask.Errors);
+                return APIResponse("Success", updateTask.Data);
+            return FailureResponse("Failed", updateTask.Message);
         }
 
         [HttpPost("DeleteTask/{taskId}")]
@@ -49,8 +49,8 @@ namespace TaskManagement.API.Controllers
         {
             var deleteTask = await _taskService.DeleteTask(taskId);
             if (deleteTask.Message == "Success")
-                return APIResponse("TM200", deleteTask.Data);
-            return FailureResponse(deleteTask.Message, deleteTask.Errors);
+                return APIResponse("Success", deleteTask.Data);
+            return FailureResponse("Failed", deleteTask.Message);
         }
 
         [HttpPost("GetAllTask")]
@@ -58,8 +58,18 @@ namespace TaskManagement.API.Controllers
         {
             var allTask = await _taskService.GetAllTask(CompanyId);
             if (allTask.Message == "Success")
-                return APIResponse("TM200", allTask.Data);
-            return FailureResponse(allTask.Message, allTask.Errors);
+                return APIResponse("Success", allTask.Data);
+            return FailureResponse("Failed", allTask.Message);
+        }
+
+        [HttpPost("AssignToTeam")]
+        public async Task<Dictionary<string, object>> AssignTask(AssignTaskRequest request)
+        {
+            var assignTask = await _taskService.AssignTask(request, UserId);
+
+            if (assignTask.Message == "Success")
+                return APIResponse("Success", assignTask.Data);
+            return FailureResponse("Failed", assignTask.Message);
         }
     }
 }

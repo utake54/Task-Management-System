@@ -18,7 +18,7 @@ namespace TaskManagement.Service.UserService
         Task<ResponseModel> GetUser(int userId);
         Task<ResponseModel> UpdateUser(int userId, UserRequest request);
         Task<ResponseModel> DeleteUser(int userId);
-        Task<UserMaster> Login(LoginRequest request);
+        Task<ResponseModel> Login(LoginRequest request);
         Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request);
         Task<ResponseModel> ResetPassword(PasswordResetRequest request);
         Task<ResponseModel> ValidateOtp(OTPValidateRequest request);

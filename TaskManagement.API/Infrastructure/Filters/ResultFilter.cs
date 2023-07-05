@@ -35,12 +35,24 @@ namespace TaskManagement.API.Infrastructure.Filters
                     break;
                 case ObjectResult objectResult:
                     Dictionary<string, object>? data = (Dictionary<string, object>)objectResult.Value;
-                    switch (data.Keys.Select(x => x).FirstOrDefault())
+                    switch (data.Keys.Select(x => x).LastOrDefault())
                     {
-                        case "Failure":
-                            responseObj.StatusCode = (int)HttpStatusCode.NoContent;
-                            //responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+                        case "Data":
+                            responseObj.StatusCode = (int)HttpStatusCode.OK;
+                            responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            break;
+
+                        case "Failed":
+                            responseObj.StatusCode = (int)HttpStatusCode.NoContent;
+                            responseObj.Message = Convert.ToString(data[Constants.RESPNSE_FAILURE_FIELD]);
+                            responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            break;
+
+                        case "Unauthorized":
+                            responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+                            //var errors = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
                             break;
                     }
                     //responseObj.Message = data.ContainsKey(Constants.RESPONSE_MESSAGE_FIELD) ? Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]) : null;

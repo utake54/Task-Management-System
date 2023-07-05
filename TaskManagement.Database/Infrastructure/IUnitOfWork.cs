@@ -14,5 +14,6 @@ namespace TaskManagement.Database.Infrastructure
         public IUserRepository UserRepository { get; }
         public IOTPRepository OTPRepository { get; }
         public ITaskRepository TaskRepository { get; }
+        public IAssignTaskRepository AssignTaskRepository { get; }
     }
 }

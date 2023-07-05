@@ -127,11 +127,18 @@ namespace TaskManagement.Service.UserService
             response.Ok(user);
             return response;
         }
-        public async Task<UserMaster> Login(LoginRequest request)
+        public async Task<ResponseModel> Login(LoginRequest request)
         {
+            var response = new ResponseModel();
             request.Password = SHA.Encrypt(request.Password);
             var user = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.UserId && x.Password == request.Password);
-            return user;
+            if (user != null)
+            {
+                response.Ok(user);
+                return response;
+            }
+            response.Failure("Invalid Credentialsss");
+            return response;
         }
 
         public async Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request)
