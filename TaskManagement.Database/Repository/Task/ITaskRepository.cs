@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Task;
+using TaskManagement.Model.Model.Task.Request;
 
 namespace TaskManagement.Database.Repository.Task
 {
     public interface ITaskRepository : IRepository<TaskMaster>
     {
+        Task<IEnumerable<AssignTask>> GetMyTask(int userId);
     }
 }

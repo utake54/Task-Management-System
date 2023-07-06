@@ -12,7 +12,7 @@ namespace TaskManagement.API.Controllers
         //protected int CompanyId => int.Parse(this.User.Claims.First(x => x.Type == "CompanyId").Value);
 
 
-        protected int UserId = 1;
+        protected int UserId = 1006;
         protected int RoleId = 1;
         protected int CompanyId = 1;
 

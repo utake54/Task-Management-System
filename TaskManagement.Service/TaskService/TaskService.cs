@@ -8,6 +8,7 @@ using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.Task;
 using TaskManagement.Model.Model.Task.Request;
+using TaskManagement.Utility.Enum;
 
 namespace TaskManagement.Service.TaskService
 {
@@ -110,14 +111,59 @@ namespace TaskManagement.Service.TaskService
                     AssignedDate = DateTime.Now,
                     AssignedBy = userId,
                     EndDate = request.EndDate,
-                    Status = 1
+                    Status = (int)Status.Assigned
                 };
                 taskList.Add(task);
             }
-            
+
             await _unitOfWork.AssignTaskRepository.AddRangeAsync(taskList);
             await _unitOfWork.AssignTaskRepository.SaveChanges();
-            response.Ok(null, "Task assigned successfully");
+            response.Ok();
+            return response;
+        }
+
+        public async Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId)
+        {
+            var response = new ResponseModel();
+            var task = await _unitOfWork.AssignTaskRepository.GetById(request.TaskId);
+            if (task == null)
+            {
+                response.Failure("No task found");
+            }
+            task.IsAcceptByUser = request.IsAccepted;
+            _unitOfWork.AssignTaskRepository.Update(task);
+            await _unitOfWork.AssignTaskRepository.SaveChanges();
+            response.Ok();
+            return response;
+
+        }
+
+        public async Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId)
+        {
+            var response = new ResponseModel();
+            var task = await _unitOfWork.AssignTaskRepository.GetById(request.TaskId);
+            if (task == null)
+            {
+                response.Failure("No task found");
+            }
+            task.Status = request.StatusId;
+            _unitOfWork.AssignTaskRepository.Update(task);
+            response.Ok();
+            return response;
+
+
+        }
+
+        public async Task<ResponseModel> GetMyTask(int userId)
+        {
+            var response = new ResponseModel();
+            var taskList = await _unitOfWork.TaskRepository.GetMyTask(userId);
+            if (taskList.Any())
+            {
+                response.Ok(taskList);
+                return response;
+            }
+            response.Failure("No task found");
             return response;
         }
     }

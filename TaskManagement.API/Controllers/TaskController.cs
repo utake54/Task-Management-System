@@ -71,5 +71,33 @@ namespace TaskManagement.API.Controllers
                 return APIResponse("Success", assignTask.Data);
             return FailureResponse("Failed", assignTask.Message);
         }
+
+        [HttpPost("GetMyTask")]
+        public async Task<Dictionary<string, object>> GetMyTask()
+        {
+            var task = await _taskService.GetMyTask(UserId);
+            if (task.Message == "Success")
+                return APIResponse("Success", null);
+            return FailureResponse(task.Message, task.Data);
+        }
+
+        [HttpPost("AcceptTask")]
+        public async Task<Dictionary<string, object>> AcceptTask(AcceptTaskRequest request)
+        {
+            var userAction = await _taskService.UserAction(request, UserId);
+            if (userAction.Message == "Success")
+                return APIResponse("Success", null);
+            return FailureResponse(userAction.Message, userAction.Data);
+        }
+
+        [HttpPost("UpdateTaskStatus")]
+        public async Task<Dictionary<string, object>> UpdateTaskStatus(TaskStatusRequest request)
+        {
+            var updateStatus = await _taskService.UpdateStatus(request, UserId);
+            if (updateStatus.Message == "Success")
+                return APIResponse("Success", null);
+            return FailureResponse(updateStatus.Message, updateStatus.Data);
+
+        }
     }
 }

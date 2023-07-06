@@ -16,5 +16,8 @@ namespace TaskManagement.Service.TaskService
         Task<ResponseModel> UpdateTask(TaskRequest request, int userId);
         Task<ResponseModel> GetAllTask(int companyId);
         Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId);
+        Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId);
+        Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId);
+        Task<ResponseModel> GetMyTask(int userId);
     }
 }

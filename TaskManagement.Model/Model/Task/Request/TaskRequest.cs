@@ -14,6 +14,5 @@ namespace TaskManagement.Model.Model.Task.Request
         public string Description { get; set; }
         public string Priority { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsFinished { get; set; }
     }
 }

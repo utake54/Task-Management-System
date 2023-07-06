@@ -45,7 +45,7 @@ namespace TaskManagement.Service.UserService
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
-            await _sendMail.SendEmailAsync(request.EmailId, null, "Registration successfull", $"Your Password is {systemPassword}");
+            await _sendMail.SendEmailAsync("omkarutake@nimapinfotech.com", null, "Registration successfull", $"Your Password is {systemPassword}");
             response.Ok();
             return response;
         }
@@ -120,7 +120,7 @@ namespace TaskManagement.Service.UserService
             user.MobileNo = request.MobileNo;
             user.ModifiedBy = userId;
             user.ModifiedDate = DateTime.Now;
-
+            user.EmailId= request.EmailId;
             _unitOfWork.UserRepository.Update(user);
             await _unitOfWork.UserRepository.SaveChanges();
 

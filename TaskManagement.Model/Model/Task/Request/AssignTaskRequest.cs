@@ -15,6 +15,7 @@ namespace TaskManagement.Model.Model.Task.Request
         public DateTime EndDate { get; set; }
         public int AssignedBy { get; set; }
         public int Status { get; set; }
+        public bool? IsAcceptByUser { get; set; }
     }
 
     public class AssignTaskRequest
