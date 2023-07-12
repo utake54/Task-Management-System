@@ -9,5 +9,6 @@ namespace TaskManagement.Utility.Email
     public interface ISendMail
     {
         Task SendEmailAsync(string to, string cc, string subject, string message);
+        Task SendEmailAsync(MailDetails details);
     }
 }

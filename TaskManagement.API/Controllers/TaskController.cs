@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.TaskService;
 
@@ -12,9 +14,11 @@ namespace TaskManagement.API.Controllers
     public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
-        public TaskController(ITaskService taskService)
+        private readonly IMapper _mapper;
+        public TaskController(ITaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
         }
 
         [HttpPost("AddTask")]
@@ -54,9 +58,9 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("GetAllTask")]
-        public async Task<Dictionary<string, object>> GetAllTask()
+        public async Task<Dictionary<string, object>> GetAllTask(SearchModel search)
         {
-            var allTask = await _taskService.GetAllTask(CompanyId);
+            var allTask = await _taskService.GetAllTask(CompanyId, search);
             if (allTask.Message == "Success")
                 return APIResponse("Success", allTask.Data);
             return FailureResponse("Failed", allTask.Message);
@@ -65,7 +69,7 @@ namespace TaskManagement.API.Controllers
         [HttpPost("AssignToTeam")]
         public async Task<Dictionary<string, object>> AssignTask(AssignTaskRequest request)
         {
-            var assignTask = await _taskService.AssignTask(request, UserId);
+            var assignTask = await _taskService.AssignTask(request, UserId, CompanyId);
 
             if (assignTask.Message == "Success")
                 return APIResponse("Success", assignTask.Data);
@@ -77,8 +81,8 @@ namespace TaskManagement.API.Controllers
         {
             var task = await _taskService.GetMyTask(UserId);
             if (task.Message == "Success")
-                return APIResponse("Success", null);
-            return FailureResponse(task.Message, task.Data);
+                return APIResponse("Success", task.Data);
+            return FailureResponse("Failed", task.Message);
         }
 
         [HttpPost("AcceptTask")]
@@ -97,7 +101,6 @@ namespace TaskManagement.API.Controllers
             if (updateStatus.Message == "Success")
                 return APIResponse("Success", null);
             return FailureResponse(updateStatus.Message, updateStatus.Data);
-
         }
     }
 }

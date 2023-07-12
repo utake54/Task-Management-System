@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -11,6 +12,7 @@ namespace TaskManagement.Database.Infrastructure
     public class Repository<T> : IRepository<T> where T : class
     {
         protected MasterDbContext Context;
+    
         public Repository(MasterDbContext context)
         {
             Context = context;

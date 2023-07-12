@@ -74,27 +74,3 @@ namespace TaskManagement.API.Infrastructure.Filters
         }
     }
 }
-
-
-//switch (data.Keys.Select(x => x).LastOrDefault())
-//{
-//    case "Data":
-//        responseObj.StatusCode = (int)HttpStatusCode.OK;
-//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-//        responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
-//        break;
-
-//    case "Failure":
-//        responseObj.StatusCode = (int)HttpStatusCode.PreconditionFailed;
-//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-//        error = new Errors { Erros = (string)data[Constants.RESPNSE_ERROR_FIELD] };
-//        //responseObj.Errors = error;
-//        break;
-
-//    case "Unauthorized":
-//        responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
-//        responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-//        error = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
-//        //responseObj.Errors = error;
-//        break;
-//}

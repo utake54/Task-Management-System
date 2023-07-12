@@ -15,6 +15,5 @@ namespace TaskManagement.Model.Model.Task
         public string Priority { get; set; }
         public DateTime DueDate { get; set; }
         public int CompanyId { get; set; }
-        public bool? IsAcceptByUser { get; set; }
     }
 }

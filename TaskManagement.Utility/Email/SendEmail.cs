@@ -20,7 +20,6 @@ namespace TaskManagement.Utility.Email
             Execute(to, cc, subject, message).Wait();
             return Task.FromResult(0);
         }
-
         public async Task Execute(string to, string cc, string subject, string message)
         {
             try
@@ -31,6 +30,41 @@ namespace TaskManagement.Utility.Email
                 };
                 to.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(t => mail.To.Add(new MailAddress(t)));
                 //cc.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(c => mail.CC.Add(new MailAddress(c)));
+                mail.Subject = subject;
+                mail.Body = message;
+                mail.IsBodyHtml = true;
+                mail.Priority = MailPriority.High;
+
+                using (SmtpClient smtp = new SmtpClient(_appSetting.MailSetting.Host, _appSetting.MailSetting.Port))
+                {
+                    smtp.Credentials = new NetworkCredential(_appSetting.MailSetting.FromEmail, _appSetting.MailSetting.Password);
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(mail);
+                }
+            }
+            catch (Exception ex)
+            {
+                var error = ex;
+            }
+        }
+
+
+
+        public Task SendEmailAsync(MailDetails mail)
+        {
+            Execute(mail.To, mail.CC, mail.Subject, mail.Message).Wait();
+            return Task.FromResult(0);
+        }
+        public async Task Execute(List<string> to, List<string> cc, string subject, string message)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage()
+                {
+                    From = new MailAddress(_appSetting.MailSetting.FromEmail, _appSetting.MailSetting.DisplayName)
+                };
+                to.ForEach(t => mail.To.Add(new MailAddress(t)));
+                cc.ForEach(c => mail.CC.Add(new MailAddress(c)));
                 mail.Subject = subject;
                 mail.Body = message;
                 mail.IsBodyHtml = true;

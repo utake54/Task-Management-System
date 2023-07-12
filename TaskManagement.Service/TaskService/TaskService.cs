@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
+using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task;
 using TaskManagement.Model.Model.Task.Request;
+using TaskManagement.Utility.Email;
 using TaskManagement.Utility.Enum;
 
 namespace TaskManagement.Service.TaskService
@@ -16,10 +18,12 @@ namespace TaskManagement.Service.TaskService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public TaskService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly ISendMail _sendMail;
+        public TaskService(IUnitOfWork unitOfWork, IMapper mapper, ISendMail sendMail)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _sendMail = sendMail;
         }
 
         public async Task<ResponseModel> AddTask(int userId, TaskRequest request)
@@ -50,10 +54,10 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllTask(int companyId)
+        public async Task<ResponseModel> GetAllTask(int companyId,SearchModel search)
         {
             var response = new ResponseModel();
-            var taskList = await _unitOfWork.TaskRepository.Get(x => x.CompanyId == companyId);
+            var taskList = await _unitOfWork.TaskRepository.GetAllTask(companyId,search);
             if (taskList.Any())
             {
                 response.Ok(taskList);
@@ -97,7 +101,7 @@ namespace TaskManagement.Service.TaskService
             response.Failure("No task found");
             return response;
         }
-        public async Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId)
+        public async Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId, int companyId)
         {
             var response = new ResponseModel();
 
@@ -110,14 +114,26 @@ namespace TaskManagement.Service.TaskService
                     UserId = user,
                     AssignedDate = DateTime.Now,
                     AssignedBy = userId,
-                    EndDate = request.EndDate,
-                    Status = (int)Status.Assigned
+                    EndDate = DateTime.Now,
+
                 };
                 taskList.Add(task);
             }
-
             await _unitOfWork.AssignTaskRepository.AddRangeAsync(taskList);
             await _unitOfWork.AssignTaskRepository.SaveChanges();
+
+            var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
+            var taskAssignedUers = users.Where(x => x.Id == request.Id).Select(x => x.EmailId).ToList();
+
+            var emailDetails = new MailDetails()
+            {
+                To = taskAssignedUers,
+                CC = taskAssignedUers,
+                Subject = "New task assigned",
+                Message = "Dear Team,  <br> <p>New task assigned to you </p>"
+            };
+
+            await _sendMail.SendEmailAsync(emailDetails);
             response.Ok();
             return response;
         }
@@ -125,10 +141,11 @@ namespace TaskManagement.Service.TaskService
         public async Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId)
         {
             var response = new ResponseModel();
-            var task = await _unitOfWork.AssignTaskRepository.GetById(request.TaskId);
+            var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.UserId == userId && x.TaskId == request.TaskId);
             if (task == null)
             {
                 response.Failure("No task found");
+                return response;
             }
             task.IsAcceptByUser = request.IsAccepted;
             _unitOfWork.AssignTaskRepository.Update(task);
@@ -141,17 +158,20 @@ namespace TaskManagement.Service.TaskService
         public async Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId)
         {
             var response = new ResponseModel();
-            var task = await _unitOfWork.AssignTaskRepository.GetById(request.TaskId);
+            var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.TaskId == request.TaskId && x.UserId == userId);
             if (task == null)
             {
                 response.Failure("No task found");
             }
             task.Status = request.StatusId;
+            if (request.StatusId == (int)Status.Completed)
+            {
+                task.EndDate = DateTime.Now;
+            }
             _unitOfWork.AssignTaskRepository.Update(task);
+            await _unitOfWork.AssignTaskRepository.SaveChanges();
             response.Ok();
             return response;
-
-
         }
 
         public async Task<ResponseModel> GetMyTask(int userId)

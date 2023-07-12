@@ -1,36 +1,59 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Text;
 
-namespace TaskManagement.API.Infrastructure.Middleware
+namespace JWTAuth_Validation.Middleware
 {
-    public class JWTValidator
+    public class JWTMiddleware
     {
-        public bool ValidateToken(string token, string secretKey)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
-                ValidateIssuer = false, // Set to true if you want to validate the issuer
-                ValidateAudience = false, // Set to true if you want to validate the audience
-                RequireExpirationTime = true,
-                ValidateLifetime = true
-            };
+        private readonly RequestDelegate _next;
+        private readonly IConfiguration _configuration;
 
-            try
-            {
-                // Validate the token and return the result
-                tokenHandler.ValidateToken(token, validationParameters, out _);
-                return true;
-            }
-            catch (Exception)
-            {
-                // Token validation failed
-                return false;
-            }
+        public JWTMiddleware(RequestDelegate next, IConfiguration configuration)
+        {
+            _next = next;
+            _configuration = configuration;
         }
 
+        public async Task Invoke(HttpContext context)
+        {
+            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token != null)
+                attachAccountToContext(context, token);
+
+            await _next(context);
+        }
+
+        private void attachAccountToContext(HttpContext context, string token)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes("UnBreakableJwTk3y");
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+
+                context.Items["UserId"] = jwtToken.Claims.First(x => x.Type == "UserId").Value;
+                context.Items["RoleId"] = jwtToken.Claims.First(x => x.Type == "RoleId").Value;
+                context.Items["CompanyId"] = jwtToken.Claims.First(x => x.Type == "CompanyId").Value;
+
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if necessary
+
+                throw new UnauthorizedAccessException("Invalid token.");
+            }
+        }
     }
 }
