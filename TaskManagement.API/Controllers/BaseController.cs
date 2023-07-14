@@ -8,13 +8,8 @@ namespace TaskManagement.API.Controllers
     public class BaseController : ControllerBase
     {
         protected int UserId => int.Parse(this.User.Claims.First(x => x.Type == "UserId").Value);
-        //protected int RoleId => int.Parse(this.User.Claims.First(x => x.Type == "RoleId").Value);
-        //protected int CompanyId => int.Parse(this.User.Claims.First(x => x.Type == "CompanyId").Value);
-
-
-        //protected int UserId = 1008;
-        protected int RoleId = 1;
-        protected int CompanyId = 1;
+        protected int RoleId => int.Parse(this.User.Claims.First(x => x.Type == "RoleId").Value);
+        protected int CompanyId => int.Parse(this.User.Claims.First(x => x.Type == "CompanyId").Value);
 
 
         [ApiExplorerSettings(IgnoreApi = true)]

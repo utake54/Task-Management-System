@@ -10,7 +10,6 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
-using TaskManagement.API.Infrastructure.Middleware;
 using TaskManagement.API.Infrastructure.Services;
 using TaskManagement.Database;
 using TaskManagement.Database.Infrastructure;
@@ -37,7 +36,7 @@ namespace TaskManagement.API
             {
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
-                config.Filters.Add<ExceptionFilter>();
+                config.Filters.Add<GlobalExceptionFilter>();
             });
             builder.Services.AddEndpointsApiExplorer()
                             .AddDbContext<MasterDbContext>()
@@ -47,8 +46,6 @@ namespace TaskManagement.API
                             .AddAutoMapper(typeof(MapperProfile))
                             .AddHangfire(x => x.UseSqlServerStorage(string.Format(@"Data Source=LAPTOP-JF9VJ1L7\SQLEXPRESS;Initial Catalog=TaskManagement;Integrated Security=True;TrustServerCertificate=True;Encrypt=False")))
                             .AddHangfireServer();
-
-
 
             // Configure the HTTP request pipeline.
 
@@ -60,7 +57,6 @@ namespace TaskManagement.API
             }
             app.UseHangfireDashboard("/HangDashboard");
             app.UseMiddleware<JWTMiddleware>();
-            app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();

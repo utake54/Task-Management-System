@@ -52,11 +52,9 @@ namespace TaskManagement.API.Infrastructure.Filters
                         case "Unauthorized":
                             responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
                             responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-                            //var errors = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
+                            var errors = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
                             break;
                     }
-                    //responseObj.Message = data.ContainsKey(Constants.RESPONSE_MESSAGE_FIELD) ? Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]) : null;
-                    //responseObj.Data = data.ContainsKey(Constants.RESPONSE_DATA_FIELD) ? data[Constants.RESPONSE_DATA_FIELD] : null;
                     break;
                 case JsonResult json:
                     responseObj.Data = json.Value;

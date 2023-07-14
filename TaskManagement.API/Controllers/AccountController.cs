@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure;
 using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.OTP;
+using TaskManagement.Model.Model.User;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
 
@@ -13,15 +15,18 @@ namespace TaskManagement.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOTPService _otpService;
-        public AccountController(IUserService userService, IOTPService oTPService)
+        private readonly IMapper _mapper;
+        public AccountController(IUserService userService, IOTPService oTPService, IMapper mapper)
         {
             _userService = userService;
             _otpService = oTPService;
+            _mapper = mapper;
         }
 
         [HttpPost("Login")]
         public async Task<Dictionary<string, object>> Login(LoginRequest request)
         {
+            throw new NotImplementedException();
             var user = await _userService.Login(request);
             if (user.Data != null)
             {

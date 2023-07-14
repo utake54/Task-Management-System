@@ -32,7 +32,6 @@ namespace TaskManagement.API.Infrastructure
             var response = new LoginResponse
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
-                User = user
             };
             return response;
         }
