@@ -7,7 +7,7 @@ namespace TaskManagement.API.Infrastructure.Services
 {
     public static class JWTConfig
     {
-        public static IServiceCollection AddJWTAuthentication(this IServiceCollection services)
+        public static IServiceCollection AddJWTAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -19,7 +19,7 @@ namespace TaskManagement.API.Infrastructure.Services
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = null,
                     ValidAudience = null,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("UnBreakableJwTk3y"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:Secret"]))
                 };
             });
 

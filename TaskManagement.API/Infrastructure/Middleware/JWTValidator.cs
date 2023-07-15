@@ -21,17 +21,17 @@ namespace JWTAuth_Validation.Middleware
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                attachAccountToContext(context, token);
+                ValidateToken(context, token, _configuration);
 
             await _next(context);
         }
 
-        private void attachAccountToContext(HttpContext context, string token)
+        private void ValidateToken(HttpContext context, string token, IConfiguration configuration)
         {
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes("UnBreakableJwTk3y");
+                var key = Encoding.ASCII.GetBytes(configuration["JWT:Secret"]);
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -48,11 +48,9 @@ namespace JWTAuth_Validation.Middleware
                 context.Items["CompanyId"] = jwtToken.Claims.First(x => x.Type == "CompanyId").Value;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log the exception if necessary
-
-                throw new UnauthorizedAccessException("Invalid token.");
+                throw;
             }
         }
     }

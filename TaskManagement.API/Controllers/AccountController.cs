@@ -26,11 +26,10 @@ namespace TaskManagement.API.Controllers
         [HttpPost("Login")]
         public async Task<Dictionary<string, object>> Login(LoginRequest request)
         {
-            throw new NotImplementedException();
             var user = await _userService.Login(request);
             if (user.Data != null)
             {
-                var _token = JWTHelper.Login((Model.Model.User.UserMaster)user.Data);
+                var _token = JWTHelper.Login((UserMaster)user.Data);
                 return APIResponse("Success", _token);
             }
             return UnauthorizeResponse("Unauthorized", user.Message);

@@ -1,33 +1,49 @@
-﻿using Hangfire.Logging;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 using System.Net;
 
-namespace TaskManagement.API.Infrastructure.Filters
+namespace TaskManagement.API.Infrastructure.Middleware
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
-
-    public class GlobalExceptionFilter : IExceptionFilter
+    public class ErrorHandlingMiddleware
     {
-        public void OnException(ExceptionContext context)
+        private readonly RequestDelegate next;
+
+        public ErrorHandlingMiddleware(RequestDelegate next)
         {
-            var exceptionType = context.Exception.GetType();
+            this.next = next;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
+                await next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleException(context, ex);
+            }
+        }
+
+        private static Task HandleException(HttpContext context, Exception exception)
+        {
+            var exceptionType = exception.GetType();
             HttpStatusCode statusCode = GetStatusCodeByException(exceptionType);
 
-            HttpResponse response = context.HttpContext.Response;
+            HttpResponse response = context.Response;
             var result = JsonConvert.SerializeObject(new
             {
                 isError = true,
-                errorMessage = context.Exception.Message,
+                errorMessage = exception.Message,
                 errorCode = (int)statusCode,
             });
+
             response.ContentType = "application/json";
+            response.StatusCode = (int)statusCode;
             response.ContentLength = result.Length;
-            response.WriteAsync(result);
+            return response.WriteAsync(result);
         }
-        private HttpStatusCode GetStatusCodeByException(Type exceptionType)
+
+        private static HttpStatusCode GetStatusCodeByException(Type exceptionType)
         {
             switch (exceptionType.Name)
             {
