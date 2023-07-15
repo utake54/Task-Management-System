@@ -27,7 +27,7 @@ namespace TaskManagement.API
                             .SwaggerConfig()
                             .RepositoryAndService()
                             .AddAutoMapper(typeof(MapperProfile))
-                            .AddHangfire(x => x.UseSqlServerStorage(string.Format(@"Data Source=LAPTOP-JF9VJ1L7\SQLEXPRESS;Initial Catalog=TaskManagement;Integrated Security=True;TrustServerCertificate=True;Encrypt=False")))
+                            .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
                             .AddHangfireServer();
 
             var app = builder.Build();
