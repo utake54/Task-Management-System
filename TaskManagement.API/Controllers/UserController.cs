@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility.Email;
@@ -9,6 +10,7 @@ namespace TaskManagement.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+    [Permissible("SuperAdmin,User")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

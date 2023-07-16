@@ -5,12 +5,13 @@ using System.Security.Claims;
 using System.Text;
 using TaskManagement.Model.Model.Login.Response;
 using TaskManagement.Model.Model.User;
+using TaskManagement.Model.Model.Login.DTO;
 
 namespace TaskManagement.API.Infrastructure
 {
     public static class JWTHelper
     {
-        public static LoginResponse Login(UserMaster user)
+        public static LoginResponse Login(LoginDTO user)
         {
             var claims = new List<Claim>
                  {
@@ -18,6 +19,7 @@ namespace TaskManagement.API.Infrastructure
                     new Claim("UserId", Convert.ToString(user.Id), ClaimValueTypes.Integer),
                     new Claim("RoleId", Convert.ToString(user.RoleId), ClaimValueTypes.Integer),
                     new Claim("CompanyId", Convert.ToString(user.CompanyId), ClaimValueTypes.Integer),
+                    new Claim("Role", Convert.ToString(user.Role), ClaimValueTypes.Integer),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 

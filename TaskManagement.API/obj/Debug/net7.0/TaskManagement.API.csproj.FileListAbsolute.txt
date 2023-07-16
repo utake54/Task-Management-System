@@ -111,3 +111,6 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\tr-TR\Hangfire.Core.resources.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\zh\Hangfire.Core.resources.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\System.Net.Http.Formatting.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\System.Web.Http.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

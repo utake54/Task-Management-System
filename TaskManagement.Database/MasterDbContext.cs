@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,5 +31,6 @@ namespace TaskManagement.Database
         public DbSet<TeamMaster> TeamMaster { get; set; }
         public DbSet<OTPMaster> OTPMaster { get; set; }
         public DbSet<AssignTask> AssignedTask { get; set; }
+        public DbSet<RoleMaster> RoleMaster { get; set; }
     }
 }

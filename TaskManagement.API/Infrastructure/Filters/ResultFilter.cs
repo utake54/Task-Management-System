@@ -63,6 +63,10 @@ namespace TaskManagement.API.Infrastructure.Filters
                 case EmptyResult _:
                     responseObj.Data = null;
                     break;
+                case UnauthorizedResult:
+                    responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    responseObj.Message = "You are not authorized to access the element";
+                    break;
                 default:
                     responseObj.Data = result;
                     break;

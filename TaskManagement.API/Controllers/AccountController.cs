@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure;
+using TaskManagement.Model.Model.Login.DTO;
 using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.User;
@@ -29,7 +30,7 @@ namespace TaskManagement.API.Controllers
             var user = await _userService.Login(request);
             if (user.Data != null)
             {
-                var _token = JWTHelper.Login((UserMaster)user.Data);
+                var _token = JWTHelper.Login((LoginDTO)user.Data);
                 return APIResponse("Success", _token);
             }
             return UnauthorizeResponse("Unauthorized", user.Message);

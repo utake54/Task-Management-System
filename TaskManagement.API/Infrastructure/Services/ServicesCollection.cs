@@ -7,6 +7,8 @@ using TaskManagement.Service.TaskService;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility.Email;
 using TaskManagement.Utility;
+using TaskManagement.API.Infrastructure.Filters;
+using System.Web.Http.Filters;
 
 namespace TaskManagement.API.Infrastructure.Services
 {

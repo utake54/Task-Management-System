@@ -131,7 +131,7 @@ namespace TaskManagement.Service.UserService
         {
             var response = new ResponseModel();
             request.Password = SHA.Encrypt(request.Password);
-            var user = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.UserId && x.Password == request.Password);
+            var user = await _unitOfWork.UserRepository.GetUserDetails(request);
             if (user != null)
             {
                 response.Ok(user);
