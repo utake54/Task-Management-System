@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.XSSF.UserModel;
 using TaskManagement.API.Infrastructure.Filters;
+using TaskManagement.Model.Model.PagedResult;
+using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.UserService;
+using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
 
 namespace TaskManagement.API.Controllers
@@ -10,7 +14,7 @@ namespace TaskManagement.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    [Permissible("SuperAdmin,User")]
+    [Permissible("Admin")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -22,9 +26,10 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("GetAllUsers")]
-        public async Task<Dictionary<string, object>> GetAllUser()
+
+        public async Task<Dictionary<string, object>> GetAllUser(PageResult pageResult)
         {
-            var allUser = await _userService.GetAllUsers(CompanyId);
+            var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
             if (allUser.Message == "Success")
                 return APIResponse("Success", allUser.Data);
             return FailureResponse("Failed", allUser.Message);
@@ -64,6 +69,26 @@ namespace TaskManagement.API.Controllers
             if (updateuser.Message == "Success")
                 return APIResponse("Success", updateuser.Data);
             return FailureResponse("Failed", updateuser.Message);
+        }
+
+        [HttpPost("ExportUsers")]
+        public async Task<IActionResult> ExportUsers()
+        {
+            var allUsers = await _userService.GetAllUsers(UserId);
+            if(allUsers.Count == 0)
+            {
+                return Ok("No users to export");
+            }
+
+            string fileName = $"UserImport-{DateTime.Now:MMddyyyyHHmmss}.xlsx";
+            var workbook = new XSSFWorkbook();
+            var sheetName = workbook.CreateSheet(fileName);
+            ExportImportHelper.WriteData(allUsers, workbook, sheetName);        
+            var memoryStream = new MemoryStream();
+            workbook.Write(memoryStream);
+            return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+
+
         }
     }
 }

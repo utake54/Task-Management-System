@@ -10,6 +10,7 @@ using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Login.DTO;
 using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.User;
+using TaskManagement.Model.Model.User.DTO;
 
 namespace TaskManagement.Database.Repository.UserRepository
 {
@@ -18,6 +19,28 @@ namespace TaskManagement.Database.Repository.UserRepository
         public UserRepository(MasterDbContext context) : base(context)
         {
 
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetAllUsers(int companyId, int pageNumber = 1, int pageSize = 3)
+        {
+            var skip = ((pageNumber * pageSize) - pageSize);
+
+            var allUsers = await (from u in Context.UserMaster
+                                  where u.CompanyId == companyId
+                                  select new UserDTO
+                                  {
+                                      Id = u.Id,
+                                      FirstName = u.FirstName,
+                                      LastName = u.LastName,
+                                      EmailId = u.EmailId,
+                                      MobileNo = u.MobileNo,
+                                      DateOfBirth = u.DateOfBirth.ToString()
+                                  })
+                                  .Take(pageSize)
+                                  .Skip(skip)
+                                  .OrderBy(u => u.Id)
+                                  .ToListAsync();
+            return allUsers;
         }
 
         public async Task<LoginDTO> GetUserDetails(LoginRequest request)

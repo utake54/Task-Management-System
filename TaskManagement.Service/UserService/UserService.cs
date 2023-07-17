@@ -8,6 +8,7 @@ using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
 using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.OTP;
+using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
@@ -65,23 +66,16 @@ namespace TaskManagement.Service.UserService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllUsers(int companyId)
+        public async Task<ResponseModel> GetAllUsers(int companyId, PageResult pageResult)
         {
             var response = new ResponseModel();
-            var allUsers = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
-            if (allUsers.Count() <= 0)
+            var allUsers = await _unitOfWork.UserRepository.GetAllUsers(companyId, pageResult.PageNumber, pageResult.PageSize);
+            if (!allUsers.Any())
             {
                 response.Message = "No users found";
                 return response;
             }
-            var users = new List<UserDTO>();
-            foreach (var user in allUsers)
-            {
-                var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
-                userDTO.DateOfBirth = user.DateOfBirth.ToString("d");
-                users.Add(userDTO);
-            }
-            response.Ok(users);
+            response.Ok(allUsers);
             return response;
         }
 
@@ -120,7 +114,7 @@ namespace TaskManagement.Service.UserService
             user.MobileNo = request.MobileNo;
             user.ModifiedBy = userId;
             user.ModifiedDate = DateTime.Now;
-            user.EmailId= request.EmailId;
+            user.EmailId = request.EmailId;
             _unitOfWork.UserRepository.Update(user);
             await _unitOfWork.UserRepository.SaveChanges();
 
@@ -186,6 +180,21 @@ namespace TaskManagement.Service.UserService
             var response = new ResponseModel();
 
             return null;
+        }
+
+        public async Task<List<UserDTO>> GetAllUsers(int companyId)
+        {
+
+
+            var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
+
+            var usersDTO = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
+                usersDTO.Add(userDTO);
+            }
+            return usersDTO;
         }
     }
 }
