@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Pqc.Crypto.Hqc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,7 @@ namespace TaskManagement.Database.Repository.Task
 
         public async Task<IEnumerable<TaskMaster>> GetAllTask(int companyId, SearchModel searchModel)
         {
-            
+
             var taskList = await Context.TaskMaster.Where(x => x.CompanyId == companyId)
                                 .Take(searchModel.PageSize)
                                 .Skip((searchModel.PageNumber - 1) * searchModel.PageSize)
@@ -49,6 +51,18 @@ namespace TaskManagement.Database.Repository.Task
                                   AssignedBy = um.FirstName
                               }).ToListAsync();
             return task;
+        }
+
+        public async Task<List<TaskExportDTO>> GetTaskDetails(int companyId)
+        {
+            var sqlParameters = new List<SqlParameter>()
+            {
+                new SqlParameter("@CompanyId",companyId)
+            };
+
+            var data = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetTaskExport", sqlParameters);
+
+            return (List<TaskExportDTO>)data;
         }
     }
 }

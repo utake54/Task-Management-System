@@ -8,6 +8,7 @@ using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task;
+using TaskManagement.Model.Model.Task.DTO;
 using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Utility.Email;
 using TaskManagement.Utility.Enum;
@@ -54,10 +55,10 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllTask(int companyId,SearchModel search)
+        public async Task<ResponseModel> GetAllTask(int companyId, SearchModel search)
         {
             var response = new ResponseModel();
-            var taskList = await _unitOfWork.TaskRepository.GetAllTask(companyId,search);
+            var taskList = await _unitOfWork.TaskRepository.GetAllTask(companyId, search);
             if (taskList.Any())
             {
                 response.Ok(taskList);
@@ -185,6 +186,12 @@ namespace TaskManagement.Service.TaskService
             }
             response.Failure("No task found");
             return response;
+        }
+
+        public async Task<List<TaskExportDTO>> GetTaskData(int companyId)
+        {
+            var data = await _unitOfWork.TaskRepository.GetTaskDetails(companyId);
+            return data;
         }
     }
 }

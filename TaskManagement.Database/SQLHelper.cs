@@ -11,7 +11,7 @@ namespace TaskManagement.Database
 {
     public static class SQLHelper
     {
-        public static string ConnectionString = string.Empty;
+        public static string ConnectionString = "Data Source=LAPTOP-JF9VJ1L7\\SQLEXPRESS;Initial Catalog=TaskManagement;Integrated Security=True;TrustServerCertificate=True;Encrypt=False";
 
         public async static Task<IEnumerable<T>> GetDataAsync<T>(string sql, List<SqlParameter> sqlParameters = null) where T : new()
         {

@@ -110,7 +110,7 @@ namespace TaskManagement.Utility
                                 break;
                             case "datetime":
                                 cell.SetCellValue(Convert.ToDateTime
-                                 (table.Rows[i][j]).ToString("dd/MM/yyyy hh:mm:ss"));
+                                 (table.Rows[i][j]).ToString("dd/MM/yyyy"));
                                 break;
                             case "list`1":
                                 cell.SetCellValue(cellvalue);

@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.XSSF.UserModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.TaskService;
+using TaskManagement.Utility;
 
 namespace TaskManagement.API.Controllers
 {
@@ -101,6 +103,25 @@ namespace TaskManagement.API.Controllers
             if (updateStatus.Message == "Success")
                 return APIResponse("Success", null);
             return FailureResponse(updateStatus.Message, updateStatus.Data);
+        }
+
+        [HttpPost("ExportTaskDetails")]
+        public async Task<IActionResult> ExportTaskDetails()
+        {
+            var taskData = await _taskService.GetTaskData(CompanyId);
+
+            if (taskData.Count == 0)
+            {
+                return Ok("No data found to export the file");
+            }
+
+            string fileName = $"TaskImport-{DateTime.Now:MMddyyyyHHmmss}.xlsx";
+            var workbook = new XSSFWorkbook();
+            var sheetName = workbook.CreateSheet(fileName);
+            ExportImportHelper.WriteData(taskData, workbook, sheetName);
+            var memoryStream = new MemoryStream();
+            workbook.Write(memoryStream);
+            return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }
