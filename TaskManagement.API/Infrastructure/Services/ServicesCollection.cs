@@ -9,6 +9,10 @@ using TaskManagement.Utility.Email;
 using TaskManagement.Utility;
 using TaskManagement.API.Infrastructure.Filters;
 using System.Web.Http.Filters;
+using TaskManagement.API.Reminders;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using TaskManagement.Service.OverDueService;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -26,10 +30,10 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IAppSettings, AppSettings>()
                 .AddTransient<ITaskRepository, TaskRepository>()
                 .AddTransient<ITaskService, TaskService>()
-                .AddTransient<IAssignTaskRepository, AssignTaskRepository>();
+                .AddTransient<IAssignTaskRepository, AssignTaskRepository>()
+                .AddTransient<IOverdueService, OverdueService>();
 
             return services;
-
         }
     }
 }

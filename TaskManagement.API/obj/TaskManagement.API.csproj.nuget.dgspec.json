@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[1.8.3, )"
             },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
             "Microsoft.ApplicationInsights.AspNetCore": {
               "target": "Package",
               "version": "[2.15.0, )"

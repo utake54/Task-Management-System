@@ -47,9 +47,6 @@ namespace TaskManagement.Utility.Email
                 var error = ex;
             }
         }
-
-
-
         public Task SendEmailAsync(MailDetails mail)
         {
             Execute(mail.To, mail.CC, mail.Subject, mail.Message).Wait();

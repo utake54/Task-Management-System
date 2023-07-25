@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/obgojKKV8zKfYfpP/o63Yhwxuxb0v65ZvpQhcvk/Ybpam2LLIfDSaEcbOzV/BfdQMh27Onh39+1O2xjbMJg1w==",
+  "dgSpecHash": "qsP8LTduSBY52Yh+KeGRPUoDdE1phBoXmeYIXRMLbMoczF/j00QRJc07L9hDT52NjMPapKNBcT1++znZPbIoEA==",
   "success": true,
   "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.API\\TaskManagement.API.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\utake\\.nuget\\packages\\hangfire\\1.8.3\\hangfire.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.aspnetcore\\1.8.3\\hangfire.aspnetcore.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.core\\1.8.3\\hangfire.core.1.8.3.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\hangfire.memorystorage\\1.8.0\\hangfire.memorystorage.1.8.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.netcore\\1.8.3\\hangfire.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.sqlserver\\1.8.3\\hangfire.sqlserver.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\mathnet.numerics.signed\\4.15.0\\mathnet.numerics.signed.4.15.0.nupkg.sha512",

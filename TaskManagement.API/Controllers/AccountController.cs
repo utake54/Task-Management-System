@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure;
 using TaskManagement.Model.Model.Login.DTO;
@@ -7,6 +8,7 @@ using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
+using TaskManagement.Utility.Email;
 
 namespace TaskManagement.API.Controllers
 {

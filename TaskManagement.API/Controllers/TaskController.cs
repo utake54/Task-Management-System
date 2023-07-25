@@ -16,11 +16,9 @@ namespace TaskManagement.API.Controllers
     public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
-        private readonly IMapper _mapper;
-        public TaskController(ITaskService taskService, IMapper mapper)
+        public TaskController(ITaskService taskService)
         {
             _taskService = taskService;
-            _mapper = mapper;
         }
 
         [HttpPost("AddTask")]

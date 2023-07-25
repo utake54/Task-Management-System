@@ -8,11 +8,12 @@ using TaskManagement.Model.Model.ResponseModel;
 
 namespace TaskManagement.API.Infrastructure.Filters
 {
+    [AttributeUsage(AttributeTargets.All)]
     public class Permissible : Attribute, IActionFilter
     {
-        private readonly string _role;
+        private readonly string[] _role;
 
-        public Permissible(string role)
+        public Permissible(params string[] role)
         {
             _role = role;
         }
@@ -24,12 +25,10 @@ namespace TaskManagement.API.Infrastructure.Filters
                 context.Result = new UnauthorizedResult();
                 return;
             }
-            string[] permissions = _role.Split(',');
 
             var tokenRole = context.HttpContext.Items["Role"].ToString();
 
-            var hasPermissibleRole = permissions.Where(x => x == tokenRole).Any();
-
+            var hasPermissibleRole = this._role.Contains(tokenRole);
             if (!hasPermissibleRole)
             {
                 context.Result = new UnauthorizedResult();

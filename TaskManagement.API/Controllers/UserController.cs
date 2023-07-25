@@ -14,7 +14,7 @@ namespace TaskManagement.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    [Permissible("Admin")]
+    [Permissible("Admin","HOD")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

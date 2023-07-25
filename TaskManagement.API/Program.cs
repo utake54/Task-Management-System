@@ -1,9 +1,10 @@
 using Hangfire;
+using Hangfire.MemoryStorage;
 using JWTAuth_Validation.Middleware;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
-using TaskManagement.API.Infrastructure.Middleware;
 using TaskManagement.API.Infrastructure.Services;
+using TaskManagement.API.Reminders;
 using TaskManagement.Database;
 
 namespace TaskManagement.API
@@ -38,12 +39,19 @@ namespace TaskManagement.API
                 app.UseSwaggerUI();
             }
             app.UseHangfireDashboard("/HangDashboard");
+            var newServices = app.Services.CreateScope();
+            var recurringJobManager = newServices.ServiceProvider.GetRequiredService<IRecurringJobManager>();
+            ReminderService.NightlyReminderService(recurringJobManager);
+
+
             app.UseMiddleware<JWTMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             //app.UseMiddleware<ErrorHandlingMiddleware>();
             app.MapControllers();
             app.Run();
+
+
         }
     }
 }
