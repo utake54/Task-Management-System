@@ -16,6 +16,7 @@ using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
+using TaskManagement.Utility.Enum;
 
 namespace TaskManagement.Service.UserService
 {
@@ -46,7 +47,18 @@ namespace TaskManagement.Service.UserService
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
-            await _sendMail.SendEmailAsync("omkarutake@nimapinfotech.com", null, "Registration successfull", $"Your Password is {systemPassword}");
+
+            #region Mail Notification
+            int templateId = (int)MailTemplate.Welcome;
+            var getMailTemplate = await _unitOfWork.EmailTemplateRepository.GetById(templateId);
+            var subject = getMailTemplate.Subject;
+            var body = getMailTemplate.Body;
+            body = body.Replace("@UserName", user.FirstName);
+            body = body.Replace("@SysPass", systemPassword);
+            await _sendMail.SendEmailAsync("omkarutake@nimapinfotech.com", null, subject, body);
+
+            #endregion
+
             response.Ok();
             return response;
         }

@@ -13,6 +13,7 @@ using TaskManagement.API.Reminders;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using TaskManagement.Service.OverDueService;
+using TaskManagement.Database.Repository.EmailTemplate;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -31,7 +32,9 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<ITaskRepository, TaskRepository>()
                 .AddTransient<ITaskService, TaskService>()
                 .AddTransient<IAssignTaskRepository, AssignTaskRepository>()
-                .AddTransient<IOverdueService, OverdueService>();
+                .AddTransient<IOverdueService, OverdueService>()
+                .AddTransient<IEmailTemplateRepository, EmailTemplateRepository>();
+
 
             return services;
         }
