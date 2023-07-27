@@ -14,19 +14,16 @@ namespace TaskManagement.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    [Permissible("Admin","HOD")]
+    [Permissible("Admin", "HOD")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
-        private readonly ISendMail _sendMail;
-        public UserController(IUserService userService, ISendMail sendMail)
+        public UserController(IUserService userService)
         {
             _userService = userService;
-            _sendMail = sendMail;
         }
 
         [HttpPost("GetAllUsers")]
-
         public async Task<Dictionary<string, object>> GetAllUser(PageResult pageResult)
         {
             var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
@@ -75,7 +72,7 @@ namespace TaskManagement.API.Controllers
         public async Task<IActionResult> ExportUsers()
         {
             var allUsers = await _userService.GetAllUsers(UserId);
-            if(allUsers.Count == 0)
+            if (allUsers.Count == 0)
             {
                 return Ok("No users to export");
             }
@@ -83,7 +80,7 @@ namespace TaskManagement.API.Controllers
             string fileName = $"UserImport-{DateTime.Now:MMddyyyyHHmmss}.xlsx";
             var workbook = new XSSFWorkbook();
             var sheetName = workbook.CreateSheet(fileName);
-            ExportImportHelper.WriteData(allUsers, workbook, sheetName);        
+            ExportImportHelper.WriteData(allUsers, workbook, sheetName);
             var memoryStream = new MemoryStream();
             workbook.Write(memoryStream);
             return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);

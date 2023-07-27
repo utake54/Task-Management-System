@@ -18,12 +18,10 @@ namespace TaskManagement.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOTPService _otpService;
-        private readonly IMapper _mapper;
-        public AccountController(IUserService userService, IOTPService oTPService, IMapper mapper)
+        public AccountController(IUserService userService, IOTPService oTPService)
         {
             _userService = userService;
             _otpService = oTPService;
-            _mapper = mapper;
         }
 
         [HttpPost("Login")]

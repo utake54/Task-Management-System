@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Model.Model.Category;
 using TaskManagement.Model.Model.Email;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.Task;
@@ -34,5 +35,6 @@ namespace TaskManagement.Database
         public DbSet<AssignTask> AssignedTask { get; set; }
         public DbSet<RoleMaster> RoleMaster { get; set; }
         public DbSet<EmailTemplateMaster> EmailTemplateMaster { get; set; }
+        public DbSet<TaskCategoryMaster> TaskCategoryMaster { get; set; }
     }
 }

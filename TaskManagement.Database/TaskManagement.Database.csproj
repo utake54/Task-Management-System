@@ -16,8 +16,4 @@
     <ProjectReference Include="..\TaskManagement.Model\TaskManagement.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\NewFolder\" />
-  </ItemGroup>
-
 </Project>
