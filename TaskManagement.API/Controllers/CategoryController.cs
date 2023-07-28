@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Model.Model.Category.Request;
 using TaskManagement.Service.CategoryService;
 
@@ -8,6 +7,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Permissible("Admin")]
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
@@ -25,6 +25,10 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", category.Message);
         }
 
+        /// <summary>
+        /// This return all categories from table
+        /// </summary>
+        /// <returns>All categories</returns>
         [HttpPost("GetAllCategories")]
         public async Task<Dictionary<string, object>> GetAllCategories()
         {

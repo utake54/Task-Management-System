@@ -73,6 +73,7 @@ namespace TaskManagement.API.Infrastructure.Filters
             }
 
             context.Result = new JsonResult(responseObj);
+            
         }
     }
 }

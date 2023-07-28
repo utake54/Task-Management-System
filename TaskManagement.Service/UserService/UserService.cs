@@ -45,6 +45,28 @@ namespace TaskManagement.Service.UserService
             user.CreatedDate = DateTime.Now;
             user.Password = SHA.Encrypt(systemPassword);
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
+
+            #region User Validation for existing check
+            var existingUsers = await _unitOfWork.UserRepository.GetAllAsync();
+
+
+            var userExistWithEmail = existingUsers.Where(x => x.EmailId == user.EmailId).Any();
+            if (userExistWithEmail)
+            {
+                response.Failure("User already exists with same email id.");
+                return response;
+            }
+
+            var userExistWithMobile = existingUsers.Where(x => x.MobileNo == user.MobileNo).Any();
+            if (userExistWithMobile)
+            {
+                response.Failure("User already exists with same Mobile no.");
+                return response;
+            }
+
+
+            #endregion
+
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.UserRepository.SaveChanges();
 

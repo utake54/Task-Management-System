@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaskManagement.API</name>
+    </assembly>
+    <members>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.GetAllCategories">
+            <summary>
+            This return all categories from table
+            </summary>
+            <returns>All categories</returns>
+        </member>
+    </members>
+</doc>

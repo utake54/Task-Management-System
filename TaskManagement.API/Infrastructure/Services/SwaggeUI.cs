@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -20,6 +21,12 @@ namespace TaskManagement.API.Infrastructure.Services
                      Scheme = "bearer"
 
                  });
+
+                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                 c.IncludeXmlComments(xmlPath);
+
+
                  c.AddSecurityRequirement(new OpenApiSecurityRequirement {
              {
                  new OpenApiSecurityScheme
@@ -33,6 +40,8 @@ namespace TaskManagement.API.Infrastructure.Services
                  new string[]{}
                     }
              });
+
+
              });
 
             return services;

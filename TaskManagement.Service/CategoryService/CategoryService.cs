@@ -45,8 +45,8 @@ namespace TaskManagement.Service.CategoryService
                 response.Failure("Category not found.");
                 return response;
             }
-           
-            _unitOfWork.CategoryRepository.Delete(category);
+            category.IsActive = false;
+            _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.CategoryRepository.SaveChanges();
             response.Ok();
             return response;
@@ -55,27 +55,22 @@ namespace TaskManagement.Service.CategoryService
         public async Task<ResponseModel> GetAllCategories()
         {
             var response = new ResponseModel();
-            var categoriesDTO = new List<CategoryDTO>();
-            var categories = await _unitOfWork.CategoryRepository.GetAllAsync();
+
+            var categories = await _unitOfWork.CategoryRepository.GetAllCategories();
             if (!categories.Any())
             {
                 response.Failure("Categories not found.");
                 return response;
             }
 
-            foreach (var category in categories)
-            {
-                var categoryDTO = _mapper.Map<TaskCategoryMaster, CategoryDTO>(category);
-                categoriesDTO.Add(categoryDTO);
-            }
-            response.Ok(categoriesDTO);
+            response.Ok(categories);
             return response;
         }
 
         public async Task<ResponseModel> GetCategory(int categoryId)
         {
             var response = new ResponseModel();
-            var category = await _unitOfWork.CategoryRepository.GetById(categoryId);
+            var category = await _unitOfWork.CategoryRepository.GetDefault(x => x.Id == categoryId && x.IsActive == true);
             if (category == null)
             {
                 response.Failure("Category not found.");
