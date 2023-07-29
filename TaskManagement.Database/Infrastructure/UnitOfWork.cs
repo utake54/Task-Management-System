@@ -15,7 +15,8 @@ namespace TaskManagement.Database.Infrastructure
         public IEmailTemplateRepository EmailTemplateRepository { get; }
         public ICategoryRepository CategoryRepository { get; }
 
-        public UnitOfWork(IUserRepository userRepository, IOTPRepository oTPRepository,
+        public MasterDbContext MasterDbContext { get; }
+        public UnitOfWork(MasterDbContext masterDbContext, IUserRepository userRepository, IOTPRepository oTPRepository,
                           ITaskRepository taskRepository, IAssignTaskRepository assignTaskRepository,
                           IEmailTemplateRepository emailTemplateRepository, ICategoryRepository categoryRepository)
         {
@@ -25,6 +26,12 @@ namespace TaskManagement.Database.Infrastructure
             AssignTaskRepository = assignTaskRepository;
             EmailTemplateRepository = emailTemplateRepository;
             CategoryRepository = categoryRepository;
+            MasterDbContext = masterDbContext;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await MasterDbContext.SaveChangesAsync();
         }
     }
 }

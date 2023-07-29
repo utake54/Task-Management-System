@@ -12,10 +12,11 @@ namespace TaskManagement.Database.Infrastructure
     public class Repository<T> : IRepository<T> where T : class
     {
         protected MasterDbContext Context;
-    
+
         public Repository(MasterDbContext context)
         {
             Context = context;
+            SQLHelper.ConnectionString = Context.Database.GetDbConnection().ConnectionString;
         }
 
         public async Task<T> AddAsync(T entity)

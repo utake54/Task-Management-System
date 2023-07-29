@@ -16,6 +16,8 @@ using TaskManagement.Service.OverDueService;
 using TaskManagement.Database.Repository.EmailTemplate;
 using TaskManagement.Database.Repository.Category;
 using TaskManagement.Service.CategoryService;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -37,7 +39,8 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IOverdueService, OverdueService>()
                 .AddTransient<IEmailTemplateRepository, EmailTemplateRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
-                .AddTransient<ICategoryService, CategoryService>();
+                .AddTransient<ICategoryService, CategoryService>()
+            .TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>(); ;
 
 
             return services;

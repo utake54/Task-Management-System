@@ -68,7 +68,7 @@ namespace TaskManagement.Service.UserService
             #endregion
 
             await _unitOfWork.UserRepository.AddAsync(user);
-            await _unitOfWork.UserRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             #region Mail Notification
             int templateId = (int)MailTemplate.Welcome;

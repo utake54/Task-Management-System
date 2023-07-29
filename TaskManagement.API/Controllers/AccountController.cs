@@ -18,10 +18,12 @@ namespace TaskManagement.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOTPService _otpService;
-        public AccountController(IUserService userService, IOTPService oTPService)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public AccountController(IUserService userService, IOTPService oTPService, IHttpContextAccessor contextAccessor)
         {
             _userService = userService;
             _otpService = oTPService;
+            _contextAccessor = contextAccessor; 
         }
 
         [HttpPost("Login")]

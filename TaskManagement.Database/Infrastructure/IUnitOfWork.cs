@@ -13,6 +13,8 @@ namespace TaskManagement.Database.Infrastructure
 {
     public interface IUnitOfWork
     {
+        Task SaveChangesAsync();
+        MasterDbContext MasterDbContext { get; }
         public IUserRepository UserRepository { get; }
         public IOTPRepository OTPRepository { get; }
         public ITaskRepository TaskRepository { get; }
