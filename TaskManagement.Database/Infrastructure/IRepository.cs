@@ -17,6 +17,5 @@ namespace TaskManagement.Database.Infrastructure
         Task<T> GetById(int id);
         Task<T> GetDefault(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> Get(Expression<Func<T, bool>> expression);
-        Task<int> SaveChanges();
     }
 }

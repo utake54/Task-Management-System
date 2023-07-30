@@ -95,7 +95,7 @@ namespace TaskManagement.Service.UserService
                 return response;
             }
             _unitOfWork.UserRepository.Delete(user);
-            await _unitOfWork.UserRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
@@ -150,7 +150,7 @@ namespace TaskManagement.Service.UserService
             user.ModifiedDate = DateTime.Now;
             user.EmailId = request.EmailId;
             _unitOfWork.UserRepository.Update(user);
-            await _unitOfWork.UserRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
 
             response.Ok(user);
             return response;
@@ -200,7 +200,7 @@ namespace TaskManagement.Service.UserService
             {
                 user.Password = SHA.Encrypt(request.Password);
                 _unitOfWork.UserRepository.Update(user);
-                await _unitOfWork.UserRepository.SaveChanges();
+                await _unitOfWork.SaveChangesAsync();
 
                 response.Ok("Password changed successfully.");
                 return response;

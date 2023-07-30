@@ -29,7 +29,7 @@ namespace TaskManagement.Service.OTPService
             otpDetails.ExpiryTime = DateTime.Now.AddMinutes(10);
 
             var saveOTP = _unitOfWork.OTPRepository.AddAsync(otpDetails);
-            await _unitOfWork.OTPRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             return userId;
         }
 

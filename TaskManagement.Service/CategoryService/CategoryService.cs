@@ -30,7 +30,7 @@ namespace TaskManagement.Service.CategoryService
             category.CreatedBy = userId;
             category.IsActive = true;
             await _unitOfWork.CategoryRepository.AddAsync(category);
-            await _unitOfWork.CategoryRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
@@ -47,7 +47,7 @@ namespace TaskManagement.Service.CategoryService
             }
             category.IsActive = false;
             _unitOfWork.CategoryRepository.Update(category);
-            await _unitOfWork.CategoryRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
@@ -93,7 +93,7 @@ namespace TaskManagement.Service.CategoryService
 
             category.Category = request.Category;
             _unitOfWork.CategoryRepository.Update(category);
-            await _unitOfWork.CategoryRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }

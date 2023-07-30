@@ -9,6 +9,7 @@ namespace TaskManagement.Model.Model.Task.DTO
     public class MyTaskDTO
     {
         public int Id { get; set; }
+        public string Category { get; set; }
         public string Task { get; set; }
         public string Description { get; set; }
         public string Priority { get; set; }

@@ -4,11 +4,50 @@
         <name>TaskManagement.API</name>
     </assembly>
     <members>
+        <member name="T:TaskManagement.API.Controllers.CategoryController">
+            <summary>
+            This is Category controller to control over task categories
+            </summary>
+        </member>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.#ctor(TaskManagement.Service.CategoryService.ICategoryService)">
+            <summary>
+            
+            </summary>
+            <param name="categoryService"></param>
+        </member>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.GetCategory(System.Int32)">
+            <summary>
+            This is for get details of selected category option.
+            </summary>
+            <param name="categoryId"></param>
+            <returns>If category found as per given id return category in details</returns>
+        </member>
         <member name="M:TaskManagement.API.Controllers.CategoryController.GetAllCategories">
             <summary>
             This return all categories from table
             </summary>
             <returns>All categories</returns>
+        </member>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.AddCategory(TaskManagement.Model.Model.Category.Request.CategoryRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.UpdateCategory(TaskManagement.Model.Model.Category.Request.CategoryRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TaskManagement.API.Controllers.CategoryController.DeleteCategory(System.Int32)">
+            <summary>
+            z
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

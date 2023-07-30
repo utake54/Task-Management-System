@@ -59,9 +59,5 @@ namespace TaskManagement.Database.Infrastructure
         {
             return await Context.Set<T>().Where(expression).ToListAsync();
         }
-        public async Task<int> SaveChanges()
-        {
-            return await Context.SaveChangesAsync();
-        }
     }
 }

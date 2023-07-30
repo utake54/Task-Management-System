@@ -24,7 +24,7 @@ namespace TaskManagement.API.Controllers
         [HttpPost("AddTask")]
         public async Task<Dictionary<string, object>> AddTask(TaskRequest request)
         {
-            var addTask = await _taskService.AddTask(UserId, request);
+            var addTask = await _taskService.AddTask(UserId, request, CompanyId);
             if (addTask.Message == "Success")
                 return APIResponse("Success", addTask.Data);
             return FailureResponse("Failed", addTask.Message);

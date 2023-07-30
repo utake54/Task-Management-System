@@ -27,14 +27,15 @@ namespace TaskManagement.Service.TaskService
             _sendMail = sendMail;
         }
 
-        public async Task<ResponseModel> AddTask(int userId, TaskRequest request)
+        public async Task<ResponseModel> AddTask(int userId, TaskRequest request, int companyId)
         {
             var response = new ResponseModel();
             var taskMaster = _mapper.Map<TaskRequest, TaskMaster>(request);
             taskMaster.CreatedBy = userId;
             taskMaster.CreatedDate = DateTime.Now;
+            taskMaster.CompanyId = companyId;
             await _unitOfWork.TaskRepository.AddAsync(taskMaster);
-            await _unitOfWork.TaskRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
@@ -47,7 +48,7 @@ namespace TaskManagement.Service.TaskService
             if (task != null)
             {
                 _unitOfWork.TaskRepository.Delete(task);
-                await _unitOfWork.TaskRepository.SaveChanges();
+                await _unitOfWork.SaveChangesAsync();
                 response.Ok();
                 return response;
             }
@@ -95,7 +96,7 @@ namespace TaskManagement.Service.TaskService
                 task.ModifiedDate = DateTime.Now;
 
                 _unitOfWork.TaskRepository.Update(task);
-                await _unitOfWork.TaskRepository.SaveChanges();
+                await _unitOfWork.SaveChangesAsync();
                 response.Ok(task);
                 return response;
             }
@@ -121,10 +122,11 @@ namespace TaskManagement.Service.TaskService
                 taskList.Add(task);
             }
             await _unitOfWork.AssignTaskRepository.AddRangeAsync(taskList);
-            await _unitOfWork.AssignTaskRepository.SaveChanges();
 
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
             var taskAssignedUers = users.Where(x => x.Id == request.Id).Select(x => x.EmailId).ToList();
+            taskAssignedUers.Add("utake.omkar54@gmail.com");
+            taskAssignedUers.Add("omkar.utake54@gmail.com");
 
             var emailDetails = new MailDetails()
             {
@@ -135,6 +137,7 @@ namespace TaskManagement.Service.TaskService
             };
 
             await _sendMail.SendEmailAsync(emailDetails);
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
@@ -150,7 +153,7 @@ namespace TaskManagement.Service.TaskService
             }
             task.IsAcceptByUser = request.IsAccepted;
             _unitOfWork.AssignTaskRepository.Update(task);
-            await _unitOfWork.AssignTaskRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
 
@@ -170,7 +173,7 @@ namespace TaskManagement.Service.TaskService
                 task.EndDate = DateTime.Now;
             }
             _unitOfWork.AssignTaskRepository.Update(task);
-            await _unitOfWork.AssignTaskRepository.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }

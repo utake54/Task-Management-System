@@ -12,7 +12,7 @@ namespace TaskManagement.Service.TaskService
 {
     public interface ITaskService
     {
-        Task<ResponseModel> AddTask(int userId, TaskRequest request);
+        Task<ResponseModel> AddTask(int userId, TaskRequest request,int companyId);
         Task<ResponseModel> GetTask(int taskId);
         Task<ResponseModel> DeleteTask(int taskId);
         Task<ResponseModel> UpdateTask(TaskRequest request, int userId);
