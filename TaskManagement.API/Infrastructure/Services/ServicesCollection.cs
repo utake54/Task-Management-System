@@ -18,6 +18,7 @@ using TaskManagement.Database.Repository.Category;
 using TaskManagement.Service.CategoryService;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Configuration;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -40,7 +41,13 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IEmailTemplateRepository, EmailTemplateRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<ICategoryService, CategoryService>()
-            .TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>(); ;
+             .AddTransient<IConfiguration>(sp =>
+                {
+                    IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                    configurationBuilder.AddJsonFile("appsettings.json");
+                    return configurationBuilder.Build();
+                })
+                .TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
             return services;

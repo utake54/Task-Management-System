@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,20 @@ namespace TaskManagement.Database
 {
     public class MasterDbContext : DbContext
     {
-        public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options)
-        {
+        private readonly string _connectionString;
+        private readonly IConfiguration _configuration;
 
+        public MasterDbContext(DbContextOptions<MasterDbContext> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnectionString");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-JF9VJ1L7\\SQLEXPRESS;Initial Catalog=TaskManagement;Integrated Security=True;TrustServerCertificate=True;Encrypt=False");
+                optionsBuilder.UseSqlServer(_connectionString);
             }
         }
         public DbSet<UserMaster> UserMaster { get; set; }
