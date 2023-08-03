@@ -121,5 +121,14 @@ namespace TaskManagement.API.Controllers
             workbook.Write(memoryStream);
             return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
+
+        [HttpPost("GetTaskByCategory/{categoryId}")]
+        public async Task<Dictionary<string, object>> GetTaskByCategory(int categoryId)
+        {
+            var task = await _taskService.GetByCategories(categoryId);
+            if (task.Message == "Success")
+                return APIResponse("Success", task.Data);
+            return FailureResponse(task.Message, null);
+        }
     }
 }

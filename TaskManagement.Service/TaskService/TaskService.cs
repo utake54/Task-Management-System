@@ -34,12 +34,12 @@ namespace TaskManagement.Service.TaskService
             taskMaster.CreatedBy = userId;
             taskMaster.CreatedDate = DateTime.Now;
             taskMaster.CompanyId = companyId;
+            taskMaster.IsActive = true;
             await _unitOfWork.TaskRepository.AddAsync(taskMaster);
             await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
-
 
         public async Task<ResponseModel> DeleteTask(int taskId)
         {
@@ -93,6 +93,7 @@ namespace TaskManagement.Service.TaskService
                 task.DueDate = request.DueDate;
                 task.Title = request.Title;
                 task.ModifiedBy = userId;
+                task.CategoryId = request.CategoryId;
                 task.ModifiedDate = DateTime.Now;
 
                 _unitOfWork.TaskRepository.Update(task);
@@ -156,7 +157,6 @@ namespace TaskManagement.Service.TaskService
             await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
-
         }
 
         public async Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId)
@@ -177,7 +177,7 @@ namespace TaskManagement.Service.TaskService
             response.Ok();
             return response;
         }
-            
+
         public async Task<ResponseModel> GetMyTask(int userId)
         {
             var response = new ResponseModel();
@@ -195,6 +195,19 @@ namespace TaskManagement.Service.TaskService
         {
             var data = await _unitOfWork.TaskRepository.GetTaskDetails(companyId);
             return data;
+        }
+
+        public async Task<ResponseModel> GetByCategories(int categoryId)
+        {
+            var response = new ResponseModel();
+            var taskList = await _unitOfWork.TaskRepository.Get(x => x.CategoryId == categoryId && x.IsActive == true);
+            if (taskList.Any())
+            {
+                response.Ok(taskList);
+                return response;
+            }
+            response.Failure("No task found");
+            return response;
         }
     }
 }

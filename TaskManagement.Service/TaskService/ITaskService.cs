@@ -22,6 +22,6 @@ namespace TaskManagement.Service.TaskService
         Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId);
         Task<ResponseModel> GetMyTask(int userId);
         Task<List<TaskExportDTO>> GetTaskData(int companyId);
-
+        Task<ResponseModel> GetByCategories(int categoryId);
     }
 }

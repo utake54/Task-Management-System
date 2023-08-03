@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using Org.BouncyCastle.Pqc.Crypto.Hqc;
 using System;
 using System.Collections.Generic;
@@ -20,15 +21,17 @@ namespace TaskManagement.Database.Repository.Task
         {
         }
 
-        public async Task<IEnumerable<TaskMaster>> GetAllTask(int companyId, SearchModel searchModel)
+        public async Task<IEnumerable<TaskExportDTO>> GetAllTask(int companyId, SearchModel searchModel)
         {
+            var sqlParameters = new List<SqlParameter>()
+            {
+                new SqlParameter("@CompanyId",companyId)
+            };
 
-            var taskList = await Context.TaskMaster.Where(x => x.CompanyId == companyId)
-                                .Take(searchModel.PageSize)
-                                .Skip((searchModel.PageNumber - 1) * searchModel.PageSize)
-                                .OrderBy(x => x.Id)
-                                .ToListAsync();
-            return taskList;
+            var data = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetAllTask", sqlParameters);
+
+          
+            return data;
         }
 
         public async Task<IEnumerable<MyTaskDTO>> GetMyTask(int userId)
