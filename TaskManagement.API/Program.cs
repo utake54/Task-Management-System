@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using Hangfire.Server;
 using JWTAuth_Validation.Middleware;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
@@ -20,7 +21,7 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
                 config.Filters.Add<GlobalExceptionFilter>();
-                //config.Filters.Add<Permissible>();
+                config.Filters.Add<Permissible>();
             });
 
             builder.Services.AddEndpointsApiExplorer()
@@ -30,7 +31,8 @@ namespace TaskManagement.API
                             .RepositoryAndService()
                             .AddAutoMapper(typeof(MapperProfile))
                             .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
-                            .AddHangfireServer();
+                            .AddHangfireServer()
+                            .AddRecurringJobManager();
 
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
@@ -39,15 +41,9 @@ namespace TaskManagement.API
                 app.UseSwaggerUI();
             }
             app.UseHangfireDashboard("/HangDashboard");
-            var newServices = app.Services.CreateScope();
-            var recurringJobManager = newServices.ServiceProvider.GetRequiredService<IRecurringJobManager>();
-            ReminderService.NightlyReminderService(recurringJobManager);
-
-
             app.UseMiddleware<JWTMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthorization();
-            //app.UseMiddleware<ErrorHandlingMiddleware>();
             app.MapControllers();
             app.Run();
 
