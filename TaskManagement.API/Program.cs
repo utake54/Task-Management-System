@@ -5,7 +5,6 @@ using JWTAuth_Validation.Middleware;
 using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.API.Infrastructure.Services;
-using TaskManagement.API.Reminders;
 using TaskManagement.Database;
 
 namespace TaskManagement.API
