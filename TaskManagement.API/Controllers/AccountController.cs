@@ -23,7 +23,7 @@ namespace TaskManagement.API.Controllers
         {
             _userService = userService;
             _otpService = oTPService;
-            _contextAccessor = contextAccessor; 
+            _contextAccessor = contextAccessor;
         }
 
         [HttpPost("Login")]

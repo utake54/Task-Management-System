@@ -7,18 +7,11 @@ using TaskManagement.Service.TaskService;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility.Email;
 using TaskManagement.Utility;
-using TaskManagement.API.Infrastructure.Filters;
-using System.Web.Http.Filters;
-using TaskManagement.API.Reminders;
-using Hangfire;
-using Hangfire.MemoryStorage;
 using TaskManagement.Service.OverDueService;
 using TaskManagement.Database.Repository.EmailTemplate;
 using TaskManagement.Database.Repository.Category;
 using TaskManagement.Service.CategoryService;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Configuration;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -41,14 +34,13 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IEmailTemplateRepository, EmailTemplateRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<ICategoryService, CategoryService>()
-             .AddTransient<IConfiguration>(sp =>
-                {
-                    IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-                    configurationBuilder.AddJsonFile("appsettings.json");
-                    return configurationBuilder.Build();
-                })
+                .AddTransient<IConfiguration>(sp =>
+                   {
+                       IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                       configurationBuilder.AddJsonFile("appsettings.json");
+                       return configurationBuilder.Build();
+                   })
                 .TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
 
             return services;
         }
