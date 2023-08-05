@@ -12,6 +12,7 @@ using TaskManagement.Database.Repository.EmailTemplate;
 using TaskManagement.Database.Repository.Category;
 using TaskManagement.Service.CategoryService;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using TaskManagement.Service.Profile;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -34,6 +35,7 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IEmailTemplateRepository, EmailTemplateRepository>()
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<ICategoryService, CategoryService>()
+                .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IConfiguration>(sp =>
                    {
                        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

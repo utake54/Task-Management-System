@@ -32,6 +32,7 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", allUser.Message);
         }
 
+        [Authorize("Admin")]
         [HttpPost("AddUser")]
         public async Task<Dictionary<string, object>> AddUser([FromBody] UserRequest request)
         {
@@ -50,6 +51,7 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", user.Message);
         }
 
+        [Authorize("Admin")]
         [HttpPost("DeleteUser/{userId}")]
         public async Task<Dictionary<string, object>> DeleteUser(int userId)
         {
@@ -59,6 +61,7 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", deleteUser.Message);
         }
 
+        [Authorize("Admin")]
         [HttpPost("UpdateUser")]
         public async Task<Dictionary<string, object>> UpdateUser([FromBody] UserRequest request)
         {
