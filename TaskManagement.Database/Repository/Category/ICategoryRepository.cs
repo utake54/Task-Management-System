@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Category;
 using TaskManagement.Model.Model.Category.DTO;
+using TaskManagement.Model.Model.PagedResult;
 
 namespace TaskManagement.Database.Repository.Category
 {
     public interface ICategoryRepository : IRepository<TaskCategoryMaster>
     {
-        Task<IEnumerable<CategoryDTO>> GetAllCategories();
+        Task<IEnumerable<CategoryDTO>> GetAllCategories(PageResult pageResult);
     }
 }

@@ -10,17 +10,30 @@ using TaskManagement.Utility;
 
 namespace TaskManagement.API.Controllers
 {
+    /// <summary>
+    /// Task Module Controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
+
     public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
+        /// <summary>
+        /// Constructor for dependancy Ijection
+        /// </summary>
+        /// <param name="taskService"></param>
         public TaskController(ITaskService taskService)
         {
             _taskService = taskService;
         }
 
+        /// <summary>
+        /// Add New Task
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("AddTask")]
         public async Task<Dictionary<string, object>> AddTask(TaskRequest request)
         {
@@ -30,6 +43,11 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", addTask.Message);
         }
 
+        /// <summary>
+        /// Get task by Id
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         [HttpPost("GetTask/{taskId}")]
         public async Task<Dictionary<string, object>> GetTask(int taskId)
         {
@@ -39,6 +57,12 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", task.Message);
         }
 
+
+        /// <summary>
+        /// Update Task
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("UpdateTask")]
         public async Task<Dictionary<string, object>> UpdateTask(TaskRequest request)
         {
@@ -48,6 +72,11 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", updateTask.Message);
         }
 
+        /// <summary>
+        /// Delete task by id
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         [HttpPost("DeleteTask/{taskId}")]
         public async Task<Dictionary<string, object>> DeleteTask(int taskId)
         {
@@ -57,6 +86,12 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", deleteTask.Message);
         }
 
+
+        /// <summary>
+        /// Get all task
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         [HttpPost("GetAllTask")]
         public async Task<Dictionary<string, object>> GetAllTask(SearchModel search)
         {
@@ -66,6 +101,12 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", allTask.Message);
         }
 
+
+        /// <summary>
+        /// Assign task to team
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("AssignToTeam")]
         public async Task<Dictionary<string, object>> AssignTask(AssignTaskRequest request)
         {
@@ -76,6 +117,11 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", assignTask.Message);
         }
 
+
+        /// <summary>
+        /// Get task assigned to me
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("GetMyTask")]
         public async Task<Dictionary<string, object>> GetMyTask()
         {
@@ -85,6 +131,12 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", task.Message);
         }
 
+
+        /// <summary>
+        /// Accept or reject task
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("AcceptTask")]
         public async Task<Dictionary<string, object>> AcceptTask(AcceptTaskRequest request)
         {
@@ -94,6 +146,12 @@ namespace TaskManagement.API.Controllers
             return FailureResponse(userAction.Message, userAction.Data);
         }
 
+
+        /// <summary>
+        /// Update task status 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("UpdateTaskStatus")]
         public async Task<Dictionary<string, object>> UpdateTaskStatus(TaskStatusRequest request)
         {
@@ -103,6 +161,11 @@ namespace TaskManagement.API.Controllers
             return FailureResponse(updateStatus.Message, updateStatus.Data);
         }
 
+
+        /// <summary>
+        /// Export task and related details in excels sheet
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("ExportTaskDetails")]
         public async Task<IActionResult> ExportTaskDetails()
         {
@@ -122,6 +185,13 @@ namespace TaskManagement.API.Controllers
             return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
 
+
+
+        /// <summary>
+        /// Get task by category
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         [HttpPost("GetTaskByCategory/{categoryId}")]
         public async Task<Dictionary<string, object>> GetTaskByCategory(int categoryId)
         {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Category;
 using TaskManagement.Model.Model.Category.DTO;
+using TaskManagement.Model.Model.PagedResult;
 
 namespace TaskManagement.Database.Repository.Category
 {
@@ -14,18 +15,23 @@ namespace TaskManagement.Database.Repository.Category
     {
         public CategoryRepository(MasterDbContext context) : base(context)
         {
-
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetAllCategories()
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategories(PageResult pageResult)
         {
+            var skip = ((pageResult.PageNumber * pageResult.PageSize) - pageResult.PageSize);
+
             var categories = await (from c in Context.TaskCategoryMaster
                                     where c.IsActive == true
                                     select new CategoryDTO
                                     {
                                         Id = c.Id,
                                         Category = c.Category
-                                    }).ToListAsync();
+                                    })
+                                     .Skip(skip)
+                                     .Take(pageResult.PageSize)
+                                     .OrderBy(u => u.Id)
+                                     .ToListAsync();
 
             return categories;
         }

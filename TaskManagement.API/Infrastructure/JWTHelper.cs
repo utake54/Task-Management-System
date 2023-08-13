@@ -28,7 +28,7 @@ namespace TaskManagement.API.Infrastructure
                issuer: null,
                audience: null,
                claims: claims,
-               expires: DateTime.Now.AddMinutes(60),
+               expires: DateTime.UtcNow.AddMinutes(60),
                signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
            );
             var response = new LoginResponse

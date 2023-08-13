@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TaskManagement.Model.Model.Category
 {
+    [Table("TaskCategoryMaster")]
     public class TaskCategoryMaster
     {
         public int Id { get; set; }

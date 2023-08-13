@@ -11,6 +11,7 @@ namespace TaskManagement.Model.Model.SearchModel
         public int PageSize { get; set; } = 5;
         public int PageNumber { get; set; } = 1;
         public string? Search { get; set; }
-        public string? SortBy { get; set; } = "Id";
+        public string? OrderBy { get; set; }
+        public string? Status { get; set; } 
     }
 }

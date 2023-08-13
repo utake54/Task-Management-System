@@ -14,7 +14,6 @@ namespace TaskManagement.Model.Model.Task.DTO
         public string Category { get; set; }
         public string Priority { get; set; }
         public string AssignedTo { get; set; }
-        public string AssignedBy { get; set; }
         public DateTime DueDate { get; set; }
         public string Status { get; set; }
         public string CompletionDate { get; set; }

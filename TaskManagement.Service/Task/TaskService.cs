@@ -32,7 +32,7 @@ namespace TaskManagement.Service.TaskService
             var response = new ResponseModel();
             var taskMaster = _mapper.Map<TaskRequest, TaskMaster>(request);
             taskMaster.CreatedBy = userId;
-            taskMaster.CreatedDate = DateTime.Now;
+            taskMaster.CreatedDate = DateTime.UtcNow;
             taskMaster.CompanyId = companyId;
             taskMaster.IsActive = true;
             await _unitOfWork.TaskRepository.AddAsync(taskMaster);
@@ -94,7 +94,7 @@ namespace TaskManagement.Service.TaskService
                 task.Title = request.Title;
                 task.ModifiedBy = userId;
                 task.CategoryId = request.CategoryId;
-                task.ModifiedDate = DateTime.Now;
+                task.ModifiedDate = DateTime.UtcNow;
 
                 _unitOfWork.TaskRepository.Update(task);
                 await _unitOfWork.SaveChangesAsync();
@@ -115,9 +115,9 @@ namespace TaskManagement.Service.TaskService
                 {
                     TaskId = request.TaskId,
                     UserId = user,
-                    AssignedDate = DateTime.Now,
+                    AssignedDate = DateTime.UtcNow,
                     AssignedBy = userId,
-                    EndDate = DateTime.Now,
+                    EndDate = DateTime.UtcNow,
 
                 };
                 taskList.Add(task);
@@ -170,7 +170,7 @@ namespace TaskManagement.Service.TaskService
             task.Status = request.StatusId;
             if (request.StatusId == (int)Status.Completed)
             {
-                task.EndDate = DateTime.Now;
+                task.EndDate = DateTime.UtcNow;
             }
             _unitOfWork.AssignTaskRepository.Update(task);
             await _unitOfWork.SaveChangesAsync();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Model.Model.Category.Request;
+using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Service.CategoryService;
 
 namespace TaskManagement.API.Controllers
@@ -10,7 +11,7 @@ namespace TaskManagement.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Permissible("Admin")]
+    //[Permissible("Admin")]
 
     public class CategoryController : BaseController
     {
@@ -23,6 +24,7 @@ namespace TaskManagement.API.Controllers
         {
             _categoryService = categoryService;
         }
+
         /// <summary>
         /// This is for get details of selected category option.
         /// </summary>
@@ -42,9 +44,9 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <returns>All categories</returns>
         [HttpPost("GetAllCategories")]
-        public async Task<Dictionary<string, object>> GetAllCategories()
+        public async Task<Dictionary<string, object>> GetAllCategories(PageResult pageResult)
         {
-            var categories = await _categoryService.GetAllCategories();
+            var categories = await _categoryService.GetAllCategories(pageResult);
             if (categories.Message == "Success")
                 return APIResponse("Success", categories.Data);
             return FailureResponse("Failed", categories.Message);

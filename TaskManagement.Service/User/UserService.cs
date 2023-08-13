@@ -42,7 +42,7 @@ namespace TaskManagement.Service.UserService
             user.IsActive = true;
             user.CreatedBy = userId;
             user.CompanyId = companyId;
-            user.CreatedDate = DateTime.Now;
+            user.CreatedDate = DateTime.UtcNow;
             user.Password = SHA.Encrypt(systemPassword);
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
 
@@ -147,7 +147,7 @@ namespace TaskManagement.Service.UserService
             user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
             user.MobileNo = request.MobileNo;
             user.ModifiedBy = userId;
-            user.ModifiedDate = DateTime.Now;
+            user.ModifiedDate = DateTime.UtcNow;
             user.EmailId = request.EmailId;
             _unitOfWork.UserRepository.Update(user);
             await _unitOfWork.SaveChangesAsync();

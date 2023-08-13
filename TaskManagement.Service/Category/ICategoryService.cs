@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Model.Model.Category.Request;
+using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 
 namespace TaskManagement.Service.CategoryService
@@ -14,6 +15,6 @@ namespace TaskManagement.Service.CategoryService
         Task<ResponseModel> UpdateCategory(CategoryRequest request);
         Task<ResponseModel> DeleteCategory(int categoryId);
         Task<ResponseModel> GetCategory(int categoryId);
-        Task<ResponseModel> GetAllCategories();
+        Task<ResponseModel> GetAllCategories(PageResult pageResult);
     }
 }

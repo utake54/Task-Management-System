@@ -1,7 +1,9 @@
-﻿using TaskManagement.Model.Model.CommonModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TaskManagement.Model.Model.CommonModel;
 
 namespace TaskManagement.Model.Model.User
 {
+    [Table("UserMaster")]
     public class UserMaster : StandardFields
     {
         public int Id { get; set; }

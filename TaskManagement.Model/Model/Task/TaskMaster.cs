@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using TaskManagement.Model.Model.CommonModel;
 
 namespace TaskManagement.Model.Model.Task
 {
+    [Table("TaskMaster")]
     public class TaskMaster : StandardFields
     {
         public int Id { get; set; }

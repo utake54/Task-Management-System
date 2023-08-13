@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.ResponseModel;
@@ -25,8 +20,8 @@ namespace TaskManagement.Service.OTPService
             var otpDetails = new OTPMaster();
             otpDetails.UserId = userId;
             otpDetails.OTP = otp;
-            otpDetails.GeneratedTime = DateTime.Now;
-            otpDetails.ExpiryTime = DateTime.Now.AddMinutes(10);
+            otpDetails.GeneratedTime = DateTime.UtcNow;
+            otpDetails.ExpiryTime = DateTime.UtcNow.AddMinutes(10);
 
             var saveOTP = _unitOfWork.OTPRepository.AddAsync(otpDetails);
             await _unitOfWork.SaveChangesAsync();
@@ -37,8 +32,11 @@ namespace TaskManagement.Service.OTPService
         {
             var response = new ResponseModel();
             var isValidOTP = await _unitOfWork.OTPRepository.IsValidOTP(request);
-            if (isValidOTP)
+            if (isValidOTP != null)
             {
+                isValidOTP.IsActive = false;
+                _unitOfWork.OTPRepository.Update(isValidOTP);
+                await _unitOfWork.SaveChangesAsync();
                 response.Ok();
                 return response;
             }

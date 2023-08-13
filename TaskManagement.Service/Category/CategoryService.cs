@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Category;
 using TaskManagement.Model.Model.Category.DTO;
 using TaskManagement.Model.Model.Category.Request;
+using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 
 namespace TaskManagement.Service.CategoryService
@@ -26,7 +22,7 @@ namespace TaskManagement.Service.CategoryService
         {
             var response = new ResponseModel();
             var category = _mapper.Map<CategoryRequest, TaskCategoryMaster>(request);
-            category.CreatedDate = DateTime.Now;
+            category.CreatedDate = DateTime.UtcNow;
             category.CreatedBy = userId;
             category.IsActive = true;
             await _unitOfWork.CategoryRepository.AddAsync(category);
@@ -52,11 +48,11 @@ namespace TaskManagement.Service.CategoryService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllCategories()
+        public async Task<ResponseModel> GetAllCategories(PageResult pageResult)
         {
             var response = new ResponseModel();
 
-            var categories = await _unitOfWork.CategoryRepository.GetAllCategories();
+            var categories = await _unitOfWork.CategoryRepository.GetAllCategories(pageResult);
             if (!categories.Any())
             {
                 response.Failure("Categories not found.");

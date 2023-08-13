@@ -25,12 +25,16 @@ namespace TaskManagement.Database.Repository.Task
         {
             var sqlParameters = new List<SqlParameter>()
             {
-                new SqlParameter("@CompanyId",companyId)
+                new SqlParameter("@CompanyId",companyId),
+                new SqlParameter("@Search",searchModel.Search),
+                new SqlParameter("@PageNumber",searchModel.PageNumber),
+                new SqlParameter("@PageSize",searchModel.PageSize),
+                new SqlParameter("@Status",searchModel.Status),
+                new SqlParameter("@OrderBy",searchModel.OrderBy),
             };
 
             var data = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetAllTask", sqlParameters);
 
-          
             return data;
         }
 

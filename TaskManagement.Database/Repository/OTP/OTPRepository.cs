@@ -15,11 +15,11 @@ namespace TaskManagement.Database.Repository.OTP
         {
         }
 
-        public async Task<bool> IsValidOTP(OTPValidateRequest request)
+        public async Task<OTPMaster> IsValidOTP(OTPValidateRequest request)
         {
             var checkOTP = await (from o in Context.OTPMaster
-                                  where o.OTP == request.OTP && o.UserId == request.UserId && o.ExpiryTime > DateTime.Now
-                                  select o).AnyAsync();
+                                  where o.OTP == request.OTP && o.UserId == request.UserId && o.ExpiryTime > DateTime.UtcNow
+                                  select o).FirstOrDefaultAsync();
             return checkOTP;
         }
     }

@@ -36,8 +36,8 @@ namespace TaskManagement.Database.Repository.UserRepository
                                       MobileNo = u.MobileNo,
                                       DateOfBirth = u.DateOfBirth.ToString()
                                   })
-                                  .Take(pageSize)
                                   .Skip(skip)
+                                  .Take(pageSize)
                                   .OrderBy(u => u.Id)
                                   .ToListAsync();
             return allUsers;

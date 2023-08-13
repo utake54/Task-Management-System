@@ -10,6 +10,6 @@ namespace TaskManagement.Database.Repository.OTP
 {
     public interface IOTPRepository : IRepository<OTPMaster>
     {
-        Task<bool> IsValidOTP(OTPValidateRequest request);
+        Task<OTPMaster> IsValidOTP(OTPValidateRequest request);
     }
 }
