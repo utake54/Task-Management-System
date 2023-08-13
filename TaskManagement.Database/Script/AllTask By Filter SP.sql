@@ -20,16 +20,20 @@ BEGIN
                             tm.Priority,
                             um.FirstName as AssignedTo,
                             tm.DueDate,
-                            atm.Status,
+                            tsm.Status,
                             atm.EndDate FROM TaskMaster tm  
                             inner join TaskCategoryMaster tcm on tm.CategoryId=tcm.Id  
                             inner join AssignedTask atm on atm.TaskId=tm.Id  
-                            inner join USerMaster um on um.Id = atm.UserId  
+                            inner join USerMaster um on um.Id = atm.UserId 
+                            left join TaskStatusMaster tsm on tsm.StatusId=atm.Status
                             WHERE tm.IsActive = 1 AND tm.CompanyId = ' + CAST(@CompanyId AS NVARCHAR(10));
 
     IF @Search IS NOT NULL
     BEGIN
-        SET @GetAllTaskQuery = @GetAllTaskQuery + ' AND um.Firstname LIKE ''' + @Search + '%''';
+        SET @GetAllTaskQuery = @GetAllTaskQuery + ' AND (um.Firstname LIKE ''' + @Search + '%'' 
+													OR  tcm.Category LIKE ''' + @Search + '%''
+													OR  tm.Title LIKE ''' + @Search + '%''
+												        )';
     END
 
 
