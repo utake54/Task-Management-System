@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using NPOI.SS.Formula.Functions;
+using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +62,7 @@ namespace TaskManagement.Service.TaskService
         {
             var response = new ResponseModel();
             var taskList = await _unitOfWork.TaskRepository.GetAllTask(companyId, search);
-            if (taskList.Any())
+            if (taskList.Tasks.Any())
             {
                 response.Ok(taskList);
                 return response;
@@ -123,22 +125,36 @@ namespace TaskManagement.Service.TaskService
                 taskList.Add(task);
             }
             await _unitOfWork.AssignTaskRepository.AddRangeAsync(taskList);
+            await _unitOfWork.SaveChangesAsync();
 
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
-            var taskAssignedUers = users.Where(x => x.Id == request.Id).Select(x => x.EmailId).ToList();
-            taskAssignedUers.Add("utake.omkar54@gmail.com");
-            taskAssignedUers.Add("omkar.utake54@gmail.com");
+            var taskAssignedUers = new List<string>();
+            foreach (var user in request.UserId)
+            {
+                taskAssignedUers = users.Where(x => x.Id == user).Select(x => x.EmailId).ToList();
+            }
+            var assignedBy = users.Where(x => x.Id == userId).ToList();
+            var mailTemplate = await _unitOfWork.EmailTemplateRepository.GetById((int)MailTemplate.TaskAssigned);
+            var taskDetails=await _unitOfWork.TaskRepository.GetById(request.TaskId);
+            var mailBody = mailTemplate.Body;
+            mailBody = mailBody.Replace("@UserName", "User");
+            mailBody = mailBody.Replace("@AssignedDate", taskDetails.CreatedDate.ToString());
+            mailBody = mailBody.Replace("@Title", taskDetails.Title);
+            mailBody = mailBody.Replace("@Description", taskDetails.Description);
+            mailBody = mailBody.Replace("@AssignedBy", assignedBy.Select(x=>x.FirstName).First());
+            mailBody = mailBody.Replace("@DueDate", taskDetails.DueDate.ToString());
+
+
 
             var emailDetails = new MailDetails()
             {
                 To = taskAssignedUers,
-                CC = taskAssignedUers,
-                Subject = "New task assigned",
-                Message = "Dear Team,  <br> <p>New task assigned to you </p>"
+                CC = assignedBy.Select(x=>x.EmailId).ToList(),
+                Subject = mailTemplate.Subject,
+                Message = mailBody
             };
 
             await _sendMail.SendEmailAsync(emailDetails);
-            await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }

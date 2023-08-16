@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="JWT\**" />
+    <EmbeddedResource Remove="JWT\**" />
+    <None Remove="JWT\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TaskManagement.Database\TaskManagement.Database.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="JWT\" />
   </ItemGroup>
 
 </Project>

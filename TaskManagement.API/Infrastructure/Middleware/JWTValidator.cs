@@ -48,7 +48,6 @@ namespace JWTAuth_Validation.Middleware
                 context.Items["CompanyId"] = jwtToken.Claims.First(x => x.Type == "CompanyId").Value;
                 context.Items["Role"] = jwtToken.Claims.First(x => x.Type == "Role").Value;
 
-
             }
             catch (Exception)
             {

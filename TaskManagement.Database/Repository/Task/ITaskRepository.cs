@@ -14,7 +14,7 @@ namespace TaskManagement.Database.Repository.Task
     public interface ITaskRepository : IRepository<TaskMaster>
     {
         Task<IEnumerable<MyTaskDTO>> GetMyTask(int userId);
-        Task<IEnumerable<TaskExportDTO>> GetAllTask(int companyId, SearchModel searchModel);
+        Task<AllTaskDTO> GetAllTask(int companyId, SearchModel searchModel);
         Task<List<TaskExportDTO>> GetTaskDetails(int companyId);
     }
 }

@@ -33,6 +33,12 @@ namespace TaskManagement.API
                             .AddHangfireServer()
                             .AddRecurringJobManager();
 
+            builder.Services.AddStackExchangeRedisCache(redisoption =>
+            {
+                string connection = builder.Configuration.GetConnectionString("Redis");
+
+                redisoption.Configuration = connection;
+            });
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 
 namespace TaskManagement.Utility
@@ -13,7 +7,6 @@ namespace TaskManagement.Utility
     {
         private static readonly byte[] Key = new byte[32];
         private static readonly byte[] IV = new byte[16];
-
 
         public static string Encrypt(string password)
         {

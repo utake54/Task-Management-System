@@ -54,7 +54,7 @@
             Task Module Controller
             </summary>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.#ctor(TaskManagement.Service.TaskService.ITaskService)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.#ctor(TaskManagement.Service.TaskService.ITaskService,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
             <summary>
             Constructor for dependancy Ijection
             </summary>

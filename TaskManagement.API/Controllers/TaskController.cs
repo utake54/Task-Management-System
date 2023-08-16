@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using NPOI.XSSF.UserModel;
+using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.TaskService;
@@ -15,18 +17,21 @@ namespace TaskManagement.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class TaskController : BaseController
     {
         private readonly ITaskService _taskService;
+        private readonly IDistributedCache _distributedCache;
+
         /// <summary>
         /// Constructor for dependancy Ijection
         /// </summary>
         /// <param name="taskService"></param>
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IDistributedCache distributedCache)
         {
             _taskService = taskService;
+            _distributedCache = distributedCache;
         }
 
         /// <summary>
@@ -95,13 +100,15 @@ namespace TaskManagement.API.Controllers
         [HttpPost("GetAllTask")]
         public async Task<Dictionary<string, object>> GetAllTask(SearchModel search)
         {
-            var allTask = await _taskService.GetAllTask(CompanyId, search);
-            if (allTask.Message == "Success")
+            {
+                var allTask = await _taskService.GetAllTask(CompanyId, search);
+                if (allTask.Message != "Success")
+                    return FailureResponse("Failed", allTask.Message);
+
                 return APIResponse("Success", allTask.Data);
-            return FailureResponse("Failed", allTask.Message);
+            }
+
         }
-
-
         /// <summary>
         /// Assign task to team
         /// </summary>

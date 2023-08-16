@@ -4,6 +4,7 @@ using Microsoft.VisualBasic;
 using Org.BouncyCastle.Pqc.Crypto.Hqc;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace TaskManagement.Database.Repository.Task
         {
         }
 
-        public async Task<IEnumerable<TaskExportDTO>> GetAllTask(int companyId, SearchModel searchModel)
+        public async Task<AllTaskDTO> GetAllTask(int companyId, SearchModel searchModel)
         {
             var sqlParameters = new List<SqlParameter>()
             {
@@ -31,11 +32,13 @@ namespace TaskManagement.Database.Repository.Task
                 new SqlParameter("@PageSize",searchModel.PageSize),
                 new SqlParameter("@Status",searchModel.Status),
                 new SqlParameter("@OrderBy",searchModel.OrderBy),
+                new SqlParameter("@TotalRecords", SqlDbType.Int) { Direction = ParameterDirection.Output }
             };
+            var response = new AllTaskDTO();
+            response.Tasks = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetAllTask_WithPage", sqlParameters);
+            response.TotalRecords = (int)sqlParameters.Single(p => p.ParameterName == "@TotalRecords").Value;
 
-            var data = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetAllTask", sqlParameters);
-
-            return data;
+            return response;
         }
 
         public async Task<IEnumerable<MyTaskDTO>> GetMyTask(int userId)

@@ -12,6 +12,6 @@ namespace TaskManagement.Utility.Enum
         Welcome,
         TaskAssigned,
         TaskOverdue,
-        DUeDateReminder
+        DueDateReminder
     }
 }
