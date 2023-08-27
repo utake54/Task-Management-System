@@ -17,3 +17,5 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\obj\Debug\net7.0\TaskManagement.Service.csproj.CopyComplete
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Utility.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Utility.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Service.Entities.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service\bin\Debug\net7.0\TaskManagement.Service.Entities.pdb

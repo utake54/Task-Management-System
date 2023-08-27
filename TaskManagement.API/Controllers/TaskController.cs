@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using NPOI.XSSF.UserModel;
+using TaskManagement.API.Request;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task.Request;
+using TaskManagement.Service.Entities.Task;
 using TaskManagement.Service.TaskService;
 using TaskManagement.Utility;
 
@@ -23,15 +25,17 @@ namespace TaskManagement.API.Controllers
     {
         private readonly ITaskService _taskService;
         private readonly IDistributedCache _distributedCache;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Constructor for dependancy Ijection
         /// </summary>
         /// <param name="taskService"></param>
-        public TaskController(ITaskService taskService, IDistributedCache distributedCache)
+        public TaskController(ITaskService taskService, IDistributedCache distributedCache, IMapper mapper)
         {
             _taskService = taskService;
             _distributedCache = distributedCache;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -40,9 +44,13 @@ namespace TaskManagement.API.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost("AddTask")]
-        public async Task<Dictionary<string, object>> AddTask(TaskRequest request)
+        public async Task<Dictionary<string, object>> AddTask(AddTaskRequest request)
         {
-            var addTask = await _taskService.AddTask(UserId, request, CompanyId);
+
+            var requestDto = _mapper.Map<AddTaskDto>(request);
+            requestDto.CreatedBy = UserId;
+            requestDto.CompanyId= CompanyId;
+            var addTask = await _taskService.AddTask(requestDto);
             if (addTask.Message == "Success")
                 return APIResponse("Success", addTask.Data);
             return FailureResponse("Failed", addTask.Message);

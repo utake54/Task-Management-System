@@ -1,0 +1,12 @@
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\bin\Debug\net7.0\TaskManagement.Service.Entities.deps.json
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\bin\Debug\net7.0\TaskManagement.Service.Entities.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\bin\Debug\net7.0\TaskManagement.Service.Entities.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.csproj.AssemblyReference.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.AssemblyInfoInputs.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.AssemblyInfo.cs
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.csproj.CoreCompileInputs.cache
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\refint\TaskManagement.Service.Entities.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\TaskManagement.Service.Entities.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Service.Entities\obj\Debug\net7.0\ref\TaskManagement.Service.Entities.dll

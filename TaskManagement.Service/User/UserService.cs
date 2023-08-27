@@ -13,6 +13,7 @@ using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.Entities.ModelDto;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
@@ -34,40 +35,51 @@ namespace TaskManagement.Service.UserService
             _otpService = oTPService;
         }
 
-        public async Task<ResponseModel> AddUser(UserRequest request, int userId, int companyId)
+        public async Task<ResponseModel> AddUser(AddUserDto requestDto)
         {
             var response = new ResponseModel();
-            var user = _mapper.Map<UserRequest, UserMaster>(request);
-            var systemPassword = request.LastName.ToString() + request.MobileNo.ToString();
-            user.IsActive = true;
-            user.CreatedBy = userId;
-            user.CompanyId = companyId;
-            user.CreatedDate = DateTime.UtcNow;
-            user.Password = SHA.Encrypt(systemPassword);
-            user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
 
             #region User Validation for existing check
             var existingUsers = await _unitOfWork.UserRepository.GetAllAsync();
 
 
-            var userExistWithEmail = existingUsers.Where(x => x.EmailId == user.EmailId).Any();
+            var userExistWithEmail = existingUsers.Where(x => x.EmailId == requestDto.EmailId).Any();
             if (userExistWithEmail)
             {
                 response.Failure("User already exists with same email id.");
                 return response;
             }
 
-            var userExistWithMobile = existingUsers.Where(x => x.MobileNo == user.MobileNo).Any();
+            var userExistWithMobile = existingUsers.Where(x => x.MobileNo == requestDto.MobileNo).Any();
             if (userExistWithMobile)
             {
                 response.Failure("User already exists with same Mobile no.");
                 return response;
             }
-
-
             #endregion
 
-            await _unitOfWork.UserRepository.AddAsync(user);
+
+            var data = new UserMaster
+            {
+                FirstName = requestDto.FirstName,
+                LastName = requestDto.LastName,
+                EmailId = requestDto.EmailId,
+                MobileNo = requestDto.MobileNo,
+                DateOfBirth = requestDto.DateOfBirth,
+                Address = requestDto.Address,
+                City = requestDto.City,
+                State = requestDto.State,
+                Country = requestDto.Country,
+                CountryCode = requestDto.CountryCode,
+                ZipCode = requestDto.ZipCode,
+                IsActive = true,
+                CreatedBy = requestDto.CreatedBy,
+                CompanyId = requestDto.CompanyId,
+                CreatedDate = DateTime.UtcNow,
+                Password = SHA.Encrypt(requestDto.FirstName + requestDto.LastName),
+            };
+
+            await _unitOfWork.UserRepository.AddAsync(data);
             await _unitOfWork.SaveChangesAsync();
 
             #region Mail Notification
@@ -75,31 +87,31 @@ namespace TaskManagement.Service.UserService
             var getMailTemplate = await _unitOfWork.EmailTemplateRepository.GetById(templateId);
             var subject = getMailTemplate.Subject;
             var body = getMailTemplate.Body;
-            body = body.Replace("@UserName", user.FirstName);
-            body = body.Replace("@SysPass", systemPassword);
-            await _sendMail.SendEmailAsync("omkarutake@nimapinfotech.com", null, subject, body);
+            body = body.Replace("@UserName", data.FirstName);
+            body = body.Replace("@SysPass", data.Password);
+            await _sendMail.SendEmailAsync(data.EmailId, null, subject, body);
 
             #endregion
 
             response.Ok();
             return response;
         }
-
-        public async Task<ResponseModel> DeleteUser(int userId)
+        public async Task<ResponseModel> DeleteUser(DeleteUserDto deleteUserDto)
         {
             var response = new ResponseModel();
-            var user = await _unitOfWork.UserRepository.GetById(userId);
+            var user = await _unitOfWork.UserRepository.GetById(deleteUserDto.Id);
             if (user == null)
             {
                 response.Message = "No user found";
                 return response;
             }
+            user.ModifiedBy = deleteUserDto.ActionBy;
+            user.ModifiedDate = DateTime.UtcNow;
             _unitOfWork.UserRepository.Delete(user);
             await _unitOfWork.SaveChangesAsync();
             response.Ok();
             return response;
         }
-
         public async Task<ResponseModel> GetAllUsers(int companyId, PageResult pageResult)
         {
             var response = new ResponseModel();
@@ -112,11 +124,10 @@ namespace TaskManagement.Service.UserService
             response.Ok(allUsers);
             return response;
         }
-
-        public async Task<ResponseModel> GetUser(int userId)
+        public async Task<ResponseModel> GetUser(GetUserDto requestDto)
         {
             var response = new ResponseModel();
-            var user = await _unitOfWork.UserRepository.GetById(userId);
+            var user = await _unitOfWork.UserRepository.GetById(requestDto.Id);
             var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
             if (user == null)
             {
@@ -126,29 +137,27 @@ namespace TaskManagement.Service.UserService
             response.Ok(userDTO);
             return response;
         }
-
-
-        public async Task<ResponseModel> UpdateUser(int userId, UserRequest request)
+        public async Task<ResponseModel> UpdateUser(UpdateUserDto updateUserDto)
         {
             var response = new ResponseModel();
-            var user = await _unitOfWork.UserRepository.GetById(request.Id);
+            var user = await _unitOfWork.UserRepository.GetById(updateUserDto.Id);
             if (user == null)
             {
                 response.Message = "No user found";
                 return response;
             }
 
-            user.FirstName = request.FirstName;
-            user.LastName = request.LastName;
-            user.Address = request.Address;
-            user.City = request.City;
-            user.State = request.State;
-            user.ZipCode = request.ZipCode;
-            user.DateOfBirth = Convert.ToDateTime(request.DateOfBirth);
-            user.MobileNo = request.MobileNo;
-            user.ModifiedBy = userId;
+            user.FirstName = updateUserDto.FirstName;
+            user.LastName = updateUserDto.LastName;
+            user.Address = updateUserDto.Address;
+            user.City = updateUserDto.City;
+            user.State = updateUserDto.State;
+            user.ZipCode = updateUserDto.ZipCode;
+            user.DateOfBirth = Convert.ToDateTime(updateUserDto.DateOfBirth);
+            user.MobileNo = updateUserDto.MobileNo;
+            user.ModifiedBy = updateUserDto.ModifiedBy;
             user.ModifiedDate = DateTime.UtcNow;
-            user.EmailId = request.EmailId;
+            user.EmailId = updateUserDto.EmailId;
             _unitOfWork.UserRepository.Update(user);
             await _unitOfWork.SaveChangesAsync();
 
@@ -168,7 +177,6 @@ namespace TaskManagement.Service.UserService
             response.Failure("Invalid Credentialsss");
             return response;
         }
-
         public async Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request)
         {
             var response = new ResponseModel();
@@ -186,7 +194,6 @@ namespace TaskManagement.Service.UserService
             response.Failure("Invalid user details.");
             return response;
         }
-
         public async Task<ResponseModel> ResetPassword(PasswordResetRequest request)
         {
             var response = new ResponseModel();
@@ -208,18 +215,14 @@ namespace TaskManagement.Service.UserService
             response.Failure("Please enter same password.");
             return response;
         }
-
         public Task<ResponseModel> ValidateOtp(OTPValidateRequest request)
         {
             var response = new ResponseModel();
 
             return null;
         }
-
         public async Task<List<UserDTO>> GetAllUsers(int companyId)
         {
-
-
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
 
             var usersDTO = new List<UserDTO>();

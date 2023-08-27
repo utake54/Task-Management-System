@@ -20,7 +20,7 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
                 config.Filters.Add<GlobalExceptionFilter>();
-                //config.Filters.Add<Permissible>();
+                config.Filters.Add<Permissible>();
             });
 
             builder.Services.AddEndpointsApiExplorer()
@@ -28,7 +28,9 @@ namespace TaskManagement.API
                             .AddJWTAuthentication(builder.Configuration)
                             .SwaggerConfig()
                             .RepositoryAndService()
-                            .AddAutoMapper(typeof(MapperProfile))
+                            .AddAutoMapper(typeof(CategoryMappingProfile))
+                            .AddAutoMapper(typeof(TaskMappingProfile))
+                            .AddAutoMapper(typeof(UserMappingProfile))
                             .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
                             .AddHangfireServer()
                             .AddRecurringJobManager();

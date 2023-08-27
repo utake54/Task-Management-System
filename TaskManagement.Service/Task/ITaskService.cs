@@ -7,12 +7,13 @@ using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task.DTO;
 using TaskManagement.Model.Model.Task.Request;
+using TaskManagement.Service.Entities.Task;
 
 namespace TaskManagement.Service.TaskService
 {
     public interface ITaskService
     {
-        Task<ResponseModel> AddTask(int userId, TaskRequest request,int companyId);
+        Task<ResponseModel> AddTask(AddTaskDto addTaskDto);
         Task<ResponseModel> GetTask(int taskId);
         Task<ResponseModel> DeleteTask(int taskId);
         Task<ResponseModel> UpdateTask(TaskRequest request, int userId);

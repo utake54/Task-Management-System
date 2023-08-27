@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaskManagement.Database\TaskManagement.Database.csproj" />
+    <ProjectReference Include="..\TaskManagement.Service.Entities\TaskManagement.Service.Entities.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,8 @@
       "TaskManagement.Service/1.0.0": {
         "dependencies": {
           "AutoMapper": "12.0.1",
-          "TaskManagement.Database": "1.0.0"
+          "TaskManagement.Database": "1.0.0",
+          "TaskManagement.Service.Entities": "1.0.0"
         },
         "runtime": {
           "TaskManagement.Service.dll": {}
@@ -772,6 +773,11 @@
           "TaskManagement.Model.dll": {}
         }
       },
+      "TaskManagement.Service.Entities/1.0.0": {
+        "runtime": {
+          "TaskManagement.Service.Entities.dll": {}
+        }
+      },
       "TaskManagement.Utility/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "2.1.1",
@@ -1321,6 +1327,11 @@
       "sha512": ""
     },
     "TaskManagement.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TaskManagement.Service.Entities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,30 +1,33 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.XSSF.UserModel;
 using TaskManagement.API.Infrastructure.Filters;
+using TaskManagement.API.Request;
 using TaskManagement.Model.Model.PagedResult;
-using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.Entities.ModelDto;
 using TaskManagement.Service.UserService;
 using TaskManagement.Utility;
-using TaskManagement.Utility.Email;
 
 namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
-    //[Permissible("Admin", "HOD")]
+    [Authorize]
+    [Permissible("Admin", "HOD")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IMapper _mapper;
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
-        [HttpPost("GetAllUsers")]
-        public async Task<Dictionary<string, object>> GetAllUser(PageResult pageResult)
+        [HttpPost("GetAllAsync")]
+        public async Task<Dictionary<string, object>> GetAllAsync([FromBody] PageResult pageResult)
         {
             var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
             if (allUser.Message == "Success")
@@ -32,47 +35,56 @@ namespace TaskManagement.API.Controllers
             return FailureResponse("Failed", allUser.Message);
         }
 
-        [Authorize("Admin")]
-        [HttpPost("AddUser")]
-        public async Task<Dictionary<string, object>> AddUser([FromBody] UserRequest request)
+        //[Authorize("Admin")]
+        [HttpPost("AddAsync")]
+        public async Task<Dictionary<string, object>> AddAsync([FromBody] AddUserRequest request)
         {
-            var addUser = await _userService.AddUser(request, UserId, CompanyId);
+            var requestDto = _mapper.Map<AddUserDto>(request);
+            requestDto.CreatedBy = 1;
+            requestDto.CompanyId = 1;
+            var addUser = await _userService.AddUser(requestDto);
+
             if (addUser.Message == "Success")
                 return APIResponse("Success", addUser.Data);
             return FailureResponse("Failed", addUser.Message);
         }
 
-        [HttpPost("GetUser/{userId}")]
-        public async Task<Dictionary<string, object>> GetUser(int userId)
+        [HttpPost("GetAsync")]
+        public async Task<Dictionary<string, object>> GetAsync([FromBody] GetUserRequest request)
         {
-            var user = await _userService.GetUser(userId);
+            var requestDto = _mapper.Map<GetUserDto>(request);
+            var user = await _userService.GetUser(requestDto);
             if (user.Message == "Success")
                 return APIResponse("Success", user.Data);
             return FailureResponse("Failed", user.Message);
         }
 
         [Authorize("Admin")]
-        [HttpPost("DeleteUser/{userId}")]
-        public async Task<Dictionary<string, object>> DeleteUser(int userId)
+        [HttpPost("DeleteAsync")]
+        public async Task<Dictionary<string, object>> DeleteAsync([FromBody] DeleteUserRequest request)
         {
-            var deleteUser = await _userService.DeleteUser(userId);
+            var requestDto = _mapper.Map<DeleteUserDto>(request);
+            requestDto.ActionBy = UserId;
+            var deleteUser = await _userService.DeleteUser(requestDto);
             if (deleteUser.Message == "Success")
                 return APIResponse("Success", deleteUser.Data);
             return FailureResponse("Failed", deleteUser.Message);
         }
 
         [Authorize("Admin")]
-        [HttpPost("UpdateUser")]
-        public async Task<Dictionary<string, object>> UpdateUser([FromBody] UserRequest request)
+        [HttpPost("UpdateAsync")]
+        public async Task<Dictionary<string, object>> UpdateAsync([FromBody] UpdateUserRequest request)
         {
-            var updateuser = await _userService.UpdateUser(UserId, request);
+            var requestDto = _mapper.Map<UpdateUserDto>(request);
+            requestDto.ModifiedBy = UserId;
+            var updateuser = await _userService.UpdateUser(requestDto);
             if (updateuser.Message == "Success")
                 return APIResponse("Success", updateuser.Data);
             return FailureResponse("Failed", updateuser.Message);
         }
 
-        [HttpPost("ExportUsers")]
-        public async Task<IActionResult> ExportUsers()
+        [HttpPost("ExportUsersAsync")]
+        public async Task<IActionResult> ExportAsync()
         {
             var allUsers = await _userService.GetAllUsers(UserId);
             if (allUsers.Count == 0)

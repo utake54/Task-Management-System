@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XWp1kK8CPxX4uzrbRk8x4oytXa3BzBm3vPbmW1A6JZ6JqsFFmzoUbBAGgoYwJP4Zs6GKuq1rUd8m5aJV81w0NA==",
+  "dgSpecHash": "wP8J7T2EhhgRgcroOVs5nBS1pHlCeMM9keyjp+qgNpH8Rwwpua/CzL5qZTUqpaCDJcAM8HhlbvrlhSySXn7Rvw==",
   "success": true,
   "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.API\\TaskManagement.API.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,9 @@
     "C:\\Users\\utake\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\enums.net\\4.0.1\\enums.net.4.0.1.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire\\1.8.3\\hangfire.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.aspnetcore\\1.8.3\\hangfire.aspnetcore.1.8.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\hangfire.core\\1.8.3\\hangfire.core.1.8.3.nupkg.sha512",
