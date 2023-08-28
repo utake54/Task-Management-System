@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Login.DTO;
-using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
+using TaskManagement.Service.Entities.Login;
 
 namespace TaskManagement.Database.Repository.UserRepository
 {
@@ -43,7 +43,7 @@ namespace TaskManagement.Database.Repository.UserRepository
             return allUsers;
         }
 
-        public async Task<LoginDTO> GetUserDetails(LoginRequest request)
+        public async Task<LoginDTO> GetUserDetails(LoginDto request)
         {
             var user = await (from u in Context.UserMaster
                               join r in Context.RoleMaster

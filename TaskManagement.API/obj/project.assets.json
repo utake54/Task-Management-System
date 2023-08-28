@@ -3573,7 +3573,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
           "Newtonsoft.Json": "11.0.2",
-          "TaskManagement.Model": "1.0.0"
+          "TaskManagement.Model": "1.0.0",
+          "TaskManagement.Service.Entities": "1.0.0"
         },
         "compile": {
           "bin/placeholder/TaskManagement.Database.dll": {}

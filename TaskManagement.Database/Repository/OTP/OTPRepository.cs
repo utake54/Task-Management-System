@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.OTP;
+using TaskManagement.Service.Entities.Login;
 
 namespace TaskManagement.Database.Repository.OTP
 {
@@ -15,7 +16,7 @@ namespace TaskManagement.Database.Repository.OTP
         {
         }
 
-        public async Task<OTPMaster> IsValidOTP(OTPValidateRequest request)
+        public async Task<OTPMaster> IsValidOTP(OTPValidateDto request)
         {
             var checkOTP = await (from o in Context.OTPMaster
                                   where o.OTP == request.OTP && o.UserId == request.UserId && o.ExpiryTime > DateTime.UtcNow

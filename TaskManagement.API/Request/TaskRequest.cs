@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TaskManagement.API.Request
+﻿namespace TaskManagement.API.Request
 {
     public class AddTaskRequest
     {
@@ -17,13 +15,10 @@ namespace TaskManagement.API.Request
 
     public class UpdateTaskRequest : AddTaskRequest
     {
-
+        public int Id { get; set; }
     }
 
     public class DeleteTaskRequest : GetTaskRequest
     {
     }
-
-
-
 }

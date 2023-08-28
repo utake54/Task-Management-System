@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManagement.Model.Model.ResponseModel;
+﻿using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.Entities.ModelDto;
 
 namespace TaskManagement.Service.Profile
 {

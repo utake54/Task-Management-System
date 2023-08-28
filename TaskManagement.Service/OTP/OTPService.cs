@@ -2,6 +2,7 @@
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.ResponseModel;
+using TaskManagement.Service.Entities.Login;
 
 namespace TaskManagement.Service.OTPService
 {
@@ -28,7 +29,7 @@ namespace TaskManagement.Service.OTPService
             return userId;
         }
 
-        public async Task<ResponseModel> ValidateOTP(OTPValidateRequest request)
+        public async Task<ResponseModel> ValidateOTP(OTPValidateDto request)
         {
             var response = new ResponseModel();
             var isValidOTP = await _unitOfWork.OTPRepository.IsValidOTP(request);

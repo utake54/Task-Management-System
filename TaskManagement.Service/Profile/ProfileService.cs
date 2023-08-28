@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManagement.Database.Infrastructure;
-using TaskManagement.Database.Repository.UserRepository;
+﻿using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User.Request;
-using TaskManagement.Service.UserService;
+using TaskManagement.Service.Entities.ModelDto;
 
 namespace TaskManagement.Service.Profile
 {
@@ -42,7 +36,6 @@ namespace TaskManagement.Service.Profile
                 response.Failure("User not found.");
                 return response;
             }
-            profileData.Address = request.Address;
             _unitOfWork.UserRepository.Update(profileData);
             await _unitOfWork.SaveChangesAsync();
             response.Ok();

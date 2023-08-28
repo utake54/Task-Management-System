@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
-using TaskManagement.Model.Model.Login.Request;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.Entities.ModelDto;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Utility;
@@ -164,7 +164,7 @@ namespace TaskManagement.Service.UserService
             response.Ok(user);
             return response;
         }
-        public async Task<ResponseModel> Login(LoginRequest request)
+        public async Task<ResponseModel> Login(LoginDto request)
         {
             var response = new ResponseModel();
             request.Password = SHA.Encrypt(request.Password);
@@ -177,7 +177,7 @@ namespace TaskManagement.Service.UserService
             response.Failure("Invalid Credentialsss");
             return response;
         }
-        public async Task<ResponseModel> ForgetPassword(ForgetPassswordRequest request)
+        public async Task<ResponseModel> ForgetPassword(ForgetPasswordDto request)
         {
             var response = new ResponseModel();
             var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == Convert.ToDateTime(request.DateOfBirth));
@@ -194,7 +194,7 @@ namespace TaskManagement.Service.UserService
             response.Failure("Invalid user details.");
             return response;
         }
-        public async Task<ResponseModel> ResetPassword(PasswordResetRequest request)
+        public async Task<ResponseModel> ResetPassword(PasswordResetDto request)
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(request.UserId);
@@ -215,7 +215,7 @@ namespace TaskManagement.Service.UserService
             response.Failure("Please enter same password.");
             return response;
         }
-        public Task<ResponseModel> ValidateOtp(OTPValidateRequest request)
+        public Task<ResponseModel> ValidateOtp(OTPValidateDto request)
         {
             var response = new ResponseModel();
 

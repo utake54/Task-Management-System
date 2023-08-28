@@ -1286,6 +1286,16 @@
           "bin/placeholder/TaskManagement.Model.dll": {}
         }
       },
+      "TaskManagement.Service.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/TaskManagement.Service.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TaskManagement.Service.Entities.dll": {}
+        }
+      },
       "TaskManagement.Utility/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3743,6 +3753,11 @@
       "path": "../TaskManagement.Model/TaskManagement.Model.csproj",
       "msbuildProject": "../TaskManagement.Model/TaskManagement.Model.csproj"
     },
+    "TaskManagement.Service.Entities/1.0.0": {
+      "type": "project",
+      "path": "../TaskManagement.Service.Entities/TaskManagement.Service.Entities.csproj",
+      "msbuildProject": "../TaskManagement.Service.Entities/TaskManagement.Service.Entities.csproj"
+    },
     "TaskManagement.Utility/1.0.0": {
       "type": "project",
       "path": "../TaskManagement.Utility/TaskManagement.Utility.csproj",
@@ -3754,7 +3769,8 @@
       "Microsoft.EntityFrameworkCore >= 7.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.8",
       "Newtonsoft.Json >= 11.0.2",
-      "TaskManagement.Model >= 1.0.0"
+      "TaskManagement.Model >= 1.0.0",
+      "TaskManagement.Service.Entities >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3786,6 +3802,9 @@
           "projectReferences": {
             "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\TaskManagement.Model.csproj": {
               "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\TaskManagement.Model.csproj"
+            },
+            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj"
             }
           }
         }

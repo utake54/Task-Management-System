@@ -54,13 +54,13 @@
             Task Module Controller
             </summary>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.#ctor(TaskManagement.Service.TaskService.ITaskService,Microsoft.Extensions.Caching.Distributed.IDistributedCache)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.#ctor(TaskManagement.Service.TaskService.ITaskService,Microsoft.Extensions.Caching.Distributed.IDistributedCache,AutoMapper.IMapper)">
             <summary>
             Constructor for dependancy Ijection
             </summary>
             <param name="taskService"></param>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.AddTask(TaskManagement.Model.Model.Task.Request.TaskRequest)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.AddTask(TaskManagement.API.Request.AddTaskRequest)">
             <summary>
             Add New Task
             </summary>

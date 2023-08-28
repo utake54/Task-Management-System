@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using TaskManagement.Utility.RegexHelper;
-
-namespace TaskManagement.API.Request
+﻿namespace TaskManagement.API.Request
 {
     public class AddUserRequest
     {
