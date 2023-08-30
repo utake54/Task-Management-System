@@ -12,6 +12,7 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<CategoryDTO, TaskCategoryMaster>().ReverseMap();
             CreateMap<CategoryDTO, TaskCategoryMaster>().ReverseMap();
             CreateMap<CategoryRequest, TaskCategoryMaster>().ReverseMap();
+
         }
     }
 }

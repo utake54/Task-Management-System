@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Request;
-using TaskManagement.Model.Model.User.Request;
-using TaskManagement.Service.Entities.ModelDto;
+using TaskManagement.Service.Entities.User;
 using TaskManagement.Service.Profile;
 
 namespace TaskManagement.API.Controllers

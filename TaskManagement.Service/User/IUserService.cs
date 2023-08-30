@@ -10,7 +10,7 @@ using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.Entities.Login;
-using TaskManagement.Service.Entities.ModelDto;
+using TaskManagement.Service.Entities.User;
 
 namespace TaskManagement.Service.UserService
 {

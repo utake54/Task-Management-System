@@ -3,7 +3,7 @@ using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Model.Model.User;
 using AutoMapper;
 using TaskManagement.API.Request;
-using TaskManagement.Service.Entities.ModelDto;
+using TaskManagement.Service.Entities.User;
 
 namespace TaskManagement.API.Infrastructure.AutoMapper
 {

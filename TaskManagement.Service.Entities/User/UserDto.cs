@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Service.Entities.ModelDto
+namespace TaskManagement.Service.Entities.User
 {
     public class AddUserDto
     {
