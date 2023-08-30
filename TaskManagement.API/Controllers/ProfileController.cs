@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.API.Request;
 using TaskManagement.Model.Model.User.Request;
+using TaskManagement.Service.Entities.ModelDto;
 using TaskManagement.Service.Profile;
 
 namespace TaskManagement.API.Controllers
@@ -12,9 +15,11 @@ namespace TaskManagement.API.Controllers
     public class ProfileController : BaseController
     {
         private readonly IProfileService _profileService;
-        public ProfileController(IProfileService profileService)
+        private readonly IMapper _mapper;
+        public ProfileController(IProfileService profileService, IMapper mapper)
         {
             _profileService = profileService;
+            _mapper = mapper;
         }
 
         [HttpPost("MyProfile")]
@@ -27,9 +32,10 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("UpdateProfile")]
-        public async Task<Dictionary<string, object>> UpdateProfile(UserRequest request)
+        public async Task<Dictionary<string, object>> UpdateProfile(UpdateUserRequest request)
         {
-            var profile = await _profileService.UpdateProfile(request);
+            var requestDto = _mapper.Map<UpdateUserDto>(request);
+            var profile = await _profileService.UpdateProfile(requestDto);
             if (profile.Message == "Success")
                 return APIResponse("Success", null);
             return FailureResponse(profile.Message, profile.Failure);

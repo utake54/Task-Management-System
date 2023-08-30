@@ -26,11 +26,11 @@ namespace TaskManagement.Service.Profile
             return response;
         }
 
-        public async Task<ResponseModel> UpdateProfile(UserRequest request)
+        public async Task<ResponseModel> UpdateProfile(UpdateUserDto requestDto)
         {
             var response = new ResponseModel();
 
-            var profileData = await _unitOfWork.UserRepository.GetById(request.Id);
+            var profileData = await _unitOfWork.UserRepository.GetById(requestDto.Id);
             if (profileData == null)
             {
                 response.Failure("User not found.");

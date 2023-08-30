@@ -30,14 +30,14 @@ namespace TaskManagement.Service.TaskService
             _sendMail = sendMail;
         }
 
-        public async Task<ResponseModel> AddTask(AddTaskDto addTaskDto)
+        public async Task<ResponseModel> AddTask(AddTaskDto requestDto)
         {
             var response = new ResponseModel();
 
-            var taskMaster = _mapper.Map<TaskMaster>(addTaskDto);
-            taskMaster.CreatedBy = addTaskDto.CreatedBy;
+            var taskMaster = _mapper.Map<TaskMaster>(requestDto);
+            taskMaster.CreatedBy = requestDto.CreatedBy;
             taskMaster.CreatedDate = DateTime.UtcNow;
-            taskMaster.CompanyId = addTaskDto.CompanyId;
+            taskMaster.CompanyId = requestDto.CompanyId;
             taskMaster.IsActive = true;
             await _unitOfWork.TaskRepository.AddAsync(taskMaster);
             await _unitOfWork.SaveChangesAsync();
@@ -45,10 +45,10 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> DeleteTask(int taskId)
+        public async Task<ResponseModel> DeleteTask(DeleteTaskDto requestDto)
         {
             var response = new ResponseModel();
-            var task = await _unitOfWork.TaskRepository.GetById(taskId);
+            var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
             if (task != null)
             {
                 _unitOfWork.TaskRepository.Delete(task);
@@ -73,10 +73,10 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> GetTask(int taskId)
+        public async Task<ResponseModel> GetTask(GetTaskDto requestDto)
         {
             var response = new ResponseModel();
-            var task = await _unitOfWork.TaskRepository.GetById(taskId);
+            var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
             if (task != null)
             {
                 response.Ok(task);
@@ -86,18 +86,18 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> UpdateTask(TaskRequest request, int userId)
+        public async Task<ResponseModel> UpdateTask(UpdateTaskDto requestDto)
         {
             var response = new ResponseModel();
-            var task = await _unitOfWork.TaskRepository.GetById(request.Id);
+            var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
             if (task != null)
             {
-                task.Priority = request.Priority;
-                task.Description = request.Description;
-                task.DueDate = request.DueDate;
-                task.Title = request.Title;
-                task.ModifiedBy = userId;
-                task.CategoryId = request.CategoryId;
+                task.Priority = requestDto.Priority;
+                task.Description = requestDto.Description;
+                task.DueDate = requestDto.DueDate;
+                task.Title = requestDto.Title;
+                task.ModifiedBy = requestDto.ActionBy;
+                task.CategoryId = requestDto.CategoryId;
                 task.ModifiedDate = DateTime.UtcNow;
 
                 _unitOfWork.TaskRepository.Update(task);

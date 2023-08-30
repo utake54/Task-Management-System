@@ -67,21 +67,21 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.GetTask(System.Int32)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.GetTask(TaskManagement.API.Request.GetTaskRequest)">
             <summary>
             Get task by Id
             </summary>
             <param name="taskId"></param>
             <returns></returns>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.UpdateTask(TaskManagement.Model.Model.Task.Request.TaskRequest)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.UpdateTask(TaskManagement.API.Request.UpdateTaskRequest)">
             <summary>
             Update Task
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:TaskManagement.API.Controllers.TaskController.DeleteTask(System.Int32)">
+        <member name="M:TaskManagement.API.Controllers.TaskController.DeleteTask(TaskManagement.API.Request.DeleteTaskRequest)">
             <summary>
             Delete task by id
             </summary>

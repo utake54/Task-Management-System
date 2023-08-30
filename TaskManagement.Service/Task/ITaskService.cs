@@ -14,9 +14,9 @@ namespace TaskManagement.Service.TaskService
     public interface ITaskService
     {
         Task<ResponseModel> AddTask(AddTaskDto addTaskDto);
-        Task<ResponseModel> GetTask(int taskId);
-        Task<ResponseModel> DeleteTask(int taskId);
-        Task<ResponseModel> UpdateTask(TaskRequest request, int userId);
+        Task<ResponseModel> GetTask(GetTaskDto requestDto);
+        Task<ResponseModel> DeleteTask(DeleteTaskDto requestDto);
+        Task<ResponseModel> UpdateTask(UpdateTaskDto requestDto);
         Task<ResponseModel> GetAllTask(int companyId, SearchModel search);
         Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId, int companyId);
         Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId);

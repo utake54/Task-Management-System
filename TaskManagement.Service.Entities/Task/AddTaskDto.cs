@@ -18,7 +18,7 @@ namespace TaskManagement.Service.Entities.Task
         public int CreatedBy { get; set; }
     }
 
-    public class UpdateTaskDto
+    public class UpdateTaskDto:GetTaskDto
     {
         public int CategoryId { get; set; }
         public string Title { get; set; }
@@ -28,13 +28,12 @@ namespace TaskManagement.Service.Entities.Task
         public int ActionBy { get; set; }
     }
 
-    public class DeleteTaskDto
+    public class DeleteTaskDto : GetTaskDto
     {
-        public int Id { get; set; }
         public int ActionBy { get; set; }
     }
-    public class GetTaskDto : DeleteTaskDto
+    public class GetTaskDto
     {
-
+        public int Id { get; set; }
     }
 }

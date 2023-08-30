@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 using Microsoft.Extensions.Caching.Distributed;
 using NPOI.XSSF.UserModel;
 using TaskManagement.API.Request;
@@ -19,7 +20,7 @@ namespace TaskManagement.API.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
 
     public class TaskController : BaseController
     {
@@ -46,11 +47,11 @@ namespace TaskManagement.API.Controllers
         [HttpPost("AddTask")]
         public async Task<Dictionary<string, object>> AddTask(AddTaskRequest request)
         {
-
             var requestDto = _mapper.Map<AddTaskDto>(request);
             requestDto.CreatedBy = UserId;
-            requestDto.CompanyId= CompanyId;
+            requestDto.CompanyId = CompanyId;
             var addTask = await _taskService.AddTask(requestDto);
+
             if (addTask.Message == "Success")
                 return APIResponse("Success", addTask.Data);
             return FailureResponse("Failed", addTask.Message);
@@ -62,9 +63,10 @@ namespace TaskManagement.API.Controllers
         /// <param name="taskId"></param>
         /// <returns></returns>
         [HttpPost("GetTask/{taskId}")]
-        public async Task<Dictionary<string, object>> GetTask(int taskId)
+        public async Task<Dictionary<string, object>> GetTask(GetTaskRequest request)
         {
-            var task = await _taskService.GetTask(taskId);
+            var requestDto = _mapper.Map<GetTaskDto>(request);
+            var task = await _taskService.GetTask(requestDto);
             if (task.Message == "Success")
                 return APIResponse("Success", task.Data);
             return FailureResponse("Failed", task.Message);
@@ -77,9 +79,10 @@ namespace TaskManagement.API.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost("UpdateTask")]
-        public async Task<Dictionary<string, object>> UpdateTask(TaskRequest request)
+        public async Task<Dictionary<string, object>> UpdateTask(UpdateTaskRequest request)
         {
-            var updateTask = await _taskService.UpdateTask(request, UserId);
+            var requestDto = _mapper.Map<UpdateTaskDto>(request);
+            var updateTask = await _taskService.UpdateTask(requestDto);
             if (updateTask.Message == "Success")
                 return APIResponse("Success", updateTask.Data);
             return FailureResponse("Failed", updateTask.Message);
@@ -91,9 +94,10 @@ namespace TaskManagement.API.Controllers
         /// <param name="taskId"></param>
         /// <returns></returns>
         [HttpPost("DeleteTask/{taskId}")]
-        public async Task<Dictionary<string, object>> DeleteTask(int taskId)
+        public async Task<Dictionary<string, object>> DeleteTask(DeleteTaskRequest request)
         {
-            var deleteTask = await _taskService.DeleteTask(taskId);
+            var requestDto = _mapper.Map<DeleteTaskDto>(request);
+            var deleteTask = await _taskService.DeleteTask(requestDto);
             if (deleteTask.Message == "Success")
                 return APIResponse("Success", deleteTask.Data);
             return FailureResponse("Failed", deleteTask.Message);
