@@ -49,7 +49,7 @@ namespace TaskManagement.Service.CategoryService
             return response;
         }
 
-        public async Task<ResponseModel> GetAsync(PageResult pageResult)
+        public async Task<ResponseModel> GetAsync(GetCategoryDto pageResult)
         {
             var response = new ResponseModel();
 

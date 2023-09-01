@@ -1,19 +1,9 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
-using TaskManagement.Database.Repository.UserRepository;
-using TaskManagement.Model.Model.Login.DTO;
-using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
-using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.Entities.User;
 using TaskManagement.Service.OTPService;
@@ -219,12 +209,7 @@ namespace TaskManagement.Service.UserService
             response.Failure("TM007");
             return response;
         }
-        public Task<ResponseModel> ValidateOtp(OTPValidateDto request)
-        {
-            var response = new ResponseModel();
-
-            return null;
-        }
+      
         public async Task<List<UserDTO>> GetAsync(int companyId)
         {
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);

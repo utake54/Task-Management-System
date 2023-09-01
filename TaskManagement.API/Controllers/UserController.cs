@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NPOI.XSSF.UserModel;
-using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.API.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Service.Entities.User;
 using TaskManagement.Service.UserService;
-using TaskManagement.Utility;
 
 namespace TaskManagement.API.Controllers
 {

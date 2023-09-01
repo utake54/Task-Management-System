@@ -37,10 +37,10 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("GetAllCategories")]
-        public async Task<Dictionary<string, object>> GetAsync(PageResult request)
+        public async Task<Dictionary<string, object>> GetAsync(GetCategoryRequest request)
         {
             var requestDto = _mapper.Map<GetCategoryDto>(request);
-            var categories = await _categoryService.GetAsync(request);
+            var categories = await _categoryService.GetAsync(requestDto);
             if (categories.Message == "Success")
                 return APIResponse("TM002A", categories.Data);
             return FailureResponse("TM002B", categories.Message);

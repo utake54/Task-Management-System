@@ -33,6 +33,7 @@ namespace TaskManagement.Service.Entities.Category
     }
     public class GetCategoryDto
     {
-
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
     }
 }

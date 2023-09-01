@@ -25,6 +25,5 @@ namespace TaskManagement.Service.UserService
         Task<ResponseModel> Login(LoginDto request);
         Task<ResponseModel> ForgetPassword(ForgetPasswordDto request);
         Task<ResponseModel> ResetPassword(PasswordResetDto request);
-        Task<ResponseModel> ValidateOtp(OTPValidateDto request);
     }
 }

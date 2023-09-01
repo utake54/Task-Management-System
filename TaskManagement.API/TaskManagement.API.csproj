@@ -25,6 +25,12 @@
 		<ProjectReference Include="..\TaskManagement.Service\TaskManagement.Service.csproj" />
 		<ProjectReference Include="..\TaskManagement.Utility\TaskManagement.Utility.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Infrastructure\Validator\Category\" />
+	  <Folder Include="Infrastructure\Validator\Task\" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
 	</PropertyGroup>

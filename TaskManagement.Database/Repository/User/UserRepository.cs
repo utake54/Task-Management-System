@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.Login.DTO;
 using TaskManagement.Model.Model.User;

@@ -16,6 +16,6 @@ namespace TaskManagement.Service.CategoryService
         Task<ResponseModel> UpdateAsync(UpdateCategoryDto requestDto);
         Task<ResponseModel> DeleteAsync(DeleteCategoryDto requestDto);
         Task<ResponseModel> GetByIdAsync(GetByIdCategoryDto requestDto);
-        Task<ResponseModel> GetAsync(PageResult requestDto);
+        Task<ResponseModel> GetAsync(GetCategoryDto requestDto);
     }
 }
