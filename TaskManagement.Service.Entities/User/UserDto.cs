@@ -23,7 +23,7 @@ namespace TaskManagement.Service.Entities.User
         public int CreatedBy { get; set; }
     }
 
-    public class UpdateUserDto : GetUserDto
+    public class UpdateUserDto : GetUserByIdDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -38,7 +38,7 @@ namespace TaskManagement.Service.Entities.User
         public int ZipCode { get; set; }
         public int ModifiedBy { get; set; }
     }
-    public class GetUserDto
+    public class GetUserByIdDto
     {
         public int Id { get; set; }
     }

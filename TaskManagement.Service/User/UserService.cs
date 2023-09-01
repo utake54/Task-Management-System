@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Database.Repository.UserRepository;
+using TaskManagement.Model.Model.Login.DTO;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
@@ -15,6 +17,7 @@ using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.Entities.User;
 using TaskManagement.Service.OTPService;
+using TaskManagement.Services;
 using TaskManagement.Utility;
 using TaskManagement.Utility.Email;
 using TaskManagement.Utility.Enum;
@@ -35,7 +38,7 @@ namespace TaskManagement.Service.UserService
             _otpService = oTPService;
         }
 
-        public async Task<ResponseModel> AddUser(AddUserDto requestDto)
+        public async Task<ResponseModel> AddAsync(AddUserDto requestDto)
         {
             var response = new ResponseModel();
 
@@ -46,14 +49,14 @@ namespace TaskManagement.Service.UserService
             var userExistWithEmail = existingUsers.Where(x => x.EmailId == requestDto.EmailId).Any();
             if (userExistWithEmail)
             {
-                response.Failure("User already exists with same email id.");
+                response.Failure("TM018");
                 return response;
             }
 
             var userExistWithMobile = existingUsers.Where(x => x.MobileNo == requestDto.MobileNo).Any();
             if (userExistWithMobile)
             {
-                response.Failure("User already exists with same Mobile no.");
+                response.Failure("TM019");
                 return response;
             }
             #endregion
@@ -96,13 +99,13 @@ namespace TaskManagement.Service.UserService
             response.Ok();
             return response;
         }
-        public async Task<ResponseModel> DeleteUser(DeleteUserDto deleteUserDto)
+        public async Task<ResponseModel> DeleteAsync(DeleteUserDto deleteUserDto)
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(deleteUserDto.Id);
             if (user == null)
             {
-                response.Message = "No user found";
+                response.Message = "TM008";
                 return response;
             }
             user.ModifiedBy = deleteUserDto.ActionBy;
@@ -118,32 +121,32 @@ namespace TaskManagement.Service.UserService
             var allUsers = await _unitOfWork.UserRepository.GetAllUsers(companyId, pageResult.PageNumber, pageResult.PageSize);
             if (!allUsers.Any())
             {
-                response.Message = "No users found";
+                response.Message = "TM008";
                 return response;
             }
             response.Ok(allUsers);
             return response;
         }
-        public async Task<ResponseModel> GetUser(GetUserDto requestDto)
+        public async Task<ResponseModel> GetByIdAsync(GetUserByIdDto requestDto)
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(requestDto.Id);
             var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
             if (user == null)
             {
-                response.Message = "No user found";
+                response.Message = "TM008";
                 return response;
             }
             response.Ok(userDTO);
             return response;
         }
-        public async Task<ResponseModel> UpdateUser(UpdateUserDto updateUserDto)
+        public async Task<ResponseModel> UpdateAsync(UpdateUserDto updateUserDto)
         {
             var response = new ResponseModel();
             var user = await _unitOfWork.UserRepository.GetById(updateUserDto.Id);
             if (user == null)
             {
-                response.Message = "No user found";
+                response.Message = "TM008";
                 return response;
             }
 
@@ -171,10 +174,11 @@ namespace TaskManagement.Service.UserService
             var user = await _unitOfWork.UserRepository.GetUserDetails(request);
             if (user != null)
             {
-                response.Ok(user);
+                var token = JWTHelper.Login(user);
+                response.Ok(token);
                 return response;
             }
-            response.Failure("Invalid Credentialsss");
+            response.Failure("TM003");
             return response;
         }
         public async Task<ResponseModel> ForgetPassword(ForgetPasswordDto request)
@@ -187,11 +191,11 @@ namespace TaskManagement.Service.UserService
                 var otp = OTPGenerator.GetOTP();
                 await _sendMail.SendEmailAsync("utake.omkar54@gmail.com", "notes.dac@gmail.com", "OTP for password reset", otp.ToString());
                 var saveOTP = _otpService.AddOTP(isUserExists.Id, otp);
-                response.Ok(isUserExists.Id, "OTP sent successfully on email");
+                response.Ok(isUserExists.Id, "TM004");
 
                 return response;
             }
-            response.Failure("Invalid user details.");
+            response.Failure("TM005");
             return response;
         }
         public async Task<ResponseModel> ResetPassword(PasswordResetDto request)
@@ -200,7 +204,7 @@ namespace TaskManagement.Service.UserService
             var user = await _unitOfWork.UserRepository.GetById(request.UserId);
             if (user == null)
             {
-                response.Failure("No User Found");
+                response.Failure("TM008");
                 return response;
             }
             if (request.Password == request.ConfirmPassword)
@@ -209,10 +213,10 @@ namespace TaskManagement.Service.UserService
                 _unitOfWork.UserRepository.Update(user);
                 await _unitOfWork.SaveChangesAsync();
 
-                response.Ok("Password changed successfully.");
+                response.Ok("TM006");
                 return response;
             }
-            response.Failure("Please enter same password.");
+            response.Failure("TM007");
             return response;
         }
         public Task<ResponseModel> ValidateOtp(OTPValidateDto request)
@@ -221,7 +225,7 @@ namespace TaskManagement.Service.UserService
 
             return null;
         }
-        public async Task<List<UserDTO>> GetAllUsers(int companyId)
+        public async Task<List<UserDTO>> GetAsync(int companyId)
         {
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);
 

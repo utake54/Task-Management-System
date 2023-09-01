@@ -6,7 +6,7 @@ namespace TaskManagement.Service.Profile
 {
     public interface IProfileService
     {
-        Task<ResponseModel> GetProfile(int id);
-        Task<ResponseModel> UpdateProfile(UpdateUserDto requestDto);
+        Task<ResponseModel> GetAsync(int id);
+        Task<ResponseModel> UpdateAsync(UpdateUserDto requestDto);
     }
 }

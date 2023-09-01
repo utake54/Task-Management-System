@@ -13,6 +13,7 @@ using TaskManagement.Database.Repository.Category;
 using TaskManagement.Service.CategoryService;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TaskManagement.Service.Profile;
+using TaskManagement.Service.Reports;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -36,6 +37,7 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<ICategoryRepository, CategoryRepository>()
                 .AddTransient<ICategoryService, CategoryService>()
                 .AddTransient<IProfileService, ProfileService>()
+                .AddTransient<IReportService, ReportService>()
                 .AddTransient<IConfiguration>(sp =>
                    {
                        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

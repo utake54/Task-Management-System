@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Utility;
 
 namespace TaskManagement.API.Controllers
 {
@@ -12,32 +13,52 @@ namespace TaskManagement.API.Controllers
         protected int CompanyId => int.Parse(this.User.Claims.First(x => x.Type == "CompanyId").Value);
 
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public Dictionary<string, object> APIResponse(string msgCode, object result)
+        protected Dictionary<string, object> APIResponse(string msgCode, object result)
         {
             var response = new Dictionary<string, object>();
-            response.Add("Message", msgCode);
-            response.Add("Data", result);
+            response.Add(ContentLoader.ReturnMessage("TM002A"), msgCode);
+            response.Add(ContentLoader.ReturnMessage("TM002"), result);
 
             return response;
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public Dictionary<string, object> FailureResponse(string msgCode, object result)
+        protected Dictionary<string, object> APIResponse(bool result, string failureMsg, string successMessage)
         {
-            var response = new Dictionary<string, object>();
-            response.Add("Data", msgCode);
-            response.Add("Failed", result);
+            var response = new Dictionary<string, object>()
+            {
+                {"Data",result }
+            };
+            response.Add(result == true ? "Message" : "Error", ContentLoader.ReturnMessage(result == true ? successMessage : failureMsg));
+            return response;
+        }
+
+        protected Dictionary<string, object> APIResponse(object result, string failureMsg, string successMessage)
+        {
+            var response = new Dictionary<string, object>()
+            {
+                {"Data",result }
+            };
+            return response;
+        }
+
+        protected Dictionary<string, object> FailureResponse(string msgCode, object result)
+        {
+            var response = new Dictionary<string, object>
+            {
+                { "Data", msgCode },
+                { "Failed", result }
+            };
 
             return response;
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public Dictionary<string, object> UnauthorizeResponse(string msgCode, object result)
+        protected Dictionary<string, object> UnauthorizeResponse(string msgCode, object result)
         {
-            var response = new Dictionary<string, object>();
-            response.Add("Message", "Invalid Credential");
-            response.Add("Unauthorized", msgCode);
+            var response = new Dictionary<string, object>
+            {
+                { "Message", ContentLoader.ReturnMessage("TM003") },
+                { "Unauthorized", msgCode }
+            };
 
             return response;
         }

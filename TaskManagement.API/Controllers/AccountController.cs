@@ -19,36 +19,32 @@ namespace TaskManagement.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOTPService _otpService;
-        private readonly IHttpContextAccessor _contextAccessor;
         private readonly IMapper _mapper;
         public AccountController(IUserService userService,
                                  IOTPService oTPService,
-                                 IHttpContextAccessor contextAccessor,
                                  IMapper mapper)
         {
             _userService = userService;
             _otpService = oTPService;
-            _contextAccessor = contextAccessor;
             _mapper = mapper;
         }
 
         [HttpPost("Login")]
-        public async Task<Dictionary<string, object>> Login(LoginRequest request)
+        public async Task<Dictionary<string, object>> LoginAsync(LoginRequest request)
         {
             var requestDto = _mapper.Map<LoginDto>(request);
-            var user = await _userService.Login(requestDto);
-            if (user.Data != null)
+            var result = await _userService.Login(requestDto);
+            if (result.Data != null)
             {
-                var _token = JWTHelper.Login((LoginDTO)user.Data);
-                return APIResponse("Success", _token);
+                return APIResponse("TM009", result.Data);
             }
-            return UnauthorizeResponse("Unauthorized", user.Message);
+            return UnauthorizeResponse("TM010", result.Message);
         }
 
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
-            return Ok("Log out success");
+            return Ok("TM011");
         }
 
         [HttpPost("ForgetPassword")]
@@ -58,9 +54,9 @@ namespace TaskManagement.API.Controllers
             var userData = await _userService.ForgetPassword(requestDto);
             if (userData.Data != null)
             {
-                return APIResponse("OTP sent successfully on email", userData.Data);
+                return APIResponse("TM012", userData.Data);
             }
-            return FailureResponse("Invalid details", userData.Message);
+            return FailureResponse("TM013", userData.Message);
         }
 
         [HttpPost("ValidateOTP")]
@@ -70,9 +66,9 @@ namespace TaskManagement.API.Controllers
             var validateOtp = await _otpService.ValidateOTP(requestDto);
             if (validateOtp.Message == "Success")
             {
-                return APIResponse("OTP validate successfully", null);
+                return APIResponse("Success", null);
             }
-            return FailureResponse("Invalid OTP", validateOtp.Message);
+            return FailureResponse("TM015", validateOtp.Message);
         }
 
         [HttpPost("ResetPassword")]
@@ -82,9 +78,9 @@ namespace TaskManagement.API.Controllers
             var changedPassword = await _userService.ResetPassword(requestDto);
             if (changedPassword.Message == "Success")
             {
-                return APIResponse("Password changed successfully", null);
+                return APIResponse("TM016", null);
             }
-            return FailureResponse("Failed to update password", changedPassword.Message);
+            return FailureResponse("TM017", changedPassword.Message);
         }
     }
 }

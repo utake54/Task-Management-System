@@ -26,6 +26,6 @@
 		<ProjectReference Include="..\TaskManagement.Utility\TaskManagement.Utility.csproj" />
 	</ItemGroup>
 	<PropertyGroup>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
 	</PropertyGroup>
 </Project>

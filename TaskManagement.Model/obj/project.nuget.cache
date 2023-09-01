@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IodP3zndIUJITmEhC3HKei2s4UowCIz90sle5N4z7LAgQIxaxw8rWZcQWNT/qYXGINNbI6wowZSLm2j1PPwCWg==",
+  "dgSpecHash": "eT2XxmZcB0oP0B8F9YYVSEGfKWW53Mu81uNN73QfUR7/giOCbob6HHlzbs5qU3Cg8A9vYSl1NPYkaJ/UhhZtUw==",
   "success": true,
   "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\TaskManagement.Model.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.io.recyclablememorystream\\2.3.2\\microsoft.io.recyclablememorystream.2.3.2.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\npoi\\2.6.1\\npoi.2.6.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\sixlabors.fonts\\1.0.0-beta19\\sixlabors.fonts.1.0.0-beta19.nupkg.sha512",

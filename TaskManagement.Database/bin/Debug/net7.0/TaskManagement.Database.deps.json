@@ -762,7 +762,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "2.1.1",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
-          "NPOI": "2.6.1"
+          "NPOI": "2.6.1",
+          "Newtonsoft.Json": "11.0.2"
         },
         "runtime": {
           "TaskManagement.Utility.dll": {}

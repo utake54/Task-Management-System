@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using TaskManagement.Model.Model.Category.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
+using TaskManagement.Service.Entities.Category;
 
 namespace TaskManagement.Service.CategoryService
 {
     public interface ICategoryService
     {
-        Task<ResponseModel> AddCategory(CategoryRequest request, int userId);
-        Task<ResponseModel> UpdateCategory(CategoryRequest request);
-        Task<ResponseModel> DeleteCategory(int categoryId);
-        Task<ResponseModel> GetCategory(int categoryId);
-        Task<ResponseModel> GetAllCategories(PageResult pageResult);
+        Task<ResponseModel> AddAsync(AddCategoryDto requestDto);
+        Task<ResponseModel> UpdateAsync(UpdateCategoryDto requestDto);
+        Task<ResponseModel> DeleteAsync(DeleteCategoryDto requestDto);
+        Task<ResponseModel> GetByIdAsync(GetByIdCategoryDto requestDto);
+        Task<ResponseModel> GetAsync(PageResult requestDto);
     }
 }

@@ -16,5 +16,6 @@ namespace TaskManagement.Utility
         public const string RESPNSE_ERROR_FIELD = "Error";
         public const string UNAUTHORIZED_RESPONSE_FIELD = "Unauthorized";
         public const string JWT_TOKEN_CLAIM_KEY = "User";
+        public const string SUCCESS_MESSAGE_FIELD = "Success";
     }
 }

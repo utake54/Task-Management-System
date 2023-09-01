@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "kkxgDTh3VmOYzAio/Z/EWv2qm0pjn9Dez1jnF31FTD8=",
+  "Hash": "Vpn5AjCRKDdTmNjBeo7h5Jaul9qt37n2nOGXDoMpG6Q=",
   "Source": "TaskManagement.API",
   "BasePath": "_content/TaskManagement.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "TaskManagement.API\\wwwroot",
+      "Source": "TaskManagement.API",
+      "ContentRoot": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.API\\wwwroot\\",
+      "BasePath": "_content/TaskManagement.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.API\\wwwroot\\Content\\en_US.json",
+      "SourceId": "TaskManagement.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.API\\wwwroot\\",
+      "BasePath": "_content/TaskManagement.API",
+      "RelativePath": "Content/en_US.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Content\\en_US.json"
+    }
+  ]
 }

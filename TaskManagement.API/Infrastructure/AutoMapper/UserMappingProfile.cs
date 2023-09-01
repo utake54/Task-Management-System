@@ -4,6 +4,7 @@ using TaskManagement.Model.Model.User;
 using AutoMapper;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.User;
+using TaskManagement.Service.Entities.Login;
 
 namespace TaskManagement.API.Infrastructure.AutoMapper
 {
@@ -14,9 +15,14 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<UserRequest, UserMaster>().ReverseMap();
             CreateMap<UserMaster, UserDTO>().ReverseMap();
             CreateMap<AddUserRequest, AddUserDto>().ReverseMap();
-            CreateMap<GetUserRequest, GetUserDto>().ReverseMap();
+            CreateMap<GetUserRequest, GetUserByIdDto>().ReverseMap();
             CreateMap<DeleteUserRequest, DeleteUserDto>().ReverseMap();
             CreateMap<UpdateUserRequest, UpdateUserDto>().ReverseMap();
+            CreateMap<LoginRequest, LoginDto>().ReverseMap();
+            CreateMap<ForgetPassswordRequest, ForgetPasswordDto>().ReverseMap();
+            CreateMap<OTPValidateRequest, OTPValidateDto>().ReverseMap();
+            CreateMap<PasswordResetRequest, PasswordResetDto>().ReverseMap();
+
         }
     }
 }

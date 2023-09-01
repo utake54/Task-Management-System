@@ -12,7 +12,7 @@ namespace TaskManagement.Service.Profile
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<ResponseModel> GetProfile(int id)
+        public async Task<ResponseModel> GetAsync(int id)
         {
             var response = new ResponseModel();
 
@@ -26,7 +26,7 @@ namespace TaskManagement.Service.Profile
             return response;
         }
 
-        public async Task<ResponseModel> UpdateProfile(UpdateUserDto requestDto)
+        public async Task<ResponseModel> UpdateAsync(UpdateUserDto requestDto)
         {
             var response = new ResponseModel();
 

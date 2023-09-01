@@ -126,8 +126,6 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Hangfire.MemoryStorage.dll
-C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.API.xml
-C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\obj\Debug\net7.0\TaskManagement.API.xml
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
@@ -138,3 +136,4 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.Service.Entities.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.Service.Entities.pdb
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.API.staticwebassets.runtime.json

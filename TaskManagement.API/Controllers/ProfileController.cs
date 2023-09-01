@@ -21,19 +21,19 @@ namespace TaskManagement.API.Controllers
         }
 
         [HttpPost("MyProfile")]
-        public async Task<Dictionary<string, object>> MyProfile()
+        public async Task<Dictionary<string, object>> GetAsync()
         {
-            var profile = await _profileService.GetProfile(UserId);
+            var profile = await _profileService.GetAsync(UserId);
             if (profile.Message == "Success")
                 return APIResponse("Success", profile.Data);
             return FailureResponse(profile.Message, profile.Failure);
         }
 
         [HttpPost("UpdateProfile")]
-        public async Task<Dictionary<string, object>> UpdateProfile(UpdateUserRequest request)
+        public async Task<Dictionary<string, object>> UpdateAsync(UpdateUserRequest request)
         {
             var requestDto = _mapper.Map<UpdateUserDto>(request);
-            var profile = await _profileService.UpdateProfile(requestDto);
+            var profile = await _profileService.UpdateAsync(requestDto);
             if (profile.Message == "Success")
                 return APIResponse("Success", null);
             return FailureResponse(profile.Message, profile.Failure);

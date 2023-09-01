@@ -8,7 +8,7 @@
         public string Priority { get; set; }
         public DateTime DueDate { get; set; }
     }
-    public class GetTaskRequest
+    public class GetTaskByIdRequest
     {
         public int Id { get; set; }
     }
@@ -18,7 +18,7 @@
         public int Id { get; set; }
     }
 
-    public class DeleteTaskRequest : GetTaskRequest
+    public class DeleteTaskRequest : GetTaskByIdRequest
     {
     }
 }

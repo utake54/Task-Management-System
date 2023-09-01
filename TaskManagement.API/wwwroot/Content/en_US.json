@@ -1,0 +1,34 @@
+{
+  "TM001": "Message",
+  "TM002": "Data",
+  "TM002A": "Success",
+  "TM002B": "Failed",
+
+  "TM003": "Invalid Credentialsss",
+  "TM004": "OTP sent successfully on email",
+  "TM005": "Invalid user details.",
+  "TM006": "Password changed successfully.",
+  "TM007": "Please enter same password.",
+  "TM008": "User not found.",
+  "TM009": "Login successfully.",
+  "TM010": "Unauthorized",
+  "TM011": "Log out success",
+  "TM012": "OTP sent successfully on email",
+  "TM013": "Invalid details",
+  "TM014": "OTP validate successfully",
+  "TM015": "Invalid OTP",
+  "TM016": "Password changed successfully",
+  "TM017": "Failed to update password",
+  "TM018": "User already exists with same email id.",
+  "TM019": "User already exists with same Mobile no.",
+
+
+
+  "TM020": "User addedd successfully.",
+  "TM021": "User details updated successfully.",
+  "TM022": "User deleted successfully.",
+  "TM023": "User details updated successfully.",
+  "TM024": "User details updated successfully.",
+  "TM025": "User details updated successfully.",
+  "TM026": "User details updated successfully."
+}

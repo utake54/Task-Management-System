@@ -30,7 +30,7 @@ namespace TaskManagement.Service.TaskService
             _sendMail = sendMail;
         }
 
-        public async Task<ResponseModel> AddTask(AddTaskDto requestDto)
+        public async Task<ResponseModel> AddAsync(AddTaskDto requestDto)
         {
             var response = new ResponseModel();
 
@@ -45,7 +45,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> DeleteTask(DeleteTaskDto requestDto)
+        public async Task<ResponseModel> DeleteAsync(DeleteTaskDto requestDto)
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
@@ -60,7 +60,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllTask(int companyId, SearchModel search)
+        public async Task<ResponseModel> GetAsync(int companyId, SearchModel search)
         {
             var response = new ResponseModel();
             var taskList = await _unitOfWork.TaskRepository.GetAllTask(companyId, search);
@@ -73,7 +73,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> GetTask(GetTaskDto requestDto)
+        public async Task<ResponseModel> GetByIdAsync(GetTaskByIdDto requestDto)
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
@@ -86,7 +86,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> UpdateTask(UpdateTaskDto requestDto)
+        public async Task<ResponseModel> UpdateAsync(UpdateTaskDto requestDto)
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);

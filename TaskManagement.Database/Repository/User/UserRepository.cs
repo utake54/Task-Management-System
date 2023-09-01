@@ -57,7 +57,6 @@ namespace TaskManagement.Database.Repository.UserRepository
                                   CompanyId = u.CompanyId,
                                   Role = r.Role
                               }).FirstOrDefaultAsync();
-
             return user;
         }
     }

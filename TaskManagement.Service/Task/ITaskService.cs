@@ -13,11 +13,11 @@ namespace TaskManagement.Service.TaskService
 {
     public interface ITaskService
     {
-        Task<ResponseModel> AddTask(AddTaskDto addTaskDto);
-        Task<ResponseModel> GetTask(GetTaskDto requestDto);
-        Task<ResponseModel> DeleteTask(DeleteTaskDto requestDto);
-        Task<ResponseModel> UpdateTask(UpdateTaskDto requestDto);
-        Task<ResponseModel> GetAllTask(int companyId, SearchModel search);
+        Task<ResponseModel> AddAsync(AddTaskDto addTaskDto);
+        Task<ResponseModel> GetByIdAsync(GetTaskByIdDto requestDto);
+        Task<ResponseModel> DeleteAsync(DeleteTaskDto requestDto);
+        Task<ResponseModel> UpdateAsync(UpdateTaskDto requestDto);
+        Task<ResponseModel> GetAsync(int companyId, SearchModel search);
         Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId, int companyId);
         Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId);
         Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId);

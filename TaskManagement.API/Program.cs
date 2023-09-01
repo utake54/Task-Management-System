@@ -20,7 +20,7 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
                 config.Filters.Add<GlobalExceptionFilter>();
-                config.Filters.Add<Permissible>();
+                //config.Filters.Add<Permissible>();
             });
 
             builder.Services.AddEndpointsApiExplorer()

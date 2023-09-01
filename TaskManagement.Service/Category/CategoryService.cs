@@ -5,6 +5,7 @@ using TaskManagement.Model.Model.Category.DTO;
 using TaskManagement.Model.Model.Category.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
+using TaskManagement.Service.Entities.Category;
 
 namespace TaskManagement.Service.CategoryService
 {
@@ -18,12 +19,12 @@ namespace TaskManagement.Service.CategoryService
             _mapper = mapper;
         }
 
-        public async Task<ResponseModel> AddCategory(CategoryRequest request, int userId)
+        public async Task<ResponseModel> AddAsync(AddCategoryDto requestDto)
         {
             var response = new ResponseModel();
-            var category = _mapper.Map<CategoryRequest, TaskCategoryMaster>(request);
+            var category = _mapper.Map<AddCategoryDto, TaskCategoryMaster>(requestDto);
             category.CreatedDate = DateTime.UtcNow;
-            category.CreatedBy = userId;
+            category.CreatedBy = requestDto.CreadetBy;
             category.IsActive = true;
             await _unitOfWork.CategoryRepository.AddAsync(category);
             await _unitOfWork.SaveChangesAsync();
@@ -31,11 +32,11 @@ namespace TaskManagement.Service.CategoryService
             return response;
         }
 
-        public async Task<ResponseModel> DeleteCategory(int categoryId)
+        public async Task<ResponseModel> DeleteAsync(DeleteCategoryDto requestDto)
         {
             var response = new ResponseModel();
 
-            var category = await _unitOfWork.CategoryRepository.GetById(categoryId);
+            var category = await _unitOfWork.CategoryRepository.GetById(requestDto.Id);
             if (category == null)
             {
                 response.Failure("Category not found.");
@@ -48,7 +49,7 @@ namespace TaskManagement.Service.CategoryService
             return response;
         }
 
-        public async Task<ResponseModel> GetAllCategories(PageResult pageResult)
+        public async Task<ResponseModel> GetAsync(PageResult pageResult)
         {
             var response = new ResponseModel();
 
@@ -63,31 +64,31 @@ namespace TaskManagement.Service.CategoryService
             return response;
         }
 
-        public async Task<ResponseModel> GetCategory(int categoryId)
+        public async Task<ResponseModel> GetByIdAsync(GetByIdCategoryDto requestDto)
         {
             var response = new ResponseModel();
-            var category = await _unitOfWork.CategoryRepository.GetDefault(x => x.Id == categoryId && x.IsActive == true);
+            var category = await _unitOfWork.CategoryRepository.GetDefault(x => x.Id == requestDto.Id && x.IsActive == true);
             if (category == null)
             {
                 response.Failure("Category not found.");
                 return response;
             }
-            var categoryDTO = _mapper.Map<TaskCategoryMaster, CategoryDTO>(category);
+            var categoryDTO = _mapper.Map<TaskCategoryMaster, CategoryMasterDto>(category);
             response.Ok(categoryDTO);
             return response;
         }
 
-        public async Task<ResponseModel> UpdateCategory(CategoryRequest request)
+        public async Task<ResponseModel> UpdateAsync(UpdateCategoryDto requestDto)
         {
             var response = new ResponseModel();
-            var category = await _unitOfWork.CategoryRepository.GetById(request.Id);
+            var category = await _unitOfWork.CategoryRepository.GetById(requestDto.Id);
             if (category == null)
             {
                 response.Failure("Category not found.");
                 return response;
             }
 
-            category.Category = request.Category;
+            category.Category = requestDto.Category;
             _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
             response.Ok();
