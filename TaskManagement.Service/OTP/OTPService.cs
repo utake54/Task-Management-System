@@ -18,13 +18,16 @@ namespace TaskManagement.Service.OTPService
 
         public async Task<int> AddOTP(int userId, int otp)
         {
-            var otpDetails = new OTPMaster();
-            otpDetails.UserId = userId;
-            otpDetails.OTP = otp;
-            otpDetails.GeneratedTime = DateTime.UtcNow;
-            otpDetails.ExpiryTime = DateTime.UtcNow.AddMinutes(10);
+            var otpDetails = new OTPMaster
+            {
+                UserId = userId,
+                OTP = otp,
+                GeneratedTime = DateTime.UtcNow,
+                ExpiryTime = DateTime.UtcNow.AddMinutes(10),
+                IsActive = true
+            };
 
-            var saveOTP = _unitOfWork.OTPRepository.AddAsync(otpDetails);
+            await _unitOfWork.OTPRepository.AddAsync(otpDetails);
             await _unitOfWork.SaveChangesAsync();
             return userId;
         }

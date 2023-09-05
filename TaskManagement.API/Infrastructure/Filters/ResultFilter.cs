@@ -39,13 +39,19 @@ namespace TaskManagement.API.Infrastructure.Filters
                     {
                         case "Data":
                             responseObj.StatusCode = (int)HttpStatusCode.OK;
-                            responseObj.Message = ContentLoader.ReturnMessage(Convert.ToString(data[Constants.SUCCESS_MESSAGE_FIELD]));
+                            responseObj.Message = ContentLoader.ReturnMessage("TM002A");
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
                             break;
 
                         case "Failed":
                             responseObj.StatusCode = (int)HttpStatusCode.NoContent;
                             responseObj.Message = ContentLoader.ReturnMessage(Convert.ToString(data[Constants.RESPNSE_FAILURE_FIELD]));
+                            responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            break;
+
+                        case "Error":
+                            responseObj.StatusCode = (int)HttpStatusCode.NoContent;
+                            responseObj.Message = Convert.ToString(data[Constants.RESPNSE_ERROR_FIELD]);
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
                             break;
 
@@ -75,6 +81,6 @@ namespace TaskManagement.API.Infrastructure.Filters
 
             context.Result = new JsonResult(responseObj);
             
-        }
+            }
     }
 }

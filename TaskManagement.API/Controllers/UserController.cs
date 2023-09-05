@@ -25,9 +25,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetAllAsync([FromBody] PageResult pageResult)
         {
             var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
-            if (allUser.Message == "Success")
-                return APIResponse("Success", allUser.Data);
-            return FailureResponse("Failed", allUser.Message);
+            return NewAPIResponse(allUser.Data);
         }
 
         //[Authorize("Admin")]
@@ -49,9 +47,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetUserByIdDto>(request);
             var user = await _userService.GetByIdAsync(requestDto);
-            if (user.Message == "Success")
-                return APIResponse("Success", user.Data);
-            return FailureResponse("Failed", user.Message);
+            return NewAPIResponse(user.Data);
         }
 
         //[Authorize("Admin")]
@@ -61,9 +57,7 @@ namespace TaskManagement.API.Controllers
             var requestDto = _mapper.Map<DeleteUserDto>(request);
             requestDto.ActionBy = UserId;
             var deleteUser = await _userService.DeleteAsync(requestDto);
-            if (deleteUser.Message == "Success")
-                return APIResponse("Success", deleteUser.Data);
-            return FailureResponse("Failed", deleteUser.Message);
+            return NewAPIResponse(deleteUser.Result, deleteUser.Message, deleteUser.Message);
         }
 
         //[Authorize("Admin")]

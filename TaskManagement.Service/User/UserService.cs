@@ -96,13 +96,14 @@ namespace TaskManagement.Service.UserService
             if (user == null)
             {
                 response.Message = "TM008";
+                response.Result = false;
                 return response;
             }
             user.ModifiedBy = deleteUserDto.ActionBy;
             user.ModifiedDate = DateTime.UtcNow;
             _unitOfWork.UserRepository.Delete(user);
             await _unitOfWork.SaveChangesAsync();
-            response.Ok();
+            response.Ok(true);
             return response;
         }
         public async Task<ResponseModel> GetAllUsers(int companyId, PageResult pageResult)
@@ -209,7 +210,7 @@ namespace TaskManagement.Service.UserService
             response.Failure("TM007");
             return response;
         }
-      
+
         public async Task<List<UserDTO>> GetAsync(int companyId)
         {
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);

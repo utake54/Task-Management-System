@@ -14,7 +14,7 @@ namespace TaskManagement.Model.Model.ResponseModel
         public string? Message { get; set; }
         public object? Data { get; set; }
         public List<Error> Errors { get; set; }
-
+        public bool Result { get; set; } = true;
         public void Ok()
         {
             Message = "Success";

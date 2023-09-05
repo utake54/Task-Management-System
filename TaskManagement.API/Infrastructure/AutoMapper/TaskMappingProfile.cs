@@ -15,6 +15,9 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<GetTaskByIdRequest, GetTaskByIdDto>().ReverseMap();
             CreateMap<UpdateTaskRequest, UpdateTaskDto>().ReverseMap();
             CreateMap<DeleteTaskRequest, DeleteTaskDto>().ReverseMap();
+            CreateMap<TaskMaster, AddTaskDto>().ReverseMap();
+
+
         }
     }
 }

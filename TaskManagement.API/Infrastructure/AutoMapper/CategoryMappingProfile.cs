@@ -20,6 +20,7 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<DeleteCategoryRequest, DeleteCategoryDto>().ReverseMap();
             CreateMap<TaskCategoryMaster, CategoryMasterDto>().ReverseMap();
             CreateMap<GetCategoryRequest, GetCategoryDto>().ReverseMap();
+            CreateMap<AddCategoryDto, TaskCategoryMaster>().ReverseMap();
         }
     }
 }

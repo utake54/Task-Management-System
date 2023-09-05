@@ -22,22 +22,26 @@ namespace TaskManagement.API.Controllers
             return response;
         }
 
-        protected Dictionary<string, object> APIResponse(bool result, string failureMsg, string successMessage)
+        protected Dictionary<string, object> NewAPIResponse(bool result, string failureMsg, string successMessage)
         {
-            var response = new Dictionary<string, object>()
+            var response = new Dictionary<string, object>
             {
-                {"Data",result }
+                { "Data", result },
+                { result == true ? "Message" : "Error", ContentLoader.ReturnMessage(result == true ? successMessage : failureMsg) }
             };
-            response.Add(result == true ? "Message" : "Error", ContentLoader.ReturnMessage(result == true ? successMessage : failureMsg));
             return response;
         }
 
-        protected Dictionary<string, object> APIResponse(object result, string failureMsg, string successMessage)
+        protected Dictionary<string, object> NewAPIResponse(object result, string msgCode = "")
         {
             var response = new Dictionary<string, object>()
             {
                 {"Data",result }
             };
+            if (!string.IsNullOrEmpty(msgCode))
+            {
+                response.Add(Constants.RESPONSE_MESSAGE_FIELD, ContentLoader.ReturnMessage(msgCode));
+            }
             return response;
         }
 

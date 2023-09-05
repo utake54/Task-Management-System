@@ -27,8 +27,23 @@
   "TM020": "User addedd successfully.",
   "TM021": "User details updated successfully.",
   "TM022": "User deleted successfully.",
-  "TM023": "User details updated successfully.",
-  "TM024": "User details updated successfully.",
-  "TM025": "User details updated successfully.",
-  "TM026": "User details updated successfully."
+
+  //AddUser validations
+  "TM023": "User name reuired.",
+  "TM024": "Last name reuired.",
+  "TM025": "User emailId reuired.",
+  "TM026": "user MobileNo reuired.",
+  "TM027": "User DateOfBirth reuired.",
+  "TM028": "User Address reuired.",
+  "TM029": "User City reuired.",
+  "TM030": "User State reuired.",
+  "TM031": "User Country reuired.",
+  "TM032": "User CountryCode reuired.",
+  "TM033": "User ZipCode reuired.",
+  "TM034": "User  reuired.",
+  "TM035": "reuired.",
+  "TM036": "reuired.",
+  "TM037": "reuired.",
+  "TM038": "reuired.",
+  "TM039": "reuired."
 }
