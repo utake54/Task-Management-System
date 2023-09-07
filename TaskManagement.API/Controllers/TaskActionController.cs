@@ -39,9 +39,7 @@ namespace TaskManagement.API.Controllers
         {
             var assignTask = await _taskService.AssignTask(request, UserId, CompanyId);
 
-            if (assignTask.Message == "Success")
-                return APIResponse("Success", assignTask.Data);
-            return FailureResponse("Failed", assignTask.Message);
+            return NewAPIResponse(assignTask.Result, assignTask.Message, "User deleted successfully.");
         }
 
 
@@ -53,9 +51,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetMyTask()
         {
             var task = await _taskService.GetMyTask(UserId);
-            if (task.Message == "Success")
-                return APIResponse("Success", task.Data);
-            return FailureResponse("Failed", task.Message);
+            return NewAPIResponse(task.Result, task.Message, "User deleted successfully.");
         }
 
 
@@ -68,9 +64,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> AcceptTask(AcceptTaskRequest request)
         {
             var userAction = await _taskService.UserAction(request, UserId);
-            if (userAction.Message == "Success")
-                return APIResponse("Success", null);
-            return FailureResponse(userAction.Message, userAction.Data);
+            return NewAPIResponse(userAction.Result, userAction.Message, "User deleted successfully.");
         }
 
 
@@ -83,9 +77,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> UpdateTaskStatus(TaskStatusRequest request)
         {
             var updateStatus = await _taskService.UpdateStatus(request, UserId);
-            if (updateStatus.Message == "Success")
-                return APIResponse("Success", null);
-            return FailureResponse(updateStatus.Message, updateStatus.Data);
+            return NewAPIResponse(updateStatus.Result, updateStatus.Message, "User deleted successfully.");
         }
 
 

@@ -9,6 +9,7 @@ using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.Entities.Task;
 using TaskManagement.Service.TaskService;
 using TaskManagement.Utility;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {
@@ -46,9 +47,7 @@ namespace TaskManagement.API.Controllers
             requestDto.CompanyId = CompanyId;
             var addTask = await _taskService.AddAsync(requestDto);
 
-            if (addTask.Message == "Success")
-                return APIResponse("Success", addTask.Data);
-            return FailureResponse("Failed", addTask.Message);
+            return NewAPIResponse(addTask.Result, addTask.Message, "Task addedd successfully.");
         }
 
         /// <summary>
@@ -61,9 +60,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetTaskByIdDto>(request);
             var task = await _taskService.GetByIdAsync(requestDto);
-            if (task.Message == "Success")
-                return APIResponse("Success", task.Data);
-            return FailureResponse("Failed", task.Message);
+            return NewAPIResponse(task.Data, task.Message);
         }
 
 
@@ -77,9 +74,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateTaskDto>(request);
             var updateTask = await _taskService.UpdateAsync(requestDto);
-            if (updateTask.Message == "Success")
-                return APIResponse("Success", updateTask.Data);
-            return FailureResponse("Failed", updateTask.Message);
+            return NewAPIResponse(updateTask.Result, updateTask.Message, "User deleted successfully.");
         }
 
         /// <summary>
@@ -92,9 +87,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<DeleteTaskDto>(request);
             var deleteTask = await _taskService.DeleteAsync(requestDto);
-            if (deleteTask.Message == "Success")
-                return APIResponse("Success", deleteTask.Data);
-            return FailureResponse("Failed", deleteTask.Message);
+            return NewAPIResponse(deleteTask.Result, deleteTask.Message, "User deleted successfully.");
         }
 
         /// <summary>
@@ -107,10 +100,7 @@ namespace TaskManagement.API.Controllers
         {
             int companyId = 1;
             var allTask = await _taskService.GetAsync(companyId, search);
-            if (allTask.Message != "Success")
-                return FailureResponse("Failed", allTask.Message);
-
-            return APIResponse("Success", allTask.Data);
+            return NewAPIResponse(allTask.Data, allTask.Message);
         }
 
         /// <summary>
@@ -122,9 +112,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetTaskByCategory(int categoryId)
         {
             var task = await _taskService.GetByCategories(categoryId);
-            if (task.Message == "Success")
-                return APIResponse("Success", task.Data);
-            return FailureResponse(task.Message, null);
+            return NewAPIResponse(task.Data, task.Message);
         }
     }
 }

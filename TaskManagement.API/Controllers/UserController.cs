@@ -24,8 +24,8 @@ namespace TaskManagement.API.Controllers
         [HttpPost("GetAllAsync")]
         public async Task<Dictionary<string, object>> GetAllAsync([FromBody] PageResult pageResult)
         {
-            var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
-            return NewAPIResponse(allUser.Data);
+            var allUser = await _userService.GetAllUsers(1, pageResult);
+            return NewAPIResponse(allUser.Data, allUser.Message);
         }
 
         //[Authorize("Admin")]
@@ -36,10 +36,7 @@ namespace TaskManagement.API.Controllers
             requestDto.CreatedBy = 1;
             requestDto.CompanyId = 1;
             var addUser = await _userService.AddAsync(requestDto);
-
-            if (addUser.Message == "Success")
-                return APIResponse("TM020", addUser.Data);
-            return FailureResponse("TM002B", addUser.Message);
+            return NewAPIResponse(addUser.Result, addUser.Message, "User addedd successfully.");
         }
 
         [HttpPost("GetAsync")]
@@ -47,7 +44,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetUserByIdDto>(request);
             var user = await _userService.GetByIdAsync(requestDto);
-            return NewAPIResponse(user.Data);
+            return NewAPIResponse(user.Data, user.Message);
         }
 
         //[Authorize("Admin")]
@@ -57,7 +54,7 @@ namespace TaskManagement.API.Controllers
             var requestDto = _mapper.Map<DeleteUserDto>(request);
             requestDto.ActionBy = UserId;
             var deleteUser = await _userService.DeleteAsync(requestDto);
-            return NewAPIResponse(deleteUser.Result, deleteUser.Message, deleteUser.Message);
+            return NewAPIResponse(deleteUser.Result, deleteUser.Message, "User deleted successfully.");
         }
 
         //[Authorize("Admin")]
@@ -67,12 +64,7 @@ namespace TaskManagement.API.Controllers
             var requestDto = _mapper.Map<UpdateUserDto>(request);
             requestDto.ModifiedBy = UserId;
             var updateuser = await _userService.UpdateAsync(requestDto);
-            if (updateuser.Message == "Success")
-
-                return APIResponse("Success", updateuser.Data);
-            return FailureResponse("Failed", updateuser.Message);
+            return NewAPIResponse(updateuser.Result, updateuser.Message, "User deleted successfully.");
         }
-
-
     }
 }

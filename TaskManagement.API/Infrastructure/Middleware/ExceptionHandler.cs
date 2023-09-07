@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
+using TaskManagement.Utility.ExceptionHelper;
 
 namespace TaskManagement.API.Infrastructure.Middleware
 {
@@ -53,6 +54,7 @@ namespace TaskManagement.API.Infrastructure.Middleware
                 case nameof(OutOfMemoryException): return HttpStatusCode.ExpectationFailed;
                 case nameof(TimeoutException): return HttpStatusCode.RequestTimeout;
                 case nameof(IndexOutOfRangeException): return HttpStatusCode.ExpectationFailed;
+                case nameof(RecordNotFoundException): return HttpStatusCode.NotFound;
 
                 default:
                     return HttpStatusCode.InternalServerError;

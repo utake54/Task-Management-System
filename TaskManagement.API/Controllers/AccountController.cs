@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {
@@ -28,11 +30,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<LoginDto>(request);
             var result = await _userService.Login(requestDto);
-            if (result.Data != null)
-            {
-                return APIResponse("TM009", result.Data);
-            }
-            return UnauthorizeResponse("TM010", result.Message);
+            return NewAPIResponse(result.Data, result.Message);
         }
 
         [HttpPost("Logout")]
@@ -46,11 +44,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<ForgetPasswordDto>(request);
             var userData = await _userService.ForgetPassword(requestDto);
-            if (userData.Data != null)
-            {
-                return APIResponse("TM012", userData.Data);
-            }
-            return FailureResponse("TM013", userData.Message);
+            return NewAPIResponse(userData.Data, userData.Message);
         }
 
         [HttpPost("ValidateOTP")]
@@ -58,11 +52,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<OTPValidateDto>(request);
             var validateOtp = await _otpService.ValidateOTP(requestDto);
-            if (validateOtp.Message == "Success")
-            {
-                return APIResponse("Success", null);
-            }
-            return FailureResponse("TM015", validateOtp.Message);
+            return NewAPIResponse(validateOtp.Data, validateOtp.Message);
         }
 
         [HttpPost("ResetPassword")]
@@ -70,11 +60,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<PasswordResetDto>(request);
             var changedPassword = await _userService.ResetPassword(requestDto);
-            if (changedPassword.Message == "Success")
-            {
-                return APIResponse("TM016", null);
-            }
-            return FailureResponse("TM017", changedPassword.Message);
+            return NewAPIResponse(changedPassword.Result, changedPassword.Message, "User deleted successfully.");
         }
     }
 }

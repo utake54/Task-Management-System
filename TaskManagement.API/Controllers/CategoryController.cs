@@ -6,6 +6,7 @@ using TaskManagement.Model.Model.Category.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Service.CategoryService;
 using TaskManagement.Service.Entities.Category;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {
@@ -31,9 +32,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetByIdCategoryDto>(request);
             var category = await _categoryService.GetByIdAsync(requestDto);
-            if (category.Message == "Success")
-                return APIResponse("TM002A", category.Data);
-            return FailureResponse("TM002B", category.Message);
+            return NewAPIResponse(category.Data, category.Message);
         }
 
         [HttpPost("GetAllCategories")]
@@ -41,9 +40,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetCategoryDto>(request);
             var categories = await _categoryService.GetAsync(requestDto);
-            if (categories.Message == "Success")
-                return APIResponse("TM002A", categories.Data);
-            return FailureResponse("TM002B", categories.Message);
+            return NewAPIResponse(categories.Data, categories.Message);
         }
 
         [HttpPost("AddCategory")]
@@ -51,9 +48,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<AddCategoryDto>(request);
             var category = await _categoryService.AddAsync(requestDto);
-            if (category.Message == "Success")
-                return APIResponse("TM002A", "TM020");
-            return FailureResponse("TM002B", category.Message);
+            return NewAPIResponse(category.Result, category.Message, "User addedd successfully.");
         }
 
         [HttpPost("UpdateCategory")]
@@ -61,9 +56,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateCategoryDto>(request);
             var category = await _categoryService.UpdateAsync(requestDto);
-            if (category.Message == "Success")
-                return APIResponse("TM021", category.Data);
-            return FailureResponse("TM002B", category.Message);
+            return NewAPIResponse(category.Result, category.Message, "User deleted successfully.");
         }
 
         [HttpPost("DeleteCategory")]
@@ -71,9 +64,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<DeleteCategoryDto>(request);
             var category = await _categoryService.DeleteAsync(requestDto);
-            if (category.Message == "Success")
-                return APIResponse("TM022", category.Data);
-            return FailureResponse("TM002B", category.Message);
+            return NewAPIResponse(category.Result, category.Message, "User deleted successfully.");
         }
     }
 }

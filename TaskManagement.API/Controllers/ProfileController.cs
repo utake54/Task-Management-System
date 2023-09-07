@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.User;
 using TaskManagement.Service.Profile;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {
@@ -24,9 +25,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetAsync()
         {
             var profile = await _profileService.GetAsync(UserId);
-            if (profile.Message == "Success")
-                return APIResponse("Success", profile.Data);
-            return FailureResponse(profile.Message, profile.Failure);
+                return NewAPIResponse(profile.Data, profile.Message);
         }
 
         [HttpPost("UpdateProfile")]
@@ -34,9 +33,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateUserDto>(request);
             var profile = await _profileService.UpdateAsync(requestDto);
-            if (profile.Message == "Success")
-                return APIResponse("Success", null);
-            return FailureResponse(profile.Message, profile.Failure);
+            return NewAPIResponse(profile.Result, profile.Message, "User deleted successfully.");
         }
 
     }

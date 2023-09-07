@@ -13,15 +13,6 @@ namespace TaskManagement.API.Controllers
         protected int CompanyId => int.Parse(this.User.Claims.First(x => x.Type == "CompanyId").Value);
 
 
-        protected Dictionary<string, object> APIResponse(string msgCode, object result)
-        {
-            var response = new Dictionary<string, object>();
-            response.Add(ContentLoader.ReturnMessage("TM002A"), msgCode);
-            response.Add(ContentLoader.ReturnMessage("TM002"), result);
-
-            return response;
-        }
-
         protected Dictionary<string, object> NewAPIResponse(bool result, string failureMsg, string successMessage)
         {
             var response = new Dictionary<string, object>
@@ -45,26 +36,35 @@ namespace TaskManagement.API.Controllers
             return response;
         }
 
-        protected Dictionary<string, object> FailureResponse(string msgCode, object result)
-        {
-            var response = new Dictionary<string, object>
-            {
-                { "Data", msgCode },
-                { "Failed", result }
-            };
+        //protected Dictionary<string, object> APIResponse(string msgCode, object result)
+        //{
+        //    var response = new Dictionary<string, object>();
+        //    response.Add(ContentLoader.ReturnMessage("TM002A"), msgCode);
+        //    response.Add(ContentLoader.ReturnMessage("TM002"), result);
 
-            return response;
-        }
+        //    return response;
+        //}
 
-        protected Dictionary<string, object> UnauthorizeResponse(string msgCode, object result)
-        {
-            var response = new Dictionary<string, object>
-            {
-                { "Message", ContentLoader.ReturnMessage("TM003") },
-                { "Unauthorized", msgCode }
-            };
+        //protected Dictionary<string, object> FailureResponse(string msgCode, object result)
+        //{
+        //    var response = new Dictionary<string, object>
+        //    {
+        //        { "Data", msgCode },
+        //        { "Failed", result }
+        //    };
 
-            return response;
-        }
+        //    return response;
+        //}
+
+        //protected Dictionary<string, object> UnauthorizeResponse(string msgCode, object result)
+        //{
+        //    var response = new Dictionary<string, object>
+        //    {
+        //        { "Message", ContentLoader.ReturnMessage("TM003") },
+        //        { "Unauthorized", msgCode }
+        //    };
+
+        //    return response;
+        //}
     }
 }

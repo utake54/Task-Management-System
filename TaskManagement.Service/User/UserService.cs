@@ -95,8 +95,7 @@ namespace TaskManagement.Service.UserService
             var user = await _unitOfWork.UserRepository.GetById(deleteUserDto.Id);
             if (user == null)
             {
-                response.Message = "TM008";
-                response.Result = false;
+                response.Failure("TM008");
                 return response;
             }
             user.ModifiedBy = deleteUserDto.ActionBy;
@@ -112,7 +111,7 @@ namespace TaskManagement.Service.UserService
             var allUsers = await _unitOfWork.UserRepository.GetAllUsers(companyId, pageResult.PageNumber, pageResult.PageSize);
             if (!allUsers.Any())
             {
-                response.Message = "TM008";
+                response.Failure("TM008");
                 return response;
             }
             response.Ok(allUsers);
@@ -125,7 +124,7 @@ namespace TaskManagement.Service.UserService
             var userDTO = _mapper.Map<UserMaster, UserDTO>(user);
             if (user == null)
             {
-                response.Message = "TM008";
+                response.Failure("TM008");
                 return response;
             }
             response.Ok(userDTO);
@@ -137,7 +136,7 @@ namespace TaskManagement.Service.UserService
             var user = await _unitOfWork.UserRepository.GetById(updateUserDto.Id);
             if (user == null)
             {
-                response.Message = "TM008";
+                response.Failure("TM008");
                 return response;
             }
 
@@ -210,7 +209,6 @@ namespace TaskManagement.Service.UserService
             response.Failure("TM007");
             return response;
         }
-
         public async Task<List<UserDTO>> GetAsync(int companyId)
         {
             var users = await _unitOfWork.UserRepository.Get(x => x.CompanyId == companyId);

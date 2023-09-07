@@ -25,7 +25,6 @@ namespace TaskManagement.API.Infrastructure.Filters
             {
                 Message = "Success",
                 StatusCode = 200,
-                Errors = null,
             };
 
             switch (result)
@@ -41,25 +40,34 @@ namespace TaskManagement.API.Infrastructure.Filters
                             responseObj.StatusCode = (int)HttpStatusCode.OK;
                             responseObj.Message = ContentLoader.ReturnMessage("TM002A");
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            responseObj.Result = true;
+                            break;
+
+                        case "Message":
+                            responseObj.StatusCode = (int)HttpStatusCode.OK;
+                            responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
+                            responseObj.Data = true;
+                            responseObj.Result = true;
                             break;
 
                         case "Failed":
                             responseObj.StatusCode = (int)HttpStatusCode.NoContent;
                             responseObj.Message = ContentLoader.ReturnMessage(Convert.ToString(data[Constants.RESPNSE_FAILURE_FIELD]));
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            responseObj.Result = false;
                             break;
 
                         case "Error":
                             responseObj.StatusCode = (int)HttpStatusCode.NoContent;
                             responseObj.Message = Convert.ToString(data[Constants.RESPNSE_ERROR_FIELD]);
                             responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
+                            responseObj.Result = false;
                             break;
 
                         case "Unauthorized":
                             responseObj.StatusCode = (int)HttpStatusCode.Unauthorized;
                             responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-                            var errors = new Errors { Erros = ContentLoader.ReturnMessage("TM003") };
-                            //var errors = new Errors { Erros = (string)data[Constants.UNAUTHORIZED_RESPONSE_FIELD] };
+                            responseObj.Result = false;
                             break;
                     }
                     break;
@@ -80,7 +88,7 @@ namespace TaskManagement.API.Infrastructure.Filters
             }
 
             context.Result = new JsonResult(responseObj);
-            
-            }
+
+        }
     }
 }
