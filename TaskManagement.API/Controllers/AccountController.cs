@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.OTPService;
 using TaskManagement.Service.UserService;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {
