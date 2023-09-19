@@ -174,7 +174,7 @@ namespace TaskManagement.Service.UserService
         public async Task<ResponseModel> ForgetPassword(ForgetPasswordDto request)
         {
             var response = new ResponseModel();
-            var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile && x.DateOfBirth == Convert.ToDateTime(request.DateOfBirth));
+            var isUserExists = await _unitOfWork.UserRepository.GetDefault(x => (x.EmailId == request.EmailOrMobile || x.MobileNo == request.EmailOrMobile) && x.DateOfBirth == Convert.ToDateTime(request.DateOfBirth));
             if (isUserExists != null)
             {
                 var userEmail = isUserExists.EmailId;

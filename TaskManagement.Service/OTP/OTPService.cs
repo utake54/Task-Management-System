@@ -41,7 +41,8 @@ namespace TaskManagement.Service.OTPService
                 isValidOTP.IsActive = false;
                 _unitOfWork.OTPRepository.Update(isValidOTP);
                 await _unitOfWork.SaveChangesAsync();
-                response.Ok();
+                response.Ok(request.UserId);
+
                 return response;
             }
             response.Failure("Invalid OTP");

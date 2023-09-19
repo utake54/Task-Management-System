@@ -19,7 +19,7 @@ namespace TaskManagement.Service.Profile
             var profileData = await _unitOfWork.UserRepository.GetById(id);
             if (profileData == null)
             {
-                response.Failure("User not found.");
+                response.Failure("TM008");
                 return response;
             }
             response.Ok(profileData);
@@ -33,7 +33,7 @@ namespace TaskManagement.Service.Profile
             var profileData = await _unitOfWork.UserRepository.GetById(requestDto.Id);
             if (profileData == null)
             {
-                response.Failure("User not found.");
+                response.Failure("TM008");
                 return response;
             }
             _unitOfWork.UserRepository.Update(profileData);

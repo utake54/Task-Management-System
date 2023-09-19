@@ -32,7 +32,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetByIdCategoryDto>(request);
             var category = await _categoryService.GetByIdAsync(requestDto);
-            return NewAPIResponse(category.Data, category.Message);
+            return APIResponse(category.Data, category.Message);
         }
 
         [HttpPost("GetAllCategories")]
@@ -40,7 +40,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetCategoryDto>(request);
             var categories = await _categoryService.GetAsync(requestDto);
-            return NewAPIResponse(categories.Data, categories.Message);
+            return APIResponse(categories.Data, categories.Message);
         }
 
         [HttpPost("AddCategory")]
@@ -48,7 +48,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<AddCategoryDto>(request);
             var category = await _categoryService.AddAsync(requestDto);
-            return NewAPIResponse(category.Result, category.Message, "User addedd successfully.");
+            return APIResponse(category.Result, category.Message, "TM049");
         }
 
         [HttpPost("UpdateCategory")]
@@ -56,7 +56,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateCategoryDto>(request);
             var category = await _categoryService.UpdateAsync(requestDto);
-            return NewAPIResponse(category.Result, category.Message, "User deleted successfully.");
+            return APIResponse(category.Result, category.Message, "TM050");
         }
 
         [HttpPost("DeleteCategory")]
@@ -64,7 +64,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<DeleteCategoryDto>(request);
             var category = await _categoryService.DeleteAsync(requestDto);
-            return NewAPIResponse(category.Result, category.Message, "User deleted successfully.");
+            return APIResponse(category.Result, category.Message, "TM051");
         }
     }
 }

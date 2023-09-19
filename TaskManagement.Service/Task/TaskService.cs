@@ -56,7 +56,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok();
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
 
@@ -69,7 +69,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(taskList);
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
 
@@ -82,7 +82,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(task);
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
 
@@ -105,7 +105,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(task);
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
         public async Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId, int companyId)
@@ -165,7 +165,7 @@ namespace TaskManagement.Service.TaskService
             var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.UserId == userId && x.TaskId == request.TaskId);
             if (task == null)
             {
-                response.Failure("No task found");
+                response.Failure("TM038");
                 return response;
             }
             task.IsAcceptByUser = request.IsAccepted;
@@ -181,7 +181,7 @@ namespace TaskManagement.Service.TaskService
             var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.TaskId == request.TaskId && x.UserId == userId);
             if (task == null)
             {
-                response.Failure("No task found");
+                response.Failure("TM038");
             }
             task.Status = request.StatusId;
             if (request.StatusId == (int)Status.Completed)
@@ -203,7 +203,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(taskList);
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
 
@@ -222,7 +222,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(taskList);
                 return response;
             }
-            response.Failure("No task found");
+            response.Failure("TM038");
             return response;
         }
     }

@@ -20,7 +20,6 @@ namespace TaskManagement.API.Infrastructure.Filters
                 }
 
                 var response = new Dictionary<string, object>();
-                response.Add(Constants.RESPONSE_MESSAGE_FIELD, "ModelSate is not valid");
                 response.Add(Constants.RESPNSE_ERROR_FIELD, data);
                 context.Result = new ObjectResult(response);
             }

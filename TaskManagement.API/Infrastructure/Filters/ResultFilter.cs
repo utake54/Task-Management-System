@@ -46,7 +46,7 @@ namespace TaskManagement.API.Infrastructure.Filters
                         case "Message":
                             responseObj.StatusCode = (int)HttpStatusCode.OK;
                             responseObj.Message = Convert.ToString(data[Constants.RESPONSE_MESSAGE_FIELD]);
-                            responseObj.Data = true;
+                            responseObj.Data = data[Constants.RESPONSE_DATA_FIELD];
                             responseObj.Result = true;
                             break;
 

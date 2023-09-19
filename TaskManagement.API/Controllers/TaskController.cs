@@ -47,7 +47,7 @@ namespace TaskManagement.API.Controllers
             requestDto.CompanyId = CompanyId;
             var addTask = await _taskService.AddAsync(requestDto);
 
-            return NewAPIResponse(addTask.Result, addTask.Message, "Task addedd successfully.");
+            return APIResponse(addTask.Result, addTask.Message, "TM035");
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetTaskByIdDto>(request);
             var task = await _taskService.GetByIdAsync(requestDto);
-            return NewAPIResponse(task.Data, task.Message);
+            return APIResponse(task.Data, task.Message);
         }
 
 
@@ -74,7 +74,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateTaskDto>(request);
             var updateTask = await _taskService.UpdateAsync(requestDto);
-            return NewAPIResponse(updateTask.Result, updateTask.Message, "User deleted successfully.");
+            return APIResponse(updateTask.Result, updateTask.Message, "TM036");
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<DeleteTaskDto>(request);
             var deleteTask = await _taskService.DeleteAsync(requestDto);
-            return NewAPIResponse(deleteTask.Result, deleteTask.Message, "User deleted successfully.");
+            return APIResponse(deleteTask.Result, deleteTask.Message, "TM037");
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace TaskManagement.API.Controllers
         {
             int companyId = 1;
             var allTask = await _taskService.GetAsync(companyId, search);
-            return NewAPIResponse(allTask.Data, allTask.Message);
+            return APIResponse(allTask.Data, allTask.Message);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetTaskByCategory(int categoryId)
         {
             var task = await _taskService.GetByCategories(categoryId);
-            return NewAPIResponse(task.Data, task.Message);
+            return APIResponse(task.Data, task.Message);
         }
     }
 }

@@ -14,11 +14,16 @@ using TaskManagement.Service.CategoryService;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TaskManagement.Service.Profile;
 using TaskManagement.Service.Reports;
+using FluentValidation;
+using TaskManagement.API.Infrastructure.Validator.Login;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
     public static class ServicesCollection
     {
+        [Obsolete]
         public static IServiceCollection RepositoryAndService(this IServiceCollection services)
         {
             services
@@ -38,6 +43,22 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<ICategoryService, CategoryService>()
                 .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<IReportService, ReportService>()
+                .AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginRequestValidator>())
+
+
+
+
+.AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>()
+
+
+
+.AddValidatorsFromAssemblyContaining(typeof(UserLoginRequestValidator))
+
+
+.AddValidatorsFromAssembly(typeof(UserLoginRequestValidator).Assembly)
+
+
                 .AddTransient<IConfiguration>(sp =>
                    {
                        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();

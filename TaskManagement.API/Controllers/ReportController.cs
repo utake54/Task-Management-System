@@ -51,7 +51,7 @@ namespace TaskManagement.API.Controllers
         [HttpPost("ExportUsersAsync")]
         public async Task<IActionResult> ExportAsync()
         {
-           var result=await _reportService.UserReport(CompanyId);
+            var result = await _reportService.UserReport(CompanyId);
             return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"UserReport {DateTime.Now}");
         }
     }

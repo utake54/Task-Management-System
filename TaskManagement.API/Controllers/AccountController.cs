@@ -30,13 +30,13 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<LoginDto>(request);
             var result = await _userService.Login(requestDto);
-            return NewAPIResponse(result.Data, result.Message);
+            return APIResponse(result.Data, result.Message);
         }
 
         [HttpPost("Logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<Dictionary<string, object>> Logout()
         {
-            return Ok("TM011");
+            return APIResponse(true,"TM011");
         }
 
         [HttpPost("ForgetPassword")]
@@ -44,7 +44,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<ForgetPasswordDto>(request);
             var userData = await _userService.ForgetPassword(requestDto);
-            return NewAPIResponse(userData.Data, userData.Message);
+            return APIResponse(userData.Data, userData.Message, "TM012");
         }
 
         [HttpPost("ValidateOTP")]
@@ -52,7 +52,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<OTPValidateDto>(request);
             var validateOtp = await _otpService.ValidateOTP(requestDto);
-            return NewAPIResponse(validateOtp.Data, validateOtp.Message);
+            return APIResponse(validateOtp.Data, validateOtp.Message, "TM014");
         }
 
         [HttpPost("ResetPassword")]
@@ -60,7 +60,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<PasswordResetDto>(request);
             var changedPassword = await _userService.ResetPassword(requestDto);
-            return NewAPIResponse(changedPassword.Result, changedPassword.Message, "User deleted successfully.");
+            return APIResponse(changedPassword.Result, changedPassword.Message, "TM016");
         }
     }
 }

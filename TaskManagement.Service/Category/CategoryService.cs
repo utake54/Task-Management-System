@@ -39,7 +39,7 @@ namespace TaskManagement.Service.CategoryService
             var category = await _unitOfWork.CategoryRepository.GetById(requestDto.Id);
             if (category == null)
             {
-                response.Failure("Category not found.");
+                response.Failure("TM052");
                 return response;
             }
             category.IsActive = false;
@@ -56,7 +56,7 @@ namespace TaskManagement.Service.CategoryService
             var categories = await _unitOfWork.CategoryRepository.GetAllCategories(pageResult);
             if (!categories.Any())
             {
-                response.Failure("Categories not found.");
+                response.Failure("TM052");
                 return response;
             }
 
@@ -70,7 +70,7 @@ namespace TaskManagement.Service.CategoryService
             var category = await _unitOfWork.CategoryRepository.GetDefault(x => x.Id == requestDto.Id && x.IsActive == true);
             if (category == null)
             {
-                response.Failure("Category not found.");
+                response.Failure("TM052");
                 return response;
             }
             var categoryDTO = _mapper.Map<TaskCategoryMaster, CategoryMasterDto>(category);
@@ -84,7 +84,7 @@ namespace TaskManagement.Service.CategoryService
             var category = await _unitOfWork.CategoryRepository.GetById(requestDto.Id);
             if (category == null)
             {
-                response.Failure("Category not found.");
+                response.Failure("TM052");
                 return response;
             }
 

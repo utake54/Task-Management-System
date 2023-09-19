@@ -25,7 +25,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetAsync()
         {
             var profile = await _profileService.GetAsync(UserId);
-                return NewAPIResponse(profile.Data, profile.Message);
+                return APIResponse(profile.Data, profile.Message);
         }
 
         [HttpPost("UpdateProfile")]
@@ -33,7 +33,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<UpdateUserDto>(request);
             var profile = await _profileService.UpdateAsync(requestDto);
-            return NewAPIResponse(profile.Result, profile.Message, "User deleted successfully.");
+            return APIResponse(profile.Result, profile.Message, "TM048");
         }
 
     }

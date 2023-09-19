@@ -1,9 +1,11 @@
 {
+  //Standard Fields
   "TM001": "Message",
   "TM002": "Data",
   "TM002A": "Success",
   "TM002B": "Failed",
 
+  //Account
   "TM003": "Invalid Credentialsss",
   "TM004": "OTP sent successfully on email",
   "TM005": "Invalid user details.",
@@ -12,7 +14,7 @@
   "TM008": "User not found.",
   "TM009": "Login successfully.",
   "TM010": "Unauthorized",
-  "TM011": "Log out success",
+  "TM011": "Log out success.",
   "TM012": "OTP sent successfully on email",
   "TM013": "Invalid details",
   "TM014": "OTP validate successfully",
@@ -24,11 +26,10 @@
 
 
 
+  //AddUser validations
   "TM020": "User addedd successfully.",
   "TM021": "User details updated successfully.",
   "TM022": "User deleted successfully.",
-
-  //AddUser validations
   "TM023": "User name reuired.",
   "TM024": "Last name reuired.",
   "TM025": "User emailId reuired.",
@@ -40,10 +41,44 @@
   "TM031": "User Country reuired.",
   "TM032": "User CountryCode reuired.",
   "TM033": "User ZipCode reuired.",
-  "TM034": "User  reuired.",
-  "TM035": "reuired.",
-  "TM036": "reuired.",
-  "TM037": "reuired.",
-  "TM038": "reuired.",
-  "TM039": "reuired."
+  "TM034": "Please select user to update.",
+
+
+  //Taskk
+  "TM035": "Task addedd successfully..",
+  "TM036": "Task updated successfully..",
+  "TM037": "Task deleted successfully..",
+  "TM038": "Task not found.",
+  "TM039": "Please enter the task title.",
+  "TM040": "Please enter task description.",
+  "TM041": "Please select task priority.",
+  "TM042": "Please select task due date.",
+  "TM043": "Task due date cannot be less then todays date.",
+  "TM044": "Please select task to update.",
+
+  //Task Actions
+  "TM045": "Task assigned successfully.",
+  "TM046": "Task accepted successfully.",
+  "TM047": "Task status updated successfully.",
+
+  //Profile
+  "TM048": "Profile updated successfully.",
+
+  //Task Category
+  "TM049": "Category added successfully.",
+  "TM050": "Category updated successfully.",
+  "TM051": "Category deleted successfully.",
+  "TM052": "Category not found.",
+  "TM053": "Category cannot be empty.",
+  "TM054": "Please select category.",
+
+  //Login Request
+  "TM055": "Please enter email id or mobile number for login.",
+  "TM056": "Please enter password for login.",
+  "TM057": "Please enter date of birth.",
+  "TM058": "Confirm password cannot be empty.",
+  "TM059": "Please enter date of birth."
+  //"TM057": "Please enter date of birth.",
+  //"TM057": "Please enter date of birth.",
+
 }

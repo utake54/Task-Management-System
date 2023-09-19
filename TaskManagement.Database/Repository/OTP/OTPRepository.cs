@@ -19,7 +19,7 @@ namespace TaskManagement.Database.Repository.OTP
         public async Task<OTPMaster> IsValidOTP(OTPValidateDto request)
         {
             var checkOTP = await (from o in Context.OTPMaster
-                                  where o.OTP == request.OTP && o.UserId == request.UserId && o.ExpiryTime > DateTime.UtcNow
+                                  where o.OTP == request.OTP && o.UserId == request.UserId && o.ExpiryTime > DateTime.UtcNow && o.IsActive==true
                                   select o).FirstOrDefaultAsync();
             return checkOTP;
         }

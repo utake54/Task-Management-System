@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.API.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Service.Entities.User;
@@ -9,7 +11,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     //[Permissible("Admin", "HOD")]
     public class UserController : BaseController
     {
@@ -24,8 +26,8 @@ namespace TaskManagement.API.Controllers
         [HttpPost("GetAllAsync")]
         public async Task<Dictionary<string, object>> GetAllAsync([FromBody] PageResult pageResult)
         {
-            var allUser = await _userService.GetAllUsers(1, pageResult);
-            return NewAPIResponse(allUser.Data, allUser.Message);
+            var allUser = await _userService.GetAllUsers(CompanyId, pageResult);
+            return APIResponse(allUser.Data, allUser.Message);
         }
 
         //[Authorize("Admin")]
@@ -36,7 +38,7 @@ namespace TaskManagement.API.Controllers
             requestDto.CreatedBy = 1;
             requestDto.CompanyId = 1;
             var addUser = await _userService.AddAsync(requestDto);
-            return NewAPIResponse(addUser.Result, addUser.Message, "User addedd successfully.");
+            return APIResponse(addUser.Result, addUser.Message, "TM020");
         }
 
         [HttpPost("GetAsync")]
@@ -44,7 +46,7 @@ namespace TaskManagement.API.Controllers
         {
             var requestDto = _mapper.Map<GetUserByIdDto>(request);
             var user = await _userService.GetByIdAsync(requestDto);
-            return NewAPIResponse(user.Data, user.Message);
+            return APIResponse(user.Data, user.Message);
         }
 
         //[Authorize("Admin")]
@@ -54,7 +56,7 @@ namespace TaskManagement.API.Controllers
             var requestDto = _mapper.Map<DeleteUserDto>(request);
             requestDto.ActionBy = UserId;
             var deleteUser = await _userService.DeleteAsync(requestDto);
-            return NewAPIResponse(deleteUser.Result, deleteUser.Message, "User deleted successfully.");
+            return APIResponse(deleteUser.Result, deleteUser.Message, "TM022");
         }
 
         //[Authorize("Admin")]
@@ -64,7 +66,7 @@ namespace TaskManagement.API.Controllers
             var requestDto = _mapper.Map<UpdateUserDto>(request);
             requestDto.ModifiedBy = UserId;
             var updateuser = await _userService.UpdateAsync(requestDto);
-            return NewAPIResponse(updateuser.Result, updateuser.Message, "User deleted successfully.");
+            return APIResponse(updateuser.Result, updateuser.Message, "TM021");
         }
     }
 }
