@@ -42,7 +42,7 @@ namespace TaskManagement.Database.Repository.UserRepository
             var user = await (from u in Context.UserMaster
                               join r in Context.RoleMaster
                               on u.RoleId equals r.RoleId
-                              where u.EmailId == request.EmailOrMobile && u.Password == request.Password && u.IsActive == true
+                              where (u.EmailId == request.EmailOrMobile || u.MobileNo == request.EmailOrMobile) && u.Password == request.Password && u.IsActive == true
                               select new LoginDTO
                               {
                                   FirstName = u.FirstName,

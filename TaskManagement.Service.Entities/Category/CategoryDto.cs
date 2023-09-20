@@ -15,6 +15,7 @@ namespace TaskManagement.Service.Entities.Category
     {
         public string Category { get; set; }
         public int CreadetBy { get; set; }
+        public int CompanyId { get; set; }
     }
 
     public class UpdateCategoryDto : GetByIdCategoryDto
@@ -35,5 +36,6 @@ namespace TaskManagement.Service.Entities.Category
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public int CompanyId { get; set; }
     }
 }

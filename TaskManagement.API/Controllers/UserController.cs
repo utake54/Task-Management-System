@@ -11,7 +11,7 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     //[Permissible("Admin", "HOD")]
     public class UserController : BaseController
     {

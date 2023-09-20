@@ -23,7 +23,7 @@ namespace TaskManagement.Database.Repository.Category
             var skip = ((pageResult.PageNumber * pageResult.PageSize) - pageResult.PageSize);
 
             var categories = await (from c in Context.TaskCategoryMaster
-                                    where c.IsActive == true
+                                    where c.IsActive == true && c.CompanyId == pageResult.CompanyId
                                     select new CategoryDTO
                                     {
                                         Id = c.Id,

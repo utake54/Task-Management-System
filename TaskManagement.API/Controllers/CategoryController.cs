@@ -47,6 +47,8 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> AddAsync(AddCategoryRequest request)
         {
             var requestDto = _mapper.Map<AddCategoryDto>(request);
+            requestDto.CreadetBy = UserId;
+            requestDto.CompanyId = CompanyId;
             var category = await _categoryService.AddAsync(requestDto);
             return APIResponse(category.Result, category.Message, "TM049");
         }
