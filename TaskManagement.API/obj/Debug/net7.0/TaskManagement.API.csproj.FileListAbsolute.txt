@@ -137,3 +137,17 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.Service.Entities.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.Service.Entities.pdb
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\TaskManagement.API.staticwebassets.runtime.json
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\GemBox.Pdf.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\HarfBuzzSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\Pkcs11Interop.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\SkiaSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\osx\native\libHarfBuzzSharp.dylib
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-arm64\native\libHarfBuzzSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-x64\native\libHarfBuzzSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-x86\native\libHarfBuzzSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\osx\native\libSkiaSharp.dylib
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-arm64\native\libSkiaSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-x64\native\libSkiaSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\runtimes\win-x86\native\libSkiaSharp.dll
+C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.API\bin\Debug\net7.0\GemBox.Document.dll

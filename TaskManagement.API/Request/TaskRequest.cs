@@ -21,4 +21,23 @@
     public class DeleteTaskRequest : GetTaskByIdRequest
     {
     }
+
+    public class AcceptTaskRequest
+    {
+        public int TaskId { get; set; }
+        public bool IsAccepted { get; set; }
+    }
+
+    public class AssignTaskRequest
+    {
+        public int Id { get; set; }
+        public int TaskId { get; set; }
+        public int[] UserId { get; set; }
+    }
+
+    public class TaskStatusRequest
+    {
+        public int TaskId { get; set; }
+        public int StatusId { get; set; }
+    }
 }

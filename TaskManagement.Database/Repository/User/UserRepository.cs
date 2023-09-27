@@ -36,7 +36,8 @@ namespace TaskManagement.Database.Repository.UserRepository
                                   .ToListAsync();
             return allUsers;
         }
-
+        
+        
         public async Task<LoginDTO> GetUserDetails(LoginDto request)
         {
             var user = await (from u in Context.UserMaster

@@ -354,6 +354,14 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "GemBox.Document": {
+              "target": "Package",
+              "version": "[35.0.1480, )"
+            },
+            "GemBox.Pdf": {
+              "target": "Package",
+              "version": "[17.0.1404, )"
             }
           },
           "imports": [

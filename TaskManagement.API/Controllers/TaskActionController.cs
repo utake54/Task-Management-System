@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using NPOI.XSSF.UserModel;
 using System.ComponentModel.Design;
-using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.TaskService;
 using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 using TaskManagement.Utility;
+using TaskManagement.API.Request;
+using TaskManagement.Service.Entities.Task;
 
 namespace TaskManagement.API.Controllers
 {
@@ -37,7 +38,8 @@ namespace TaskManagement.API.Controllers
         [HttpPost("AssignToTeam")]
         public async Task<Dictionary<string, object>> AssignTask(AssignTaskRequest request)
         {
-            var assignTask = await _taskService.AssignTask(request, UserId, CompanyId);
+            var requestDto = _mapper.Map<AssignTaskDto>(request);
+            var assignTask = await _taskService.AssignTask(requestDto, UserId, CompanyId);
 
             return APIResponse(assignTask.Result, assignTask.Message, "TM045");
         }
@@ -63,7 +65,8 @@ namespace TaskManagement.API.Controllers
         [HttpPost("AcceptTask")]
         public async Task<Dictionary<string, object>> AcceptTask(AcceptTaskRequest request)
         {
-            var userAction = await _taskService.UserAction(request, UserId);
+            var requestDto = _mapper.Map<AcceptTaskDto>(request);
+            var userAction = await _taskService.UserAction(requestDto, UserId);
             return APIResponse(userAction.Result, userAction.Message, "TM046");
         }
 
@@ -76,7 +79,8 @@ namespace TaskManagement.API.Controllers
         [HttpPost("UpdateTaskStatus")]
         public async Task<Dictionary<string, object>> UpdateTaskStatus(TaskStatusRequest request)
         {
-            var updateStatus = await _taskService.UpdateStatus(request, UserId);
+            var requestDto = _mapper.Map<TaskStatusDto>(request);
+            var updateStatus = await _taskService.UpdateStatus(requestDto, UserId);
             return APIResponse(updateStatus.Result, updateStatus.Message, "TM047");
         }
 

@@ -35,4 +35,22 @@ namespace TaskManagement.Service.Entities.Task
     {
         public int Id { get; set; }
     }
+    public class AcceptTaskDto
+    {
+        public int TaskId { get; set; }
+        public bool IsAccepted { get; set; }
+    }
+
+    public class AssignTaskDto
+    {
+        public int Id { get; set; }
+        public int TaskId { get; set; }
+        public int[] UserId { get; set; }
+    }
+
+    public class TaskStatusDto
+    {
+        public int TaskId { get; set; }
+        public int StatusId { get; set; }
+    }
 }

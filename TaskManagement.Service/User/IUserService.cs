@@ -8,7 +8,6 @@ using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
 using TaskManagement.Model.Model.User.DTO;
-using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.Entities.Login;
 using TaskManagement.Service.Entities.User;
 

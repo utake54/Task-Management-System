@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.API.Request;
-using TaskManagement.Model.Model.Category.Request;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Service.CategoryService;
 using TaskManagement.Service.Entities.Category;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {

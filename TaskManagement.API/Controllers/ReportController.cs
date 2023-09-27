@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GemBox.Document;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -37,16 +38,14 @@ namespace TaskManagement.API.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// Export task and related details in excels sheet
-        /// </summary>
-        /// <returns></returns>
+
         [HttpPost("ExportTaskDetails")]
         public async Task<IActionResult> ExportTaskDetails()
         {
             var result = await _reportService.TaskReport(CompanyId);
             return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"TaskReport {DateTime.Now}");
         }
+
 
         [HttpPost("ExportUsersAsync")]
         public async Task<IActionResult> ExportAsync()

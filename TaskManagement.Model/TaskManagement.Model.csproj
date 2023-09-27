@@ -10,4 +10,8 @@
     <ProjectReference Include="..\TaskManagement.Utility\TaskManagement.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Task\Request\" />
+  </ItemGroup>
+
 </Project>

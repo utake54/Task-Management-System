@@ -1,4 +1,10 @@
-﻿using NPOI.XSSF.UserModel;
+﻿using Azure;
+using GemBox.Document;
+using GemBox.Document.Tables;
+using GemBox.Pdf;
+using GemBox.Pdf.Content;
+using NPOI.POIFS.FileSystem;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -7,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Utility;
+using ComponentInfo = GemBox.Document.ComponentInfo;
 
 namespace TaskManagement.Service.Reports
 {
@@ -45,4 +52,5 @@ namespace TaskManagement.Service.Reports
             return memoryStream.ToArray();
         }
     }
+
 }

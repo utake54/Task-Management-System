@@ -1,5 +1,4 @@
 ﻿using TaskManagement.Model.Model.User.DTO;
-using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Model.Model.User;
 using AutoMapper;
 using TaskManagement.API.Request;
@@ -12,7 +11,6 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
     {
         public UserMappingProfile()
         {
-            CreateMap<UserRequest, UserMaster>().ReverseMap();
             CreateMap<UserMaster, UserDTO>().ReverseMap();
             CreateMap<AddUserRequest, AddUserDto>().ReverseMap();
             CreateMap<GetUserRequest, GetUserByIdDto>().ReverseMap();
@@ -22,7 +20,6 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<ForgetPassswordRequest, ForgetPasswordDto>().ReverseMap();
             CreateMap<OTPValidateRequest, OTPValidateDto>().ReverseMap();
             CreateMap<PasswordResetRequest, PasswordResetDto>().ReverseMap();
-
         }
     }
 }

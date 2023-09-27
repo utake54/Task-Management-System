@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Model.Model.Category;
+using TaskManagement.Model.Model.Company;
 using TaskManagement.Model.Model.Email;
 using TaskManagement.Model.Model.OTP;
 using TaskManagement.Model.Model.Task;
-using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Model.Model.User;
 
 namespace TaskManagement.Database
@@ -41,5 +41,6 @@ namespace TaskManagement.Database
         public DbSet<RoleMaster> RoleMaster { get; set; }
         public DbSet<EmailTemplateMaster> EmailTemplateMaster { get; set; }
         public DbSet<TaskCategoryMaster> TaskCategoryMaster { get; set; }
+        public DbSet<CompanyMaster> CompanyMaster { get; set; }
     }
 }

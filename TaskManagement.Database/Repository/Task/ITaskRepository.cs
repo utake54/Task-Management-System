@@ -7,7 +7,6 @@ using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task;
 using TaskManagement.Model.Model.Task.DTO;
-using TaskManagement.Model.Model.Task.Request;
 
 namespace TaskManagement.Database.Repository.Task
 {

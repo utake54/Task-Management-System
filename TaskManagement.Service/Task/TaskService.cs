@@ -11,7 +11,6 @@ using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Model.Model.Task;
 using TaskManagement.Model.Model.Task.DTO;
-using TaskManagement.Model.Model.Task.Request;
 using TaskManagement.Service.Entities.Task;
 using TaskManagement.Utility.Email;
 using TaskManagement.Utility.Enum;
@@ -108,7 +107,7 @@ namespace TaskManagement.Service.TaskService
             response.Failure("TM038");
             return response;
         }
-        public async Task<ResponseModel> AssignTask(AssignTaskRequest request, int userId, int companyId)
+        public async Task<ResponseModel> AssignTask(AssignTaskDto request, int userId, int companyId)
         {
             var response = new ResponseModel();
 
@@ -159,7 +158,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> UserAction(AcceptTaskRequest request, int userId)
+        public async Task<ResponseModel> UserAction(AcceptTaskDto request, int userId)
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.UserId == userId && x.TaskId == request.TaskId);
@@ -175,7 +174,7 @@ namespace TaskManagement.Service.TaskService
             return response;
         }
 
-        public async Task<ResponseModel> UpdateStatus(TaskStatusRequest request, int userId)
+        public async Task<ResponseModel> UpdateStatus(TaskStatusDto request, int userId)
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.AssignTaskRepository.GetDefault(x => x.TaskId == request.TaskId && x.UserId == userId);

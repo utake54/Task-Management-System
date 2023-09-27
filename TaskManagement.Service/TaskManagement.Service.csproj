@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="GemBox.Document" Version="35.0.1480" />
+    <PackageReference Include="GemBox.Pdf" Version="17.0.1404" />
   </ItemGroup>
 
   <ItemGroup>

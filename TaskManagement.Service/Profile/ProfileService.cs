@@ -1,6 +1,5 @@
 ﻿using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
-using TaskManagement.Model.Model.User.Request;
 using TaskManagement.Service.Entities.User;
 
 namespace TaskManagement.Service.Profile
