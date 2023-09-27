@@ -37,6 +37,7 @@ namespace TaskManagement.API.Controllers
         public async Task<Dictionary<string, object>> GetAsync(GetCategoryRequest request)
         {
             var requestDto = _mapper.Map<GetCategoryDto>(request);
+            requestDto.CompanyId = CompanyId;
             var categories = await _categoryService.GetAsync(requestDto);
             return APIResponse(categories.Data, categories.Message);
         }

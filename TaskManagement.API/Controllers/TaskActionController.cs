@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using NPOI.XSSF.UserModel;
-using System.ComponentModel.Design;
 using TaskManagement.Service.TaskService;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
-using TaskManagement.Utility;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.Task;
 

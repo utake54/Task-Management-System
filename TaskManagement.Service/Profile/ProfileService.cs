@@ -1,5 +1,7 @@
-﻿using TaskManagement.Database.Infrastructure;
+﻿using AutoMapper;
+using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.ResponseModel;
+using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Service.Entities.User;
 
 namespace TaskManagement.Service.Profile
@@ -7,9 +9,11 @@ namespace TaskManagement.Service.Profile
     public class ProfileService : IProfileService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProfileService(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public ProfileService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         public async Task<ResponseModel> GetAsync(int id)
         {
@@ -21,7 +25,8 @@ namespace TaskManagement.Service.Profile
                 response.Failure("TM008");
                 return response;
             }
-            response.Ok(profileData);
+            var profileDto = _mapper.Map<UserDTO>(profileData);
+            response.Ok(profileDto);
             return response;
         }
 

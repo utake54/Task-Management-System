@@ -81,6 +81,7 @@ namespace TaskManagement.Service.TaskService
                 response.Ok(task);
                 return response;
             }
+
             response.Failure("TM038");
             return response;
         }
@@ -121,7 +122,8 @@ namespace TaskManagement.Service.TaskService
                     AssignedDate = DateTime.UtcNow,
                     AssignedBy = userId,
                     EndDate = DateTime.UtcNow,
-
+                    IsAcceptByUser = false,
+                    Status=(int)Status.Assigned
                 };
                 taskList.Add(task);
             }
