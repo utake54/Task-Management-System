@@ -2,6 +2,7 @@
 using TaskManagement.Model.Model.Task;
 using TaskManagement.API.Request;
 using TaskManagement.Service.Entities.Task;
+using TaskManagement.Model.Model.Task.DTO;
 
 namespace TaskManagement.API.Infrastructure.AutoMapper
 {
@@ -14,6 +15,7 @@ namespace TaskManagement.API.Infrastructure.AutoMapper
             CreateMap<UpdateTaskRequest, UpdateTaskDto>().ReverseMap();
             CreateMap<DeleteTaskRequest, DeleteTaskDto>().ReverseMap();
             CreateMap<TaskMaster, AddTaskDto>().ReverseMap();
+            CreateMap<TaskMaster, TaskExportDTO>().ReverseMap();
             CreateMap<AcceptTaskRequest, AcceptTaskDto>().ReverseMap();
             CreateMap<AssignTaskRequest, AssignTaskDto>().ReverseMap();
             CreateMap<TaskStatusRequest, TaskStatusDto>().ReverseMap();

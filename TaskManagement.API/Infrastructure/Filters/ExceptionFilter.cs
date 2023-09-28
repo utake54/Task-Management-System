@@ -1,12 +1,8 @@
-﻿using Hangfire.Logging;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 using System.Net;
 
 namespace TaskManagement.API.Infrastructure.Filters
 {
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
     public class GlobalExceptionFilter : IExceptionFilter
@@ -20,7 +16,8 @@ namespace TaskManagement.API.Infrastructure.Filters
             var result = JsonConvert.SerializeObject(new
             {
                 isError = true,
-                errorMessage = context.Exception.Message,
+                errorMessage = "Something wrong on your request, hold it we are woking on it.",
+                //errorMessage = context.Exception.Message,
                 errorCode = (int)statusCode,
             });
             response.ContentType = "application/json";

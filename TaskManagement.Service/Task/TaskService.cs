@@ -123,7 +123,7 @@ namespace TaskManagement.Service.TaskService
                     AssignedBy = userId,
                     EndDate = DateTime.UtcNow,
                     IsAcceptByUser = false,
-                    Status=(int)Status.Assigned
+                    Status = (int)Status.Assigned
                 };
                 taskList.Add(task);
             }
@@ -218,9 +218,11 @@ namespace TaskManagement.Service.TaskService
         {
             var response = new ResponseModel();
             var taskList = await _unitOfWork.TaskRepository.Get(x => x.CategoryId == categoryId && x.IsActive == true);
+
             if (taskList.Any())
             {
-                response.Ok(taskList);
+                var taskDto = _mapper.Map<List<TaskExportDTO>>(taskList);
+                response.Ok(taskDto);
                 return response;
             }
             response.Failure("TM038");
