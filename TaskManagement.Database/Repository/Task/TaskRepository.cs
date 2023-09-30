@@ -38,6 +38,8 @@ namespace TaskManagement.Database.Repository.Task
             var task = await (from tm in Context.TaskMaster
                               join at in Context.AssignedTask
                               on tm.Id equals at.TaskId
+                              join c in Context.TaskCategoryMaster
+                              on tm.CategoryId equals c.Id
                               join um in Context.UserMaster on at.AssignedBy equals um.Id
                               where at.UserId == userId && tm.IsActive == true
 
@@ -45,6 +47,7 @@ namespace TaskManagement.Database.Repository.Task
                               {
                                   Id = tm.Id,
                                   Task = tm.Title,
+                                  Category=c.Category,
                                   Description = tm.Description,
                                   Priority = tm.Priority,
                                   AssignedDate = at.AssignedDate.ToString("dd-MM-yyyy"),

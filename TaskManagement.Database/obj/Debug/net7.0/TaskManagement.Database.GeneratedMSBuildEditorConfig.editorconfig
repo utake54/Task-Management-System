@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TaskManagement.Database
-build_property.ProjectDir = C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Database\
+build_property.ProjectDir = C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Database\

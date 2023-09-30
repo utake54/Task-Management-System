@@ -76,9 +76,16 @@ namespace TaskManagement.Service.TaskService
         {
             var response = new ResponseModel();
             var task = await _unitOfWork.TaskRepository.GetById(requestDto.Id);
+
             if (task != null)
             {
-                response.Ok(task);
+
+                var taskDto = _mapper.Map<TaskMasterDto>(task);
+                taskDto.Task = task.Title;
+                taskDto.AssignedDate = task.CreatedDate.ToShortDateString();
+
+
+                response.Ok(taskDto);
                 return response;
             }
 
@@ -140,6 +147,7 @@ namespace TaskManagement.Service.TaskService
             var mailTemplate = await _unitOfWork.EmailTemplateRepository.GetById((int)MailTemplate.TaskAssigned);
             var taskDetails = await _unitOfWork.TaskRepository.GetById(request.TaskId);
             var mailBody = mailTemplate.Body;
+
             mailBody = mailBody.Replace("@UserName", "User");
             mailBody = mailBody.Replace("@AssignedDate", taskDetails.CreatedDate.ToShortDateString());
             mailBody = mailBody.Replace("@Title", taskDetails.Title);
@@ -221,7 +229,7 @@ namespace TaskManagement.Service.TaskService
 
             if (taskList.Any())
             {
-                var taskDto = _mapper.Map<List<TaskExportDTO>>(taskList);
+                var taskDto = _mapper.Map<List<TaskMasterDto>>(taskList);
                 response.Ok(taskDto);
                 return response;
             }

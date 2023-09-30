@@ -10,3 +10,15 @@ C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskMan
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Utility\obj\Debug\net7.0\refint\TaskManagement.Utility.dll
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.pdb
 C:\Users\utake\OneDrive\Desktop\TaskManagementProject\TaskManagement.API\TaskManagement.Utility\obj\Debug\net7.0\ref\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\bin\Debug\net7.0\TaskManagement.Utility.deps.json
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\bin\Debug\net7.0\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\bin\Debug\net7.0\TaskManagement.Utility.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.csproj.AssemblyReference.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.AssemblyInfoInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.AssemblyInfo.cs
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.csproj.CoreCompileInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\refint\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\TaskManagement.Utility.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Utility\obj\Debug\net7.0\ref\TaskManagement.Utility.dll

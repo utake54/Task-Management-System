@@ -20,4 +20,14 @@ namespace TaskManagement.Model.Model.Task.DTO
 
 
     }
+
+    public class TaskMasterDto
+    {
+        public int Id { get; set; }
+        public string Task { get; set; }
+        public string Description { get; set; }
+        public string Priority { get; set; }
+        public string AssignedDate { get; set; }
+        public string DueDate { get; set; }
+    }
 }

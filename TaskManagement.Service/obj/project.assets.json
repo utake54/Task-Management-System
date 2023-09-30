@@ -4485,11 +4485,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\TaskManagement.Service.csproj",
+      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service\\TaskManagement.Service.csproj",
       "projectName": "TaskManagement.Service",
-      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\TaskManagement.Service.csproj",
+      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service\\TaskManagement.Service.csproj",
       "packagesPath": "C:\\Users\\utake\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service\\obj\\",
+      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\utake\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4506,11 +4506,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Database\\TaskManagement.Database.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Database\\TaskManagement.Database.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Database\\TaskManagement.Database.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Database\\TaskManagement.Database.csproj"
             },
-            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj"
             }
           }
         }

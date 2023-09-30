@@ -23,6 +23,7 @@ namespace TaskManagement.API
                 config.Filters.Add<ModelStateFilter>();
                 config.Filters.Add<ResultFilter>();
                 config.Filters.Add<GlobalExceptionFilter>();
+                config.ValidateComplexTypesIfChildValidationFails = true;
                 //config.Filters.Add<Permissible>();
             });
 
@@ -31,14 +32,13 @@ namespace TaskManagement.API
                             .AddJWTAuthentication(builder.Configuration)
                             .SwaggerConfig()
                             .RepositoryAndService()
-                            .AddFluentValidation()
-                            .AddAutoMapper(typeof(CategoryMappingProfile))
+                            .AddAutoMapper(typeof(UserLoginRequestValidator))
                             .AddAutoMapper(typeof(TaskMappingProfile))
                             .AddAutoMapper(typeof(UserMappingProfile))
                             .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
                             .AddHangfireServer()
-                            .AddRecurringJobManager();
-            builder.Services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginRequestValidator>());
+                            .AddRecurringJobManager()
+            .AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
             builder.Services.AddStackExchangeRedisCache(redisoption =>
             {

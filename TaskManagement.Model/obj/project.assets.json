@@ -1151,11 +1151,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\TaskManagement.Model.csproj",
+      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Model\\TaskManagement.Model.csproj",
       "projectName": "TaskManagement.Model",
-      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\TaskManagement.Model.csproj",
+      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Model\\TaskManagement.Model.csproj",
       "packagesPath": "C:\\Users\\utake\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Model\\obj\\",
+      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\utake\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1172,8 +1172,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\TaskManagementProject\\TaskManagement.API\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
             }
           }
         }

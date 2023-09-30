@@ -2,13 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using NPOI.XSSF.UserModel;
 using TaskManagement.API.Request;
 using TaskManagement.Model.Model.SearchModel;
 using TaskManagement.Service.Entities.Task;
 using TaskManagement.Service.TaskService;
-using TaskManagement.Utility;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TaskManagement.API.Controllers
 {

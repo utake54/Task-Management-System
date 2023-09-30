@@ -28,7 +28,13 @@ namespace TaskManagement.Database.Repository.UserRepository
                                       LastName = u.LastName,
                                       EmailId = u.EmailId,
                                       MobileNo = u.MobileNo,
-                                      DateOfBirth = u.DateOfBirth.ToString()
+                                      DateOfBirth = u.DateOfBirth.ToString(),
+                                      Address = u.Address,
+                                      City = u.City,
+                                      State = u.State,
+                                      ZipCode = u.ZipCode,
+                                      Country = u.Country,
+                                      CountryCode = u.CountryCode
                                   })
                                   .Skip(skip)
                                   .Take(pageSize)
@@ -36,8 +42,8 @@ namespace TaskManagement.Database.Repository.UserRepository
                                   .ToListAsync();
             return allUsers;
         }
-        
-        
+
+
         public async Task<LoginDTO> GetUserDetails(LoginDto request)
         {
             var user = await (from u in Context.UserMaster
