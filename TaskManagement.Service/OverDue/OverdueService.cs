@@ -25,6 +25,7 @@ namespace TaskManagement.Service.OverDueService
 
             var DueDateTaskUsers = users.Select(x => x.UserId).ToList();
             var userEmails = new List<string>();
+
             foreach (var user in DueDateTaskUsers)
             {
                 var userEmail = await _unitOfWork.UserRepository.GetDefault(x => x.Id == user);
@@ -33,16 +34,17 @@ namespace TaskManagement.Service.OverDueService
             }
 
             MailRequest mailRequestmail = new MailRequest();
-            mailRequestmail.Subject = "TestHanfFireOvedueSchedule";
-            mailRequestmail.Body = "New test for job";
-            mailRequestmail.ToEmail = "omkar.utake54@gmail.com";
+            var mailTemplate = await _unitOfWork.EmailTemplateRepository.GetById((int)MailTemplate.TaskOverdue);
+            mailRequestmail.Subject = mailTemplate.Subject;
+            mailRequestmail.Body = mailTemplate.Body;
+
 
             var emailDetails = new MailDetails()
             {
                 To = userEmails,
                 CC = userEmails,
-                Subject = "TestHanfFireOvedueSchedule",
-                Message = "job overdue"
+                Subject = mailRequestmail.Subject,
+                Message = mailRequestmail.Body
             };
             await _sendMail.SendEmailAsync(emailDetails);
             return mailRequestmail;

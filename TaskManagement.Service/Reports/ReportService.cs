@@ -1,22 +1,8 @@
 ﻿using AutoMapper;
-using Azure;
-using GemBox.Document;
-using GemBox.Document.Tables;
-using GemBox.Pdf;
-using GemBox.Pdf.Content;
-using Net.Pkcs11Interop.LowLevelAPI40.MechanismParams;
-using NPOI.POIFS.FileSystem;
 using NPOI.XSSF.UserModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskManagement.Database.Infrastructure;
 using TaskManagement.Model.Model.User.DTO;
 using TaskManagement.Utility;
-using ComponentInfo = GemBox.Document.ComponentInfo;
 
 namespace TaskManagement.Service.Reports
 {
@@ -40,7 +26,6 @@ namespace TaskManagement.Service.Reports
             var memoryStream = new MemoryStream();
             workbook.Write(memoryStream);
             return memoryStream.ToArray();
-
         }
 
         public async Task<byte[]> UserReport(int companyId)
@@ -56,5 +41,4 @@ namespace TaskManagement.Service.Reports
             return memoryStream.ToArray();
         }
     }
-
 }

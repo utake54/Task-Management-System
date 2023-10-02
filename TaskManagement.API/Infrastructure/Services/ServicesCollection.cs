@@ -17,7 +17,6 @@ using TaskManagement.Service.Reports;
 using FluentValidation;
 using TaskManagement.API.Infrastructure.Validator.Login;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace TaskManagement.API.Infrastructure.Services
 {
@@ -45,19 +44,9 @@ namespace TaskManagement.API.Infrastructure.Services
                 .AddTransient<IReportService, ReportService>()
                 .AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserLoginRequestValidator>())
-
-
-
-
-.AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>()
-
-
-
-.AddValidatorsFromAssemblyContaining(typeof(UserLoginRequestValidator))
-
-
-.AddValidatorsFromAssembly(typeof(UserLoginRequestValidator).Assembly)
-
+                .AddValidatorsFromAssemblyContaining<UserLoginRequestValidator>()
+                .AddValidatorsFromAssemblyContaining(typeof(UserLoginRequestValidator))
+                .AddValidatorsFromAssembly(typeof(UserLoginRequestValidator).Assembly)
 
                 .AddTransient<IConfiguration>(sp =>
                    {

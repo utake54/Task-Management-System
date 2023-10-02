@@ -47,7 +47,7 @@ namespace TaskManagement.Database.Repository.Task
                               {
                                   Id = tm.Id,
                                   Task = tm.Title,
-                                  Category=c.Category,
+                                  Category = c.Category,
                                   Description = tm.Description,
                                   Priority = tm.Priority,
                                   AssignedDate = at.AssignedDate.ToString("dd-MM-yyyy"),
@@ -68,6 +68,25 @@ namespace TaskManagement.Database.Repository.Task
             var data = await SQLHelper.GetDataAsync<TaskExportDTO>("USP_GetTaskExport", sqlParameters);
 
             return (List<TaskExportDTO>)data;
+        }
+
+        public async Task<List<TaskMasterDto>> TaskByCategory(int categoryId)
+        {
+            var data = await (from t in Context.TaskMaster
+                              join c in Context.TaskCategoryMaster
+                              on t.CategoryId equals c.Id
+                              where c.Id == categoryId && t.IsActive == true
+                              select new TaskMasterDto
+                              {
+                                  Id = t.Id,
+                                  Task = t.Title,
+                                  Description = t.Description,
+                                  Priority = t.Priority,
+                                  AssignedDate = t.CreatedDate.ToShortDateString(),
+                                  DueDate = t.DueDate.ToShortDateString()
+                              }).ToListAsync();
+
+            return data;
         }
     }
 }

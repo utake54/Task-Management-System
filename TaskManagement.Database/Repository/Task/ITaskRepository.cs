@@ -15,5 +15,6 @@ namespace TaskManagement.Database.Repository.Task
         Task<IEnumerable<MyTaskDTO>> GetMyTask(int userId);
         Task<AllTaskDTO> GetAllTask(int companyId, SearchModel searchModel);
         Task<List<TaskExportDTO>> GetTaskDetails(int companyId);
+        Task<List<TaskMasterDto>> TaskByCategory(int categoryId);
     }
 }

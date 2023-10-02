@@ -18,6 +18,7 @@ namespace TaskManagement.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //Filters
             builder.Services.AddControllers(config =>
             {
                 config.Filters.Add<ModelStateFilter>();
@@ -27,25 +28,27 @@ namespace TaskManagement.API
                 //config.Filters.Add<Permissible>();
             });
 
+            //Services
             builder.Services.AddEndpointsApiExplorer()
                             .AddDbContext<MasterDbContext>()
                             .AddJWTAuthentication(builder.Configuration)
                             .SwaggerConfig()
                             .RepositoryAndService()
-                            .AddAutoMapper(typeof(UserLoginRequestValidator))
-                            .AddAutoMapper(typeof(TaskMappingProfile))
-                            .AddAutoMapper(typeof(UserMappingProfile))
                             .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
                             .AddHangfireServer()
                             .AddRecurringJobManager()
-            .AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
+                            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
+
+            //Redis 
             builder.Services.AddStackExchangeRedisCache(redisoption =>
             {
                 string connection = builder.Configuration.GetConnectionString("Redis");
 
                 redisoption.Configuration = connection;
             });
+
+            //MiddleWares
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
@@ -58,8 +61,6 @@ namespace TaskManagement.API
             app.UseAuthorization();
             app.MapControllers();
             app.Run();
-
-
         }
     }
 }

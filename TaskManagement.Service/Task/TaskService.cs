@@ -225,12 +225,11 @@ namespace TaskManagement.Service.TaskService
         public async Task<ResponseModel> GetByCategories(int categoryId)
         {
             var response = new ResponseModel();
-            var taskList = await _unitOfWork.TaskRepository.Get(x => x.CategoryId == categoryId && x.IsActive == true);
+            var taskList = await _unitOfWork.TaskRepository.TaskByCategory(categoryId);
 
             if (taskList.Any())
             {
-                var taskDto = _mapper.Map<List<TaskMasterDto>>(taskList);
-                response.Ok(taskDto);
+                response.Ok(taskList);
                 return response;
             }
             response.Failure("TM038");
