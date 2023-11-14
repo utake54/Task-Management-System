@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+SWYq3BgT1pL52OcbGXCk1kTYByklgU5sLhwdzV8XFm/QruregtIFHAVu+cn7HCkm+F7kGdtcQpQXaNL8V1W9g==",
+  "dgSpecHash": "fqqMxmI1rI9ufQuVNuHZz9HGDu35PeJ+4LMSeIbU5qv/uA69ziBQZatKT9cNmFnREl7WvJd0xrt1sMTP6mtakw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.API\\TaskManagement.API.csproj",
+  "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.API\\TaskManagement.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\utake\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -116,6 +116,7 @@
     "C:\\Users\\utake\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\utake\\.nuget\\packages\\select.htmltopdf\\23.1.0\\select.htmltopdf.23.1.0.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\sixlabors.fonts\\1.0.0-beta19\\sixlabors.fonts.1.0.0-beta19.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\sixlabors.imagesharp\\2.1.4\\sixlabors.imagesharp.2.1.4.nupkg.sha512",

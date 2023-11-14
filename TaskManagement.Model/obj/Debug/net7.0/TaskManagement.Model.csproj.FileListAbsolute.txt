@@ -28,3 +28,18 @@ C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Model\obj\
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Model\obj\Debug\net7.0\refint\TaskManagement.Model.dll
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.pdb
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Model\obj\Debug\net7.0\ref\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\bin\Debug\net7.0\TaskManagement.Model.deps.json
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\bin\Debug\net7.0\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\bin\Debug\net7.0\TaskManagement.Model.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\bin\Debug\net7.0\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\bin\Debug\net7.0\TaskManagement.Utility.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.csproj.AssemblyReference.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.AssemblyInfoInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.AssemblyInfo.cs
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.csproj.CoreCompileInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.csproj.CopyComplete
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\refint\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\TaskManagement.Model.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Model\obj\Debug\net7.0\ref\TaskManagement.Model.dll

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Model.Model.Company;
 
 namespace TaskManagement.Model.Model.User
 {
@@ -17,5 +18,11 @@ namespace TaskManagement.Model.Model.User
         public int ParentId { get; set; }
         public int CompanyId { get; set; }
         public bool IsActive { get; set; }
+
+        [ForeignKey("CompanyId")]
+        public CompanyMaster? Company { get; set; }
+
+        [ForeignKey("UserId")]
+        public UserMaster? UserMaster { get; set; }
     }
 }

@@ -17,5 +17,7 @@ namespace TaskManagement.Model.Model.User
 
         [Column(TypeName = "varchar")]
         public string Role { get; set; }
+
+        public ICollection<UserMaster> UserMasters { get; set; }
     }
 }

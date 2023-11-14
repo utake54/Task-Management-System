@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "peDtaLlNn+dl9FfgzlTW6cbRJ79JtJSuzrqXfsxaLeNDs1ZLU+ODK+vXzVBzRQTTE1vifCjrKLZBVyK3yAWXOg==",
+  "dgSpecHash": "9wEBx6gLOeyo7N9xTNjUkpmWNqhI0CETanzv4YgtTl4Iee4G2X91cQJRjBo1ko5qaauwbYjByF5tFFIQXOfwNA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Model\\TaskManagement.Model.csproj",
+  "projectFilePath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Model\\TaskManagement.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\utake\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\utake\\.nuget\\packages\\enums.net\\4.0.1\\enums.net.4.0.1.nupkg.sha512",

@@ -1937,6 +1937,17 @@
           }
         }
       },
+      "Select.HtmlToPdf/23.1.0": {
+        "type": "package",
+        "contentFiles": {
+          "contentFiles/any/any/Select.Html.dep": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": true,
+            "outputPath": "Select.Html.dep"
+          }
+        }
+      },
       "SharpZipLib/1.3.3": {
         "type": "package",
         "compile": {
@@ -6400,6 +6411,26 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Select.HtmlToPdf/23.1.0": {
+      "sha512": "V4XWTuZPVXNgKeGBhYRZml3WCNTPPlZAGpmaU6FkkGNzDOS27B8y6Q+dtnk0Csj9eChKFk4O5Yajyi7r+uzmHA==",
+      "type": "package",
+      "path": "select.htmltopdf/23.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "contentFiles/any/any/Select.Html.dep",
+        "images/icon.png",
+        "lib/net20/Select.Html.dep",
+        "lib/net20/Select.HtmlToPdf.dll",
+        "lib/net20/Select.HtmlToPdf.xml",
+        "lib/net40/Select.Html.dep",
+        "lib/net40/Select.HtmlToPdf.dll",
+        "lib/net40/Select.HtmlToPdf.xml",
+        "readme.txt",
+        "select.htmltopdf.23.1.0.nupkg.sha512",
+        "select.htmltopdf.nuspec"
       ]
     },
     "SharpZipLib/1.3.3": {
@@ -10957,6 +10988,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.8",
       "Microsoft.AspNetCore.OpenApi >= 7.0.1",
       "Microsoft.Extensions.Caching.StackExchangeRedis >= 7.0.10",
+      "Select.HtmlToPdf >= 23.1.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
       "TaskManagement.Service >= 1.0.0",
       "TaskManagement.Service.Entities >= 1.0.0",
@@ -10969,11 +11001,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.API\\TaskManagement.API.csproj",
+      "projectUniqueName": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.API\\TaskManagement.API.csproj",
       "projectName": "TaskManagement.API",
-      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.API\\TaskManagement.API.csproj",
+      "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.API\\TaskManagement.API.csproj",
       "packagesPath": "C:\\Users\\utake\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.API\\obj\\",
+      "outputPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\utake\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10990,14 +11022,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Service.Entities\\TaskManagement.Service.Entities.csproj"
             },
-            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service\\TaskManagement.Service.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Service\\TaskManagement.Service.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Service\\TaskManagement.Service.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Service\\TaskManagement.Service.csproj"
             },
-            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
-              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
+            "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Utility\\TaskManagement.Utility.csproj": {
+              "projectPath": "C:\\Users\\utake\\OneDrive\\Desktop\\Task-Management-System - Copy\\TaskManagement.Utility\\TaskManagement.Utility.csproj"
             }
           }
         }
@@ -11051,6 +11083,10 @@
           "Microsoft.Extensions.Caching.StackExchangeRedis": {
             "target": "Package",
             "version": "[7.0.10, )"
+          },
+          "Select.HtmlToPdf": {
+            "target": "Package",
+            "version": "[23.1.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

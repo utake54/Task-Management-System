@@ -33,6 +33,7 @@ namespace TaskManagement.API
                             .AddDbContext<MasterDbContext>()
                             .AddJWTAuthentication(builder.Configuration)
                             .SwaggerConfig()
+                            .AddAutoMapper(typeof(Program))
                             .RepositoryAndService()
                             .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnectionString")))
                             .AddHangfireServer()

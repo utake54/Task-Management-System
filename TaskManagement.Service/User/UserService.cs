@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TaskManagement.Database.Infrastructure;
+using TaskManagement.Model.Model.Login.DTO;
 using TaskManagement.Model.Model.PagedResult;
 using TaskManagement.Model.Model.ResponseModel;
 using TaskManagement.Model.Model.User;
@@ -161,6 +163,21 @@ namespace TaskManagement.Service.UserService
         {
             var response = new ResponseModel();
             request.Password = SHA.Encrypt(request.Password);
+
+            var nUser = _unitOfWork.UserRepository.GetAllGetAllAsQueryble()
+            //.Include(x => x.CompanyMaster)
+            .Include(x => x.RoleMaster);
+
+            var result = await nUser.Select(x => new LoginDTO
+            {
+                FirstName = x.FirstName,
+                Id = x.Id,
+                RoleId = x.RoleId,
+                CompnayName = x.CompanyMaster.Name,
+                CompanyId = x.CompanyId,
+                Role = x.RoleMaster.Role
+            }).FirstOrDefaultAsync();
+
             var user = await _unitOfWork.UserRepository.GetUserDetails(request);
             if (user != null)
             {

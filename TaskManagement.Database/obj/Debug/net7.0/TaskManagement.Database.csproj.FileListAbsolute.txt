@@ -36,3 +36,22 @@ C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Database\o
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Database\obj\Debug\net7.0\refint\TaskManagement.Database.dll
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.pdb
 C:\Users\utake\OneDrive\Desktop\Task-Management-System\TaskManagement.Database\obj\Debug\net7.0\ref\TaskManagement.Database.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Database.deps.json
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Database.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Database.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Model.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Service.Entities.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Utility.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Model.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Service.Entities.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\bin\Debug\net7.0\TaskManagement.Utility.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.csproj.AssemblyReference.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.AssemblyInfoInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.AssemblyInfo.cs
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.csproj.CoreCompileInputs.cache
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.csproj.CopyComplete
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\refint\TaskManagement.Database.dll
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\TaskManagement.Database.pdb
+C:\Users\utake\OneDrive\Desktop\Task-Management-System - Copy\TaskManagement.Database\obj\Debug\net7.0\ref\TaskManagement.Database.dll

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Model.Model.User;
 
 namespace TaskManagement.Model.Model.OTP
 {
@@ -16,5 +17,8 @@ namespace TaskManagement.Model.Model.OTP
         public DateTime GeneratedTime { get; set; }
         public DateTime ExpiryTime { get; set; }
         public bool IsActive { get; set; }
+
+        [ForeignKey("UserId")]
+        public UserMaster UserMaster { get; set; }
     }
 }
