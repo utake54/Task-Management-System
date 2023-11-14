@@ -60,7 +60,7 @@ namespace TaskManagement.Database.Infrastructure
             return await Context.Set<T>().Where(expression).ToListAsync();
         }
 
-        public virtual IQueryable<T> GetAllGetAllAsQueryble()
+        public virtual IQueryable<T> GetAllAsQueryble()
         {
             return this.Context.Set<T>().AsQueryable();
         }

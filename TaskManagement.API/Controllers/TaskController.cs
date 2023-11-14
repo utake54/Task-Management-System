@@ -35,7 +35,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("AddTask")]
+        [HttpPost("AddAsync")]
         public async Task<Dictionary<string, object>> AddAsync(AddTaskRequest request)
         {
             var requestDto = _mapper.Map<AddTaskDto>(request);
@@ -51,7 +51,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>
-        [HttpPost("GetTask")]
+        [HttpPost("GetByIdAsync")]
         public async Task<Dictionary<string, object>> GetAsync(GetTaskByIdRequest request)
         {
             var requestDto = _mapper.Map<GetTaskByIdDto>(request);
@@ -65,7 +65,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("UpdateTask")]
+        [HttpPost("UpdateAsync")]
         public async Task<Dictionary<string, object>> UpdateAsync(UpdateTaskRequest request)
         {
             var requestDto = _mapper.Map<UpdateTaskDto>(request);
@@ -78,7 +78,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="taskId"></param>
         /// <returns></returns>
-        [HttpPost("DeleteTask/{taskId}")]
+        [HttpPost("DeleteAsync/{taskId}")]
         public async Task<Dictionary<string, object>> DeleteAsync(DeleteTaskRequest request)
         {
             var requestDto = _mapper.Map<DeleteTaskDto>(request);
@@ -91,7 +91,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        [HttpPost("GetAllTask")]
+        [HttpPost("GetAllAsync")]
         public async Task<Dictionary<string, object>> GetAsync(SearchModel search)
         {
             int companyId = 1;

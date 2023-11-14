@@ -30,7 +30,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("AssignToTeam")]
+        [HttpPost("AssignUserAsync")]
         public async Task<Dictionary<string, object>> AssignTask(AssignTaskRequest request)
         {
             var requestDto = _mapper.Map<AssignTaskDto>(request);
@@ -44,7 +44,7 @@ namespace TaskManagement.API.Controllers
         /// Get task assigned to me
         /// </summary>
         /// <returns></returns>
-        [HttpPost("GetMyTask")]
+        [HttpPost("GetMyTaskAsync")]
         public async Task<Dictionary<string, object>> GetMyTask()
         {
             var task = await _taskService.GetMyTask(UserId);
@@ -57,7 +57,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("AcceptTask")]
+        [HttpPost("AcceptTaskAsync")]
         public async Task<Dictionary<string, object>> AcceptTask(AcceptTaskRequest request)
         {
             var requestDto = _mapper.Map<AcceptTaskDto>(request);
@@ -71,7 +71,7 @@ namespace TaskManagement.API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost("UpdateTaskStatus")]
+        [HttpPost("UpdateTaskStatusAsync")]
         public async Task<Dictionary<string, object>> UpdateTaskStatus(TaskStatusRequest request)
         {
             var requestDto = _mapper.Map<TaskStatusDto>(request);

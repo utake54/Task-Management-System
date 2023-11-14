@@ -23,7 +23,7 @@ namespace TaskManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("LoginAsync")]
         public async Task<Dictionary<string, object>> LoginAsync(LoginRequest request)
         {
             var requestDto = _mapper.Map<LoginDto>(request);
@@ -31,13 +31,13 @@ namespace TaskManagement.API.Controllers
             return APIResponse(result.Data, result.Message);
         }
 
-        [HttpPost("Logout")]
+        [HttpPost("LogoutAsync")]
         public async Task<Dictionary<string, object>> Logout()
         {
             return APIResponse(true,"TM011");
         }
 
-        [HttpPost("ForgetPassword")]
+        [HttpPost("ForgetPasswordAsync")]
         public async Task<Dictionary<string, object>> ForgetPassword(ForgetPassswordRequest request)
         {
             var requestDto = _mapper.Map<ForgetPasswordDto>(request);
@@ -45,7 +45,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(userData.Data, userData.Message, "TM012");
         }
 
-        [HttpPost("ValidateOTP")]
+        [HttpPost("ValidateOTPAsync")]
         public async Task<Dictionary<string, object>> ValidateOtp(OTPValidateRequest request)
         {
             var requestDto = _mapper.Map<OTPValidateDto>(request);
@@ -53,7 +53,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(validateOtp.Data, validateOtp.Message, "TM014");
         }
 
-        [HttpPost("ResetPassword")]
+        [HttpPost("ResetPasswordAsync")]
         public async Task<Dictionary<string, object>> ResetPassword(PasswordResetRequest request)
         {
             var requestDto = _mapper.Map<PasswordResetDto>(request);

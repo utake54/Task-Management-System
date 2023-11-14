@@ -25,7 +25,7 @@ namespace TaskManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("GetCategory")]
+        [HttpPost("GetByIdAsync")]
         public async Task<Dictionary<string, object>> GetByIdAsync(GetByIdCategoryRequest request)
         {
             var requestDto = _mapper.Map<GetByIdCategoryDto>(request);
@@ -33,7 +33,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(category.Data, category.Message);
         }
 
-        [HttpPost("GetAllCategories")]
+        [HttpPost("GetAllAsync")]
         public async Task<Dictionary<string, object>> GetAsync(GetCategoryRequest request)
         {
             var requestDto = _mapper.Map<GetCategoryDto>(request);
@@ -42,7 +42,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(categories.Data, categories.Message);
         }
 
-        [HttpPost("AddCategory")]
+        [HttpPost("AddAsync")]
         public async Task<Dictionary<string, object>> AddAsync(AddCategoryRequest request)
         {
             var requestDto = _mapper.Map<AddCategoryDto>(request);
@@ -52,7 +52,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(category.Result, category.Message, "TM049");
         }
 
-        [HttpPost("UpdateCategory")]
+        [HttpPost("UpdateAsync")]
         public async Task<Dictionary<string, object>> UpdateAsync(UpdateCategoryRequest request)
         {
             var requestDto = _mapper.Map<UpdateCategoryDto>(request);
@@ -60,7 +60,7 @@ namespace TaskManagement.API.Controllers
             return APIResponse(category.Result, category.Message, "TM050");
         }
 
-        [HttpPost("DeleteCategory")]
+        [HttpPost("DeleteAsync")]
         public async Task<Dictionary<string, object>> DeleteAsync(DeleteCategoryRequest request)
         {
             var requestDto = _mapper.Map<DeleteCategoryDto>(request);

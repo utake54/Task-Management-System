@@ -164,7 +164,7 @@ namespace TaskManagement.Service.UserService
             var response = new ResponseModel();
             request.Password = SHA.Encrypt(request.Password);
 
-            var nUser = _unitOfWork.UserRepository.GetAllGetAllAsQueryble()
+            var nUser = _unitOfWork.UserRepository.GetAllAsQueryble()
             //.Include(x => x.CompanyMaster)
             .Include(x => x.RoleMaster);
 

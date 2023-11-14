@@ -21,14 +21,14 @@ namespace TaskManagement.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("MyProfile")]
+        [HttpPost("ViewAsync")]
         public async Task<Dictionary<string, object>> GetAsync()
         {
             var profile = await _profileService.GetAsync(UserId);
                 return APIResponse(profile.Data, profile.Message);
         }
 
-        [HttpPost("UpdateProfile")]
+        [HttpPost("UpdateAsync")]
         public async Task<Dictionary<string, object>> UpdateAsync(UpdateUserRequest request)
         {
             var requestDto = _mapper.Map<UpdateUserDto>(request);
