@@ -1,12 +1,8 @@
 using FluentValidation.AspNetCore;
 using Hangfire;
-using Hangfire.MemoryStorage;
-using Hangfire.Server;
 using JWTAuth_Validation.Middleware;
-using TaskManagement.API.Infrastructure.AutoMapper;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.API.Infrastructure.Services;
-using TaskManagement.API.Infrastructure.Validator.Login;
 using TaskManagement.Database;
 
 namespace TaskManagement.API
@@ -41,11 +37,11 @@ namespace TaskManagement.API
                             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
 
+
             //Redis 
             builder.Services.AddStackExchangeRedisCache(redisoption =>
             {
-                string connection = builder.Configuration.GetConnectionString("Redis");
-
+                string connection = builder.Configuration.GetConnectionString("Redis")!;
                 redisoption.Configuration = connection;
             });
 
@@ -56,6 +52,19 @@ namespace TaskManagement.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+                context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+                context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+
+                await next();
+            });
+
             app.UseHangfireDashboard("/HangDashboard");
             app.UseMiddleware<JWTMiddleware>();
             app.UseHttpsRedirection();

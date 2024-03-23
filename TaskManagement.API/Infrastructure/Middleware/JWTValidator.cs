@@ -31,7 +31,7 @@ namespace JWTAuth_Validation.Middleware
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(configuration["JWT:Secret"]);
+                var key = Encoding.ASCII.GetBytes(configuration["JWT:Secret"]!);
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,

@@ -2,10 +2,13 @@
 using GemBox.Document;
 using GemBox.Pdf;
 using GemBox.Pdf.Content;
+using GemBox.Spreadsheet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using NPOI.XSSF.UserModel;
+using Org.BouncyCastle.Tls;
+using SixLabors.ImageSharp.Drawing.Processing;
 using System.Net.Mail;
 using TaskManagement.API.Infrastructure.Filters;
 using TaskManagement.Service.Reports;
@@ -61,7 +64,9 @@ namespace TaskManagement.API.Controllers
         public async Task<IActionResult> UploadAsync(List<IFormFile> formFiles)
         {
             GemBox.Pdf.ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+            GemBox.Pdf.ComponentInfo.FreeLimitReached += (sender, e) => e.FreeLimitReachedAction = GemBox.Pdf.FreeLimitReachedAction.Stop;
 
+            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
             var tempDir = Path.Combine(Directory.GetCurrentDirectory(), "Temp");
             Directory.CreateDirectory(tempDir);
             var pdfFileNames = new List<string>();
@@ -88,20 +93,43 @@ namespace TaskManagement.API.Controllers
                 var formatedText = new PdfFormattedText();
                 formatedText.AppendLine("Test 1St Page");
                 double x = 100, y = customPage.CropBox.Top - 100 - formatedText.Height;
-                customPage.Content.DrawText(formatedText,new PdfPoint(x,y));
+                customPage.Content.DrawText(formatedText, new PdfPoint(x, y));
                 // Merge multiple PDF files into single PDF by loading source documents
                 // and cloning all their pages to destination document.
                 foreach (var fileName in pdfFileNames)
-                    using (var source = PdfDocument.Load(fileName))
-                        document.Pages.Kids.AddClone(source.Pages);
+                {
+                    if (fileName.EndsWith(".xlsx"))
+                    {
+                        var workbook = GemBox.Spreadsheet.ExcelFile.Load(fileName);
+                        var pdfStream = new System.IO.MemoryStream();
 
-               
-                document.Save("Merge Files.pdf");
+                        foreach (var worksheet in workbook.Worksheets)
+                        {
+                            worksheet.PrintOptions.FitWorksheetWidthToPages = 1; // Scale to fit the width of the page
+                            worksheet.PrintOptions.FitWorksheetHeightToPages = 0; // Do not scale vertically
+                        }
+
+                        workbook.Save(pdfStream, GemBox.Spreadsheet.SaveOptions.PdfDefault);
+                        using (var sourcePage = PdfDocument.Load(pdfStream))
+                        {
+                            foreach (var page in sourcePage.Pages)
+                            {
+                                document.Pages.AddClone(page);
+                            }
+                        }
+                        //using (var source = PdfDocument.Load(fileName))
+                        //    document.Pages.Kids.AddClone(source.Pages);
+                    }
+
+
+                    document.Save("Merge Files.pdf");
+                }
+
+                return Ok();
             }
 
-            return Ok();
+
+
         }
-
-
     }
 }

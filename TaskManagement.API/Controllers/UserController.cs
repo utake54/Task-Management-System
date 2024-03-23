@@ -11,8 +11,8 @@ namespace TaskManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
-    //[Permissible("Admin", "HOD")]
+    [Authorize]
+    [Permissible("Admin", "HOD")]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;
@@ -30,7 +30,6 @@ namespace TaskManagement.API.Controllers
             return APIResponse(allUser.Data, allUser.Message);
         }
 
-        //[Authorize("Admin")]
         [HttpPost("AddAsync")]
         public async Task<Dictionary<string, object>> AddAsync([FromBody] AddUserRequest request)
         {
@@ -49,7 +48,6 @@ namespace TaskManagement.API.Controllers
             return APIResponse(user.Data, user.Message);
         }
 
-        //[Authorize("Admin")]
         [HttpPost("DeleteAsync")]
         public async Task<Dictionary<string, object>> DeleteAsync([FromBody] DeleteUserRequest request)
         {
@@ -59,7 +57,6 @@ namespace TaskManagement.API.Controllers
             return APIResponse(deleteUser.Result, deleteUser.Message, "TM022");
         }
 
-        //[Authorize("Admin")]
         [HttpPost("UpdateAsync")]
         public async Task<Dictionary<string, object>> UpdateAsync([FromBody] UpdateUserRequest request)
         {

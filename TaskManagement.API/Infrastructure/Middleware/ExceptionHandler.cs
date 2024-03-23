@@ -46,19 +46,17 @@ namespace TaskManagement.API.Infrastructure.Middleware
 
         private static HttpStatusCode GetStatusCodeByException(Type exceptionType)
         {
-            switch (exceptionType.Name)
+            return exceptionType.Name switch
             {
-                case nameof(NullReferenceException): return HttpStatusCode.NotImplemented;
-                case nameof(FileNotFoundException): return HttpStatusCode.NotFound;
-                case nameof(OverflowException): return HttpStatusCode.RequestedRangeNotSatisfiable;
-                case nameof(OutOfMemoryException): return HttpStatusCode.ExpectationFailed;
-                case nameof(TimeoutException): return HttpStatusCode.RequestTimeout;
-                case nameof(IndexOutOfRangeException): return HttpStatusCode.ExpectationFailed;
-                case nameof(RecordNotFoundException): return HttpStatusCode.NotFound;
-
-                default:
-                    return HttpStatusCode.InternalServerError;
-            }
+                nameof(NullReferenceException) => HttpStatusCode.NotImplemented,
+                nameof(FileNotFoundException) => HttpStatusCode.NotFound,
+                nameof(OverflowException) => HttpStatusCode.RequestedRangeNotSatisfiable,
+                nameof(OutOfMemoryException) => HttpStatusCode.ExpectationFailed,
+                nameof(TimeoutException) => HttpStatusCode.RequestTimeout,
+                nameof(IndexOutOfRangeException) => HttpStatusCode.ExpectationFailed,
+                nameof(RecordNotFoundException) => HttpStatusCode.NotFound,
+                _ => HttpStatusCode.InternalServerError,
+            };
         }
     }
 }
